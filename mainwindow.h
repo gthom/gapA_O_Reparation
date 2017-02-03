@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "QDateEdit"
+#include <QListWidgetItem>
 
 namespace Ui {
 class MainWindow;
@@ -22,7 +23,8 @@ public:
     ~MainWindow();
 
 private slots:
-
+    void majListeRecherche(QString);
+    void on_focusChanged(QWidget *, QWidget*);
     void on_pushButtonAjouterClient_clicked();
 
     void on_pushButtonSupprimerClient_clicked();
@@ -40,6 +42,10 @@ private slots:
     void on_pushButtonRechercher_2_clicked();
 
     void on_pushButtonDeselectionner_2_clicked();
+
+    void on_lineEditMarque_returnPressed();
+
+    void on_listWidgetResultatRecherche_itemActivated(QListWidgetItem *item);
 
 private:
     Ui::MainWindow *ui;

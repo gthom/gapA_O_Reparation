@@ -3,6 +3,7 @@
 #include "QtSql/QSqlDriver"
 #include "QtSql/QSqlQuery"
 #include "QDebug"
+#include <QSqlError>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -11,11 +12,51 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     chargerLesClients();
     chargerLesMachines();
+    connect(qApp,SIGNAL(focusChanged(QWidget*,QWidget*)),this,SLOT(on_focusChanged(QWidget*,QWidget*)));
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::majListeRecherche(QString leTexte)
+{
+    qDebug()<<"void MainWindow::majListeRecherche(QString leTexte)";
+    //s'exécute quand il faut raffraichir la liste de recherche
+    if(sender()==ui->lineEditReference)
+    {
+
+        QString txtReq="select idModel,codeModel,libelleMarque from Modele inner join Marque on Modele.marque=Marque.idMarque where codeModel like upper('%"+ui->lineEditReference->text()+"%')";
+        qDebug()<<txtReq;
+        QSqlQuery maReq(txtReq);
+        //effacement de la liste
+        ui->listWidgetResultatRecherche->clear();
+        while(maReq.next())
+        {
+            QListWidgetItem*  nouvelElement=new QListWidgetItem(maReq.value("codeModel").toString()+" "+maReq.value("libelleMarque").toString());
+            nouvelElement->setData(32,maReq.value("idModel").toString());
+            nouvelElement->setData(33,maReq.value("codeModel").toString());
+            nouvelElement->setData(34,maReq.value("libelleMarque").toString());
+            ui->listWidgetResultatRecherche->insertItem(0,nouvelElement);
+
+        }
+    }
+}
+
+void MainWindow::on_focusChanged(QWidget* old, QWidget* nouveau)
+{
+    qDebug()<<"void MainWindow::on_focusChanged(QWidget* old, QWidget* nouveau)";
+    if(nouveau==ui->lineEditReference)
+    {
+        //il est dans le modele on affiche les références
+        //attacher l'evenement textChanged à la maj de la zone de droite
+        connect(ui->lineEditReference,SIGNAL(textChanged(QString)),this, SLOT(majListeRecherche(QString)));
+    }
+    else
+    {
+        disconnect(ui->lineEditReference,SIGNAL(textChanged(QString)),this, SLOT(majListeRecherche(QString)));
+    }
 }
 
 void MainWindow::chargerLesClients()
@@ -393,6 +434,7 @@ void MainWindow::on_pushButtonRechercher_clicked()
 
 void MainWindow::on_pushButtonAjouterMachine_clicked()
 {
+    qDebug()<<"void MainWindow::on_pushButtonAjouterMachine_clicked()";
     int typeMachineInt;
     int idMaxMachine;
 
@@ -403,7 +445,7 @@ void MainWindow::on_pushButtonAjouterMachine_clicked()
     QString dateARentrer;
 
     QSqlQuery reqMaxIdMach;
-    reqMaxIdMach.prepare("select max(idReparation) from Reparation");
+    reqMaxIdMach.prepare("select ifnull(max(idReparation),100) from Reparation");
     if(reqMaxIdMach.exec())
     {
         reqMaxIdMach.first();
@@ -436,9 +478,11 @@ void MainWindow::on_pushButtonAjouterMachine_clicked()
     typeMachine=QString::number(typeMachineInt);
 
     QSqlQuery insertMachine;
-    insertMachine.prepare("insert into Reparation (idReparation,outilNom,outilMarque,outilType,panneReparation,outilRef,dateArrivee,idClient,idEtat,idDevis) values("+maxId+",'"+nomMachine+"','"+marqueMachine+"',"+typeMachine+",'"+panneMachine+"','"+refMachine+"','"+dateARentrer+"',"+idClientAct+",2,2)");
-    insertMachine.exec();
 
+    insertMachine.prepare("insert into Reparation (idReparation,outilNom,outilType,panneReparation,outilRef,dateArrivee,idClient,idEtat,idDevis) values("+maxId+",'"+nomMachine+"','"+marqueMachine+"',"+typeMachine+",'"+panneMachine+"','"+refMachine+"','"+dateARentrer+"',"+idClientAct+",2,2)");
+    qDebug()<<insertMachine.lastError();
+    insertMachine.exec();
+qDebug()<<insertMachine.lastError();
     chargerLesMachines();
 
     ui->lineEditNomMachine->setText("");
@@ -460,4 +504,15 @@ void MainWindow::on_pushButtonRechercher_2_clicked()
 void MainWindow::on_pushButtonDeselectionner_2_clicked()
 {
      viderLesChamps();
+}
+
+void MainWindow::on_lineEditMarque_returnPressed()
+{
+
+}
+
+void MainWindow::on_listWidgetResultatRecherche_itemActivated(QListWidgetItem *item)
+{
+    ui->lineEditReference->setText(item->data(33).toString());
+    ui->lineEditMarque->setText(item->data(34).toString());
 }

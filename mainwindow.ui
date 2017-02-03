@@ -1496,7 +1496,7 @@
        <enum>Qt::Vertical</enum>
       </property>
      </widget>
-     <widget class="QListWidget" name="listWidget">
+     <widget class="QListWidget" name="listWidgetResultatRecherche">
       <property name="geometry">
        <rect>
         <x>560</x>
@@ -1607,34 +1607,11 @@
      <zorder>radioButtonElectrique</zorder>
      <zorder>radioButtonThermique</zorder>
      <zorder>label_4</zorder>
-     <zorder>label_25</zorder>
      <zorder>line_31</zorder>
      <zorder>line_32</zorder>
      <zorder>line_33</zorder>
      <zorder>lineEditNomMachine</zorder>
-     <zorder>label_24</zorder>
-     <zorder>tableWidgetMachineClient2</zorder>
-     <zorder>label_29</zorder>
-     <zorder>line_8</zorder>
-     <zorder>labelCPClient_2</zorder>
-     <zorder>line_9</zorder>
-     <zorder>label_31</zorder>
-     <zorder>line_6</zorder>
-     <zorder>line_7</zorder>
-     <zorder>label_28</zorder>
-     <zorder>labelMail_3</zorder>
-     <zorder>labelAdresse_3</zorder>
-     <zorder>label_30</zorder>
-     <zorder>labelPrenomClient_2</zorder>
-     <zorder>labelTelClient_2</zorder>
-     <zorder>labelEmailClient_2</zorder>
-     <zorder>line_10</zorder>
-     <zorder>labelNomClient_2</zorder>
-     <zorder>labelVilleClient_2</zorder>
      <zorder>label_25</zorder>
-     <zorder>label_26</zorder>
-     <zorder>labelAdresseClient_2</zorder>
-     <zorder>label_27</zorder>
      <zorder>label_24</zorder>
      <zorder>label_30</zorder>
      <zorder>label_31</zorder>
@@ -1669,7 +1646,7 @@
      <zorder>label_7</zorder>
      <zorder>lineEditMarque</zorder>
      <zorder>line_46</zorder>
-     <zorder>listWidget</zorder>
+     <zorder>listWidgetResultatRecherche</zorder>
      <zorder>line_47</zorder>
      <zorder>label_8</zorder>
      <zorder>pushButtonDeselectionner_2</zorder>
@@ -2894,7 +2871,7 @@
      <x>0</x>
      <y>0</y>
      <width>1469</width>
-     <height>21</height>
+     <height>17</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_Fichier">
