@@ -4,6 +4,7 @@
 #include "QtSql/QSqlQuery"
 #include "QDebug"
 #include <QSqlError>
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -174,6 +175,7 @@ int MainWindow::chercherIdClient()
 {
     QSqlQuery reqIdClient;
     QString req="select idClient from Client where nomClient='"+nomClient+"' and telephoneClient='"+telClient+"'";
+    qDebug()<<req;
     reqIdClient.prepare(req);
     reqIdClient.exec();
     reqIdClient.first();
@@ -274,19 +276,22 @@ void MainWindow::on_pushButtonAjouterClient_clicked()
 
 void MainWindow::on_pushButtonSupprimerClient_clicked()
 {
-   int numClient=0;
-   numClient=chercherIdClient();
-   QString numClientSt=QString::number(numClient);
+   if(QMessageBox::warning(this,this->windowTitle(),"Etes-vous bien certain de vouloir supprimer ce client?",QMessageBox::Yes|QMessageBox::No,QMessageBox::No)==QMessageBox::Yes)
+   {
+       int numClient=0;
+       numClient=chercherIdClient();
+       QString numClientSt=QString::number(numClient);
 
-   QString reqSuppr="delete from Client where idClient="+numClientSt+"";
-   qDebug()<<reqSuppr;
+       QString reqSuppr="delete from Client where idClient="+numClientSt+"";
+       qDebug()<<reqSuppr;
 
-    QSqlQuery reqSupprClient;
-    reqSupprClient.prepare(reqSuppr);
-    reqSupprClient.exec();
+       QSqlQuery reqSupprClient;
+       reqSupprClient.prepare(reqSuppr);
+       reqSupprClient.exec();
 
-    viderLesChamps();
-    chargerLesClients();
+       viderLesChamps();
+       chargerLesClients();
+   }
 }
 
 void MainWindow::on_tableWidgetClient_cellClicked(int row, int column)
@@ -458,12 +463,13 @@ void MainWindow::on_pushButtonAjouterMachine_clicked()
     dateARentrer=dateArrivee.toString("yyyy/MM/dd");
     nomMachine=ui->lineEditNomMachine->text();
     marqueMachine=ui->lineEditMarque->text();
-    refMachine=ui->lineEditReference->text();
+    //refMachine=ui->lineEditReference->text();
+    refMachine=ui->lineEditReference->property("numeroModele").toString();
     panneMachine=ui->lineEditPanne1->text();
-    panneMachine=panneMachine+" "+ui->lineEditPanne2->text();
-    panneMachine=panneMachine+" "+ui->lineEditPanne3->text();
-    panneMachine=panneMachine+" "+ui->lineEditPanne4->text();
-    panneMachine=panneMachine+" "+ui->lineEditPanne5->text();
+    panneMachine=panneMachine+"&&"+ui->lineEditPanne2->text();
+    panneMachine=panneMachine+"&&"+ui->lineEditPanne3->text();
+    panneMachine=panneMachine+"&&"+ui->lineEditPanne4->text();
+    panneMachine=panneMachine+"&&"+ui->lineEditPanne5->text();
 
     if(ui->radioButtonElectrique->isChecked())
     {
@@ -478,11 +484,21 @@ void MainWindow::on_pushButtonAjouterMachine_clicked()
     typeMachine=QString::number(typeMachineInt);
 
     QSqlQuery insertMachine;
-
-    insertMachine.prepare("insert into Reparation (idReparation,outilNom,outilType,panneReparation,outilRef,dateArrivee,idClient,idEtat,idDevis) values("+maxId+",'"+nomMachine+"','"+marqueMachine+"',"+typeMachine+",'"+panneMachine+"','"+refMachine+"','"+dateARentrer+"',"+idClientAct+",2,2)");
+/*CREATE TABLE `Reparation`(`idReparation` int(11),`outilNom` varchar(45),`outilType` tinyint(2),`panneReparation` varchar(255),`outilRef` integer not null references Modele(idModel),`dateArrivee` DATE,`tempsPasse` int(11),`dateFinalisation` date,`idClient` int(11) NOT NULL,`idDevis` int(11) NOT NULL,`idEtat` int(11) NOT NULL,`refProduit` varchar(45) ,`idUtilisateur` int(11) NOT NULL, foreign key (`idClient`) references Client(`idClient`), foreign key (`idDevis`) references Devis_Reparation(`idDevis`), foreign key (`idEtat`) references Etat_Reparation(`idEtat`), foreign key (`refProduit`) references Produit(`refProduit`), foreign key (`idUtilisateur`) references Utilisateur(`idUtilisateur`),primary key(`idReparation`));
+ */
+    QString txtReq="insert into Reparation (idReparation,outilNom,outilType,panneReparation,outilRef,dateArrivee,idClient,idEtat,idDevis,idUtilisateur) values("+maxId+","+
+                                                                                                                                                         "'"+nomMachine+"',"
+                                                                                                                                                           //+"'"+marqueMachine+"',"
+                                                                                                                                                           +typeMachine+",'"
+                                                                                                                                                           +panneMachine+"','"
+                                                                                                                                                           +refMachine+"','"
+                                                                                                                                                           +dateARentrer+"',"
+                                                                                                                                                           +idClientAct+",2,2,1)";
+    insertMachine.prepare(txtReq);
+    qDebug()<<txtReq;
     qDebug()<<insertMachine.lastError();
     insertMachine.exec();
-qDebug()<<insertMachine.lastError();
+    qDebug()<<insertMachine.lastError();
     chargerLesMachines();
 
     ui->lineEditNomMachine->setText("");
@@ -514,5 +530,6 @@ void MainWindow::on_lineEditMarque_returnPressed()
 void MainWindow::on_listWidgetResultatRecherche_itemActivated(QListWidgetItem *item)
 {
     ui->lineEditReference->setText(item->data(33).toString());
+    ui->lineEditReference->setProperty("numeroModele",item->data(32).toString());
     ui->lineEditMarque->setText(item->data(34).toString());
 }
