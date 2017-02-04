@@ -14,2856 +14,2905 @@
    <string>Alpes Réparation Outillage</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QTabWidget" name="tabWidget">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>30</y>
-      <width>1441</width>
-      <height>921</height>
-     </rect>
-    </property>
-    <property name="currentIndex">
-     <number>1</number>
-    </property>
-    <widget class="QWidget" name="tabClients">
-     <attribute name="title">
-      <string>Clients</string>
-     </attribute>
-     <widget class="QTableWidget" name="tableWidgetClient">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>40</y>
-        <width>1091</width>
-        <height>481</height>
-       </rect>
-      </property>
-      <property name="editTriggers">
-       <set>QAbstractItemView::NoEditTriggers</set>
-      </property>
-      <column>
-       <property name="text">
-        <string>Nom</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Prénom</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Téléphone</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Email</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Ville</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Adresse</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Code Postal</string>
-       </property>
-      </column>
-     </widget>
-     <widget class="QLabel" name="label">
-      <property name="geometry">
-       <rect>
-        <x>270</x>
-        <y>10</y>
-        <width>91</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Liste des clients :</string>
-      </property>
-     </widget>
-     <widget class="Line" name="line">
-      <property name="geometry">
-       <rect>
-        <x>1110</x>
-        <y>40</y>
-        <width>20</width>
-        <height>781</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEditRechercheClient">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>530</y>
-        <width>411</width>
-        <height>31</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButtonRechercher">
-      <property name="geometry">
-       <rect>
-        <x>440</x>
-        <y>530</y>
-        <width>91</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Rechercher</string>
-      </property>
-     </widget>
-     <widget class="Line" name="line_2">
-      <property name="geometry">
-       <rect>
-        <x>1410</x>
-        <y>40</y>
-        <width>20</width>
-        <height>781</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-     </widget>
-     <widget class="Line" name="line_3">
-      <property name="geometry">
-       <rect>
-        <x>1120</x>
-        <y>810</y>
-        <width>301</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-     <widget class="Line" name="line_4">
-      <property name="geometry">
-       <rect>
-        <x>1120</x>
-        <y>30</y>
-        <width>301</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelActions">
-      <property name="geometry">
-       <rect>
-        <x>450</x>
-        <y>570</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Actions :</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButtonAjouterClient">
-      <property name="geometry">
-       <rect>
-        <x>170</x>
-        <y>800</y>
-        <width>111</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Ajouter un client</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButtonSupprimerClient">
-      <property name="enabled">
-       <bool>false</bool>
-      </property>
-      <property name="geometry">
-       <rect>
-        <x>410</x>
-        <y>590</y>
-        <width>111</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Supprimer un client</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButtonVoirMachinesClient">
-      <property name="geometry">
-       <rect>
-        <x>390</x>
-        <y>630</y>
-        <width>161</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Voir les machines du client</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEditNom">
-      <property name="geometry">
-       <rect>
-        <x>100</x>
-        <y>590</y>
-        <width>161</width>
-        <height>20</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEditPrenom">
-      <property name="geometry">
-       <rect>
-        <x>100</x>
-        <y>620</y>
-        <width>161</width>
-        <height>20</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEditTelephone">
-      <property name="geometry">
-       <rect>
-        <x>100</x>
-        <y>650</y>
-        <width>161</width>
-        <height>20</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEditVille">
-      <property name="geometry">
-       <rect>
-        <x>100</x>
-        <y>680</y>
-        <width>161</width>
-        <height>20</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEditCP">
-      <property name="geometry">
-       <rect>
-        <x>100</x>
-        <y>710</y>
-        <width>161</width>
-        <height>20</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelNom">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>590</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Nom :</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelPrenom">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>620</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Prénom :</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelTelephone">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>650</y>
-        <width>61</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Téléphone :</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelAdresse">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>740</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Adresse :</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEditAdresse">
-      <property name="geometry">
-       <rect>
-        <x>100</x>
-        <y>740</y>
-        <width>161</width>
-        <height>20</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelVille">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>680</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Ville :</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelCP">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>710</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>CP :</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelAjouterClient">
-      <property name="geometry">
-       <rect>
-        <x>110</x>
-        <y>570</y>
-        <width>131</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Ajouter/Modifier un client :</string>
-      </property>
-     </widget>
-     <widget class="Line" name="line_5">
-      <property name="geometry">
-       <rect>
-        <x>1120</x>
-        <y>320</y>
-        <width>301</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEditEmail">
-      <property name="geometry">
-       <rect>
-        <x>100</x>
-        <y>770</y>
-        <width>161</width>
-        <height>20</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelMail">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>770</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Email :</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButtonAjouterMachineClient">
-      <property name="geometry">
-       <rect>
-        <x>390</x>
-        <y>670</y>
-        <width>161</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Ajouter une machine au client</string>
-      </property>
-     </widget>
-     <widget class="Line" name="line_24">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>570</y>
-        <width>21</width>
-        <height>261</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-     </widget>
-     <widget class="Line" name="line_26">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>560</y>
-        <width>601</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-     <widget class="Line" name="line_27">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>820</y>
-        <width>601</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-     <widget class="Line" name="line_28">
-      <property name="geometry">
-       <rect>
-        <x>310</x>
-        <y>570</y>
-        <width>21</width>
-        <height>261</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-     </widget>
-     <widget class="Line" name="line_29">
-      <property name="geometry">
-       <rect>
-        <x>610</x>
-        <y>570</y>
-        <width>21</width>
-        <height>261</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_16">
-      <property name="geometry">
-       <rect>
-        <x>1210</x>
-        <y>10</y>
-        <width>131</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Informations sur le client :</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_17">
-      <property name="geometry">
-       <rect>
-        <x>1140</x>
-        <y>80</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Nom :</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_18">
-      <property name="geometry">
-       <rect>
-        <x>1140</x>
-        <y>110</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Prénom :</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_19">
-      <property name="geometry">
-       <rect>
-        <x>1140</x>
-        <y>140</y>
-        <width>61</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Téléphone :</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_20">
-      <property name="geometry">
-       <rect>
-        <x>1140</x>
-        <y>170</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Ville :</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_21">
-      <property name="geometry">
-       <rect>
-        <x>1140</x>
-        <y>200</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>CP :</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelAdresse_2">
-      <property name="geometry">
-       <rect>
-        <x>1140</x>
-        <y>230</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Adresse :</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelMail_2">
-      <property name="geometry">
-       <rect>
-        <x>1140</x>
-        <y>270</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Email :</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_22">
-      <property name="geometry">
-       <rect>
-        <x>1250</x>
-        <y>40</y>
-        <width>31</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Client </string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_23">
-      <property name="geometry">
-       <rect>
-        <x>1250</x>
-        <y>330</y>
-        <width>41</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Machine</string>
-      </property>
-     </widget>
-     <widget class="QTableWidget" name="tableWidgetMachineClient">
-      <property name="geometry">
-       <rect>
-        <x>1140</x>
-        <y>351</y>
-        <width>256</width>
-        <height>421</height>
-       </rect>
-      </property>
-      <property name="editTriggers">
-       <set>QAbstractItemView::NoEditTriggers</set>
-      </property>
-      <column>
-       <property name="text">
-        <string>Nom</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Date récéption</string>
-       </property>
-      </column>
-     </widget>
-     <widget class="QLabel" name="labelNomClient">
-      <property name="geometry">
-       <rect>
-        <x>1230</x>
-        <y>80</y>
-        <width>171</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelPrenomClient">
-      <property name="geometry">
-       <rect>
-        <x>1230</x>
-        <y>110</y>
-        <width>171</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelTelClient">
-      <property name="geometry">
-       <rect>
-        <x>1230</x>
-        <y>140</y>
-        <width>171</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelVilleClient">
-      <property name="geometry">
-       <rect>
-        <x>1230</x>
-        <y>170</y>
-        <width>171</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelCPClient">
-      <property name="geometry">
-       <rect>
-        <x>1230</x>
-        <y>200</y>
-        <width>171</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelAdresseClient">
-      <property name="geometry">
-       <rect>
-        <x>1230</x>
-        <y>230</y>
-        <width>171</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelEmailClient">
-      <property name="geometry">
-       <rect>
-        <x>1220</x>
-        <y>270</y>
-        <width>181</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButtonModifierClient">
-      <property name="enabled">
-       <bool>false</bool>
-      </property>
-      <property name="geometry">
-       <rect>
-        <x>50</x>
-        <y>800</y>
-        <width>111</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Modifier un client</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButtonRechercher_2">
-      <property name="geometry">
-       <rect>
-        <x>530</x>
-        <y>530</y>
-        <width>91</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Annuler</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButtonDeselectionner">
-      <property name="geometry">
-       <rect>
-        <x>1190</x>
-        <y>780</y>
-        <width>161</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Désélectionner un client</string>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="tabMachine">
-     <attribute name="title">
-      <string>Machine</string>
-     </attribute>
-     <widget class="QTableWidget" name="tableWidgetMachine">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>40</y>
-        <width>1101</width>
-        <height>481</height>
-       </rect>
-      </property>
-      <property name="editTriggers">
-       <set>QAbstractItemView::NoEditTriggers</set>
-      </property>
-      <column>
-       <property name="text">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tabClients">
+       <attribute name="title">
+        <string>Clients</string>
+       </attribute>
+       <widget class="QTableWidget" name="tableWidgetClient">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>40</y>
+          <width>1091</width>
+          <height>481</height>
+         </rect>
+        </property>
+        <property name="sizeAdjustPolicy">
+         <enum>QAbstractScrollArea::AdjustToContents</enum>
+        </property>
+        <property name="editTriggers">
+         <set>QAbstractItemView::NoEditTriggers</set>
+        </property>
+        <property name="tabKeyNavigation">
+         <bool>false</bool>
+        </property>
+        <property name="alternatingRowColors">
+         <bool>true</bool>
+        </property>
+        <property name="selectionMode">
+         <enum>QAbstractItemView::SingleSelection</enum>
+        </property>
+        <property name="selectionBehavior">
+         <enum>QAbstractItemView::SelectRows</enum>
+        </property>
+        <property name="sortingEnabled">
+         <bool>true</bool>
+        </property>
+        <column>
+         <property name="text">
+          <string>Nom</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Prénom</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Téléphone</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Email</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Adresse</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Code Postal</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Ville</string>
+         </property>
+        </column>
+       </widget>
+       <widget class="QLabel" name="label">
+        <property name="geometry">
+         <rect>
+          <x>270</x>
+          <y>10</y>
+          <width>91</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Liste des clients :</string>
+        </property>
+       </widget>
+       <widget class="Line" name="line">
+        <property name="geometry">
+         <rect>
+          <x>1110</x>
+          <y>40</y>
+          <width>20</width>
+          <height>781</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEditRechercheClient">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>530</y>
+          <width>411</width>
+          <height>31</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonRechercher">
+        <property name="geometry">
+         <rect>
+          <x>440</x>
+          <y>530</y>
+          <width>91</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Rechercher</string>
+        </property>
+       </widget>
+       <widget class="Line" name="line_2">
+        <property name="geometry">
+         <rect>
+          <x>1410</x>
+          <y>40</y>
+          <width>20</width>
+          <height>781</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+       <widget class="Line" name="line_3">
+        <property name="geometry">
+         <rect>
+          <x>1120</x>
+          <y>810</y>
+          <width>301</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+       <widget class="Line" name="line_4">
+        <property name="geometry">
+         <rect>
+          <x>1120</x>
+          <y>30</y>
+          <width>301</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelActions">
+        <property name="geometry">
+         <rect>
+          <x>450</x>
+          <y>570</y>
+          <width>47</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Actions :</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonAjouterClient">
+        <property name="geometry">
+         <rect>
+          <x>170</x>
+          <y>800</y>
+          <width>111</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Ajouter un client</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonSupprimerClient">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>410</x>
+          <y>590</y>
+          <width>111</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Supprimer un client</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonVoirMachinesClient">
+        <property name="geometry">
+         <rect>
+          <x>390</x>
+          <y>630</y>
+          <width>161</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Voir les machines du client</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEditNom">
+        <property name="geometry">
+         <rect>
+          <x>100</x>
+          <y>590</y>
+          <width>161</width>
+          <height>20</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEditPrenom">
+        <property name="geometry">
+         <rect>
+          <x>100</x>
+          <y>620</y>
+          <width>161</width>
+          <height>20</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEditTelephone">
+        <property name="geometry">
+         <rect>
+          <x>100</x>
+          <y>650</y>
+          <width>161</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="inputMask">
+         <string>99 99 99 99 99</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEditVille">
+        <property name="geometry">
+         <rect>
+          <x>100</x>
+          <y>680</y>
+          <width>161</width>
+          <height>20</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEditCP">
+        <property name="geometry">
+         <rect>
+          <x>100</x>
+          <y>710</y>
+          <width>161</width>
+          <height>20</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelNom">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>590</y>
+          <width>47</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Nom :</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelPrenom">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>620</y>
+          <width>47</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Prénom :</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelTelephone">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>650</y>
+          <width>61</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Téléphone :</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelAdresse">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>740</y>
+          <width>47</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Adresse :</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEditAdresse">
+        <property name="geometry">
+         <rect>
+          <x>100</x>
+          <y>740</y>
+          <width>161</width>
+          <height>20</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelVille">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>680</y>
+          <width>47</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Ville :</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelCP">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>710</y>
+          <width>47</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>CP :</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelAjouterClient">
+        <property name="geometry">
+         <rect>
+          <x>110</x>
+          <y>570</y>
+          <width>131</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Ajouter/Modifier un client :</string>
+        </property>
+       </widget>
+       <widget class="Line" name="line_5">
+        <property name="geometry">
+         <rect>
+          <x>1120</x>
+          <y>320</y>
+          <width>301</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEditEmail">
+        <property name="geometry">
+         <rect>
+          <x>100</x>
+          <y>770</y>
+          <width>161</width>
+          <height>20</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelMail">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>770</y>
+          <width>47</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Email :</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonAjouterMachineClient">
+        <property name="geometry">
+         <rect>
+          <x>390</x>
+          <y>670</y>
+          <width>161</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Ajouter une machine au client</string>
+        </property>
+       </widget>
+       <widget class="Line" name="line_24">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>570</y>
+          <width>21</width>
+          <height>261</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+       <widget class="Line" name="line_26">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>560</y>
+          <width>601</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+       <widget class="Line" name="line_27">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>820</y>
+          <width>601</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+       <widget class="Line" name="line_28">
+        <property name="geometry">
+         <rect>
+          <x>310</x>
+          <y>570</y>
+          <width>21</width>
+          <height>261</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+       <widget class="Line" name="line_29">
+        <property name="geometry">
+         <rect>
+          <x>610</x>
+          <y>570</y>
+          <width>21</width>
+          <height>261</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_16">
+        <property name="geometry">
+         <rect>
+          <x>1210</x>
+          <y>10</y>
+          <width>131</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Informations sur le client :</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_17">
+        <property name="geometry">
+         <rect>
+          <x>1140</x>
+          <y>80</y>
+          <width>47</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Nom :</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_18">
+        <property name="geometry">
+         <rect>
+          <x>1140</x>
+          <y>110</y>
+          <width>47</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Prénom :</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_19">
+        <property name="geometry">
+         <rect>
+          <x>1140</x>
+          <y>140</y>
+          <width>61</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Téléphone :</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_20">
+        <property name="geometry">
+         <rect>
+          <x>1140</x>
+          <y>170</y>
+          <width>47</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Ville :</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_21">
+        <property name="geometry">
+         <rect>
+          <x>1140</x>
+          <y>200</y>
+          <width>47</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>CP :</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelAdresse_2">
+        <property name="geometry">
+         <rect>
+          <x>1140</x>
+          <y>230</y>
+          <width>47</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Adresse :</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelMail_2">
+        <property name="geometry">
+         <rect>
+          <x>1140</x>
+          <y>270</y>
+          <width>47</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Email :</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_22">
+        <property name="geometry">
+         <rect>
+          <x>1250</x>
+          <y>40</y>
+          <width>31</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Client </string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_23">
+        <property name="geometry">
+         <rect>
+          <x>1250</x>
+          <y>330</y>
+          <width>41</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Machine</string>
+        </property>
+       </widget>
+       <widget class="QTableWidget" name="tableWidgetMachineClient">
+        <property name="geometry">
+         <rect>
+          <x>1140</x>
+          <y>351</y>
+          <width>256</width>
+          <height>421</height>
+         </rect>
+        </property>
+        <property name="editTriggers">
+         <set>QAbstractItemView::NoEditTriggers</set>
+        </property>
+        <column>
+         <property name="text">
+          <string>Nom</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Date récéption</string>
+         </property>
+        </column>
+       </widget>
+       <widget class="QLabel" name="labelNomClient">
+        <property name="geometry">
+         <rect>
+          <x>1230</x>
+          <y>80</y>
+          <width>171</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelPrenomClient">
+        <property name="geometry">
+         <rect>
+          <x>1230</x>
+          <y>110</y>
+          <width>171</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelTelClient">
+        <property name="geometry">
+         <rect>
+          <x>1230</x>
+          <y>140</y>
+          <width>171</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelVilleClient">
+        <property name="geometry">
+         <rect>
+          <x>1230</x>
+          <y>170</y>
+          <width>171</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelCPClient">
+        <property name="geometry">
+         <rect>
+          <x>1230</x>
+          <y>200</y>
+          <width>171</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelAdresseClient">
+        <property name="geometry">
+         <rect>
+          <x>1230</x>
+          <y>230</y>
+          <width>171</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelEmailClient">
+        <property name="geometry">
+         <rect>
+          <x>1220</x>
+          <y>270</y>
+          <width>181</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonModifierClient">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>50</x>
+          <y>800</y>
+          <width>111</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Modifier un client</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonRechercher_2">
+        <property name="geometry">
+         <rect>
+          <x>530</x>
+          <y>530</y>
+          <width>91</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Annuler</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonDeselectionner">
+        <property name="geometry">
+         <rect>
+          <x>1190</x>
+          <y>780</y>
+          <width>161</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Désélectionner un client</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tabMachine">
+       <attribute name="title">
         <string>Machine</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Marque</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Modèle</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Type</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Client</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Panne</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Etat</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Devis</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Date d'arrivée</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Date de sortie</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Technicien</string>
-       </property>
-      </column>
-     </widget>
-     <widget class="QLabel" name="label_2">
-      <property name="geometry">
-       <rect>
-        <x>260</x>
-        <y>10</y>
-        <width>101</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Liste des machines :</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEditRechercheMachine">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>530</y>
-        <width>501</width>
-        <height>31</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButtonRechercherMachine">
-      <property name="geometry">
-       <rect>
-        <x>530</x>
-        <y>530</y>
-        <width>91</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Rechercher</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelAjouterClient_2">
-      <property name="geometry">
-       <rect>
-        <x>220</x>
-        <y>570</y>
-        <width>111</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Ajouter une machine :</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_5">
-      <property name="geometry">
-       <rect>
-        <x>40</x>
-        <y>690</y>
-        <width>61</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Modèle :</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButtonAjouterMachine">
-      <property name="enabled">
-       <bool>false</bool>
-      </property>
-      <property name="geometry">
-       <rect>
-        <x>200</x>
-        <y>780</y>
-        <width>111</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Ajouter une machine</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_6">
-      <property name="geometry">
-       <rect>
-        <x>40</x>
-        <y>740</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Type :</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEditReference">
-      <property name="geometry">
-       <rect>
-        <x>120</x>
-        <y>690</y>
-        <width>151</width>
-        <height>20</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QRadioButton" name="radioButtonElectrique">
-      <property name="geometry">
-       <rect>
-        <x>210</x>
-        <y>740</y>
-        <width>82</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Eléctrique</string>
-      </property>
-     </widget>
-     <widget class="QRadioButton" name="radioButtonThermique">
-      <property name="geometry">
-       <rect>
-        <x>120</x>
-        <y>740</y>
-        <width>82</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Thermique</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_4">
-      <property name="geometry">
-       <rect>
-        <x>40</x>
-        <y>610</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Machine :</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_25">
-      <property name="geometry">
-       <rect>
-        <x>1250</x>
-        <y>330</y>
-        <width>41</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Machine</string>
-      </property>
-     </widget>
-     <widget class="Line" name="line_31">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>570</y>
-        <width>21</width>
-        <height>251</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-     </widget>
-     <widget class="Line" name="line_32">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>810</y>
-        <width>831</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-     <widget class="Line" name="line_33">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>560</y>
-        <width>831</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEditNomMachine">
-      <property name="geometry">
-       <rect>
-        <x>120</x>
-        <y>610</y>
-        <width>151</width>
-        <height>20</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_24">
-      <property name="geometry">
-       <rect>
-        <x>1250</x>
-        <y>40</y>
-        <width>31</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Client </string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_30">
-      <property name="geometry">
-       <rect>
-        <x>1140</x>
-        <y>140</y>
-        <width>61</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Téléphone :</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_31">
-      <property name="geometry">
-       <rect>
-        <x>1210</x>
-        <y>10</y>
-        <width>131</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Informations sur le client :</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelTelClient_2">
-      <property name="geometry">
-       <rect>
-        <x>1230</x>
-        <y>140</y>
-        <width>171</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-     <widget class="Line" name="line_6">
-      <property name="geometry">
-       <rect>
-        <x>1120</x>
-        <y>30</y>
-        <width>301</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelEmailClient_2">
-      <property name="geometry">
-       <rect>
-        <x>1220</x>
-        <y>270</y>
-        <width>181</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_26">
-      <property name="geometry">
-       <rect>
-        <x>1140</x>
-        <y>110</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Prénom :</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_29">
-      <property name="geometry">
-       <rect>
-        <x>1140</x>
-        <y>80</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Nom :</string>
-      </property>
-     </widget>
-     <widget class="Line" name="line_10">
-      <property name="geometry">
-       <rect>
-        <x>1120</x>
-        <y>310</y>
-        <width>301</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-     <widget class="Line" name="line_7">
-      <property name="geometry">
-       <rect>
-        <x>1110</x>
-        <y>40</y>
-        <width>20</width>
-        <height>781</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_27">
-      <property name="geometry">
-       <rect>
-        <x>1140</x>
-        <y>170</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Ville :</string>
-      </property>
-     </widget>
-     <widget class="Line" name="line_8">
-      <property name="geometry">
-       <rect>
-        <x>1410</x>
-        <y>40</y>
-        <width>20</width>
-        <height>781</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelAdresseClient_2">
-      <property name="geometry">
-       <rect>
-        <x>1230</x>
-        <y>230</y>
-        <width>171</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelMail_3">
-      <property name="geometry">
-       <rect>
-        <x>1140</x>
-        <y>270</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Email :</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelAdresse_3">
-      <property name="geometry">
-       <rect>
-        <x>1140</x>
-        <y>230</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Adresse :</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelCPClient_2">
-      <property name="geometry">
-       <rect>
-        <x>1230</x>
-        <y>200</y>
-        <width>171</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelPrenomClient_2">
-      <property name="geometry">
-       <rect>
-        <x>1230</x>
-        <y>110</y>
-        <width>171</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-     <widget class="QTableWidget" name="tableWidgetMachineClient2">
-      <property name="geometry">
-       <rect>
-        <x>1140</x>
-        <y>351</y>
-        <width>256</width>
-        <height>421</height>
-       </rect>
-      </property>
-      <property name="editTriggers">
-       <set>QAbstractItemView::NoEditTriggers</set>
-      </property>
-      <column>
-       <property name="text">
-        <string>Nom</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Date récéption</string>
-       </property>
-      </column>
-     </widget>
-     <widget class="Line" name="line_9">
-      <property name="geometry">
-       <rect>
-        <x>1120</x>
-        <y>810</y>
-        <width>301</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelNomClient_2">
-      <property name="geometry">
-       <rect>
-        <x>1230</x>
-        <y>80</y>
-        <width>171</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelVilleClient_2">
-      <property name="geometry">
-       <rect>
-        <x>1230</x>
-        <y>170</y>
-        <width>171</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_28">
-      <property name="geometry">
-       <rect>
-        <x>1140</x>
-        <y>200</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>CP :</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_5">
-      <property name="geometry">
-       <rect>
-        <x>920</x>
-        <y>680</y>
-        <width>121</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Attribuer technicien</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_2">
-      <property name="geometry">
-       <rect>
-        <x>920</x>
-        <y>640</y>
-        <width>121</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Supprimer une machine</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_3">
-      <property name="geometry">
-       <rect>
-        <x>960</x>
-        <y>580</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Actions :</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_3">
-      <property name="geometry">
-       <rect>
-        <x>910</x>
-        <y>720</y>
-        <width>141</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Voir client de la machine</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton">
-      <property name="geometry">
-       <rect>
-        <x>920</x>
-        <y>600</y>
-        <width>121</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Modifier une machine</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_4">
-      <property name="geometry">
-       <rect>
-        <x>910</x>
-        <y>760</y>
-        <width>141</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Voir commande de pièces</string>
-      </property>
-     </widget>
-     <widget class="Line" name="line_34">
-      <property name="geometry">
-       <rect>
-        <x>850</x>
-        <y>560</y>
-        <width>251</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-     <widget class="Line" name="line_40">
-      <property name="geometry">
-       <rect>
-        <x>850</x>
-        <y>810</y>
-        <width>251</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-     <widget class="Line" name="line_45">
-      <property name="geometry">
-       <rect>
-        <x>1090</x>
-        <y>570</y>
-        <width>21</width>
-        <height>251</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_7">
-      <property name="geometry">
-       <rect>
-        <x>40</x>
-        <y>650</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Marque :</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEditMarque">
-      <property name="geometry">
-       <rect>
-        <x>120</x>
-        <y>650</y>
-        <width>151</width>
-        <height>20</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="Line" name="line_46">
-      <property name="geometry">
-       <rect>
-        <x>530</x>
-        <y>570</y>
-        <width>21</width>
-        <height>251</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-     </widget>
-     <widget class="QListWidget" name="listWidgetResultatRecherche">
-      <property name="geometry">
-       <rect>
-        <x>560</x>
-        <y>580</y>
-        <width>271</width>
-        <height>221</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="Line" name="line_47">
-      <property name="geometry">
-       <rect>
-        <x>840</x>
-        <y>570</y>
-        <width>21</width>
-        <height>251</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_8">
-      <property name="geometry">
-       <rect>
-        <x>390</x>
-        <y>590</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Panne :</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButtonDeselectionner_2">
-      <property name="geometry">
-       <rect>
-        <x>1190</x>
-        <y>780</y>
-        <width>161</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Désélectionner un client</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEditPanne1">
-      <property name="geometry">
-       <rect>
-        <x>340</x>
-        <y>610</y>
-        <width>141</width>
-        <height>20</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEditPanne2">
-      <property name="geometry">
-       <rect>
-        <x>340</x>
-        <y>640</y>
-        <width>141</width>
-        <height>20</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEditPanne3">
-      <property name="geometry">
-       <rect>
-        <x>340</x>
-        <y>670</y>
-        <width>141</width>
-        <height>20</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEditPanne4">
-      <property name="geometry">
-       <rect>
-        <x>340</x>
-        <y>700</y>
-        <width>141</width>
-        <height>20</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEditPanne5">
-      <property name="geometry">
-       <rect>
-        <x>340</x>
-        <y>730</y>
-        <width>141</width>
-        <height>20</height>
-       </rect>
-      </property>
-     </widget>
-     <zorder>tableWidgetMachine</zorder>
-     <zorder>label_2</zorder>
-     <zorder>lineEditRechercheMachine</zorder>
-     <zorder>pushButtonRechercherMachine</zorder>
-     <zorder>labelAjouterClient_2</zorder>
-     <zorder>label_5</zorder>
-     <zorder>pushButtonAjouterMachine</zorder>
-     <zorder>label_6</zorder>
-     <zorder>lineEditReference</zorder>
-     <zorder>radioButtonElectrique</zorder>
-     <zorder>radioButtonThermique</zorder>
-     <zorder>label_4</zorder>
-     <zorder>line_31</zorder>
-     <zorder>line_32</zorder>
-     <zorder>line_33</zorder>
-     <zorder>lineEditNomMachine</zorder>
-     <zorder>label_25</zorder>
-     <zorder>label_24</zorder>
-     <zorder>label_30</zorder>
-     <zorder>label_31</zorder>
-     <zorder>labelTelClient_2</zorder>
-     <zorder>line_6</zorder>
-     <zorder>labelEmailClient_2</zorder>
-     <zorder>label_26</zorder>
-     <zorder>label_29</zorder>
-     <zorder>line_10</zorder>
-     <zorder>line_7</zorder>
-     <zorder>label_27</zorder>
-     <zorder>line_8</zorder>
-     <zorder>labelAdresseClient_2</zorder>
-     <zorder>labelMail_3</zorder>
-     <zorder>labelAdresse_3</zorder>
-     <zorder>labelCPClient_2</zorder>
-     <zorder>labelPrenomClient_2</zorder>
-     <zorder>tableWidgetMachineClient2</zorder>
-     <zorder>line_9</zorder>
-     <zorder>labelNomClient_2</zorder>
-     <zorder>labelVilleClient_2</zorder>
-     <zorder>label_28</zorder>
-     <zorder>pushButton_5</zorder>
-     <zorder>pushButton_2</zorder>
-     <zorder>label_3</zorder>
-     <zorder>pushButton_3</zorder>
-     <zorder>pushButton</zorder>
-     <zorder>pushButton_4</zorder>
-     <zorder>line_34</zorder>
-     <zorder>line_40</zorder>
-     <zorder>line_45</zorder>
-     <zorder>label_7</zorder>
-     <zorder>lineEditMarque</zorder>
-     <zorder>line_46</zorder>
-     <zorder>listWidgetResultatRecherche</zorder>
-     <zorder>line_47</zorder>
-     <zorder>label_8</zorder>
-     <zorder>pushButtonDeselectionner_2</zorder>
-     <zorder>lineEditPanne1</zorder>
-     <zorder>lineEditPanne2</zorder>
-     <zorder>lineEditPanne3</zorder>
-     <zorder>lineEditPanne4</zorder>
-     <zorder>lineEditPanne5</zorder>
-    </widget>
-    <widget class="QWidget" name="tabCommande">
-     <attribute name="title">
-      <string>Commande</string>
-     </attribute>
-     <widget class="QTableWidget" name="tableWidget_3">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>40</y>
-        <width>601</width>
-        <height>481</height>
-       </rect>
-      </property>
-      <property name="editTriggers">
-       <set>QAbstractItemView::NoEditTriggers</set>
-      </property>
-      <column>
-       <property name="text">
-        <string>Numéro </string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Fournisseur</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Date commande</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Date livraison</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Date réception</string>
-       </property>
-      </column>
-     </widget>
-     <widget class="Line" name="line_11">
-      <property name="geometry">
-       <rect>
-        <x>630</x>
-        <y>40</y>
-        <width>20</width>
-        <height>481</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-     </widget>
-     <widget class="Line" name="line_12">
-      <property name="geometry">
-       <rect>
-        <x>930</x>
-        <y>40</y>
-        <width>20</width>
-        <height>481</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_9">
-      <property name="geometry">
-       <rect>
-        <x>250</x>
-        <y>10</y>
-        <width>111</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Liste des commandes :</string>
-      </property>
-     </widget>
-     <widget class="Line" name="line_13">
-      <property name="geometry">
-       <rect>
-        <x>640</x>
-        <y>30</y>
-        <width>301</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-     <widget class="Line" name="line_14">
-      <property name="geometry">
-       <rect>
-        <x>640</x>
-        <y>510</y>
-        <width>301</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEditRechercheMachine_2">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>530</y>
-        <width>501</width>
-        <height>31</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButtonRechercherMachine_2">
-      <property name="geometry">
-       <rect>
-        <x>530</x>
-        <y>530</y>
-        <width>91</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Rechercher</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_11">
-      <property name="geometry">
-       <rect>
-        <x>440</x>
-        <y>570</y>
-        <width>47</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Actions :</string>
-      </property>
-     </widget>
-     <widget class="Line" name="line_19">
-      <property name="geometry">
-       <rect>
-        <x>640</x>
-        <y>320</y>
-        <width>301</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_14">
-      <property name="geometry">
-       <rect>
-        <x>60</x>
-        <y>730</y>
-        <width>131</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Produits de la commande :</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_7">
-      <property name="geometry">
-       <rect>
-        <x>170</x>
-        <y>750</y>
-        <width>111</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Ajouter produits</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_6">
-      <property name="geometry">
-       <rect>
-        <x>180</x>
-        <y>800</y>
-        <width>111</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Ajouter commande</string>
-      </property>
-     </widget>
-     <widget class="QDateEdit" name="dateEdit_2">
-      <property name="geometry">
-       <rect>
-        <x>130</x>
-        <y>680</y>
-        <width>161</width>
-        <height>22</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="Line" name="line_18">
-      <property name="geometry">
-       <rect>
-        <x>40</x>
-        <y>720</y>
-        <width>251</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-     <widget class="Line" name="line_16">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>730</y>
-        <width>20</width>
-        <height>51</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_12">
-      <property name="geometry">
-       <rect>
-        <x>40</x>
-        <y>640</y>
-        <width>91</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Date commande :</string>
-      </property>
-     </widget>
-     <widget class="Line" name="line_17">
-      <property name="geometry">
-       <rect>
-        <x>273</x>
-        <y>730</y>
-        <width>31</width>
-        <height>51</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelAjouterClient_3">
-      <property name="geometry">
-       <rect>
-        <x>110</x>
-        <y>570</y>
-        <width>121</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Ajouter une commande :</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_10">
-      <property name="geometry">
-       <rect>
-        <x>40</x>
-        <y>600</y>
-        <width>71</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Fournisseur :</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_8">
-      <property name="geometry">
-       <rect>
-        <x>50</x>
-        <y>750</y>
-        <width>111</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Voir les produits</string>
-      </property>
-     </widget>
-     <widget class="Line" name="line_15">
-      <property name="geometry">
-       <rect>
-        <x>40</x>
-        <y>770</y>
-        <width>251</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_13">
-      <property name="geometry">
-       <rect>
-        <x>40</x>
-        <y>680</y>
-        <width>91</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Date livraison :</string>
-      </property>
-     </widget>
-     <widget class="QDateEdit" name="dateEdit">
-      <property name="geometry">
-       <rect>
-        <x>130</x>
-        <y>640</y>
-        <width>161</width>
-        <height>22</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QComboBox" name="comboBox">
-      <property name="geometry">
-       <rect>
-        <x>130</x>
-        <y>600</y>
-        <width>161</width>
-        <height>22</height>
-       </rect>
-      </property>
-      <property name="editable">
-       <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_11">
-      <property name="geometry">
-       <rect>
-        <x>390</x>
-        <y>600</y>
-        <width>151</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Modifier une commande</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_9">
-      <property name="geometry">
-       <rect>
-        <x>390</x>
-        <y>680</y>
-        <width>151</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Voir produits de la commande</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_10">
-      <property name="geometry">
-       <rect>
-        <x>390</x>
-        <y>640</y>
-        <width>151</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Supprimer commande</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_32">
-      <property name="geometry">
-       <rect>
-        <x>770</x>
-        <y>40</y>
-        <width>31</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Client </string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_33">
-      <property name="geometry">
-       <rect>
-        <x>760</x>
-        <y>330</y>
-        <width>41</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Machine</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_34">
-      <property name="geometry">
-       <rect>
-        <x>660</x>
-        <y>110</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Prénom :</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_35">
-      <property name="geometry">
-       <rect>
-        <x>660</x>
-        <y>170</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Ville :</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_36">
-      <property name="geometry">
-       <rect>
-        <x>660</x>
-        <y>200</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>CP :</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelAdresse_4">
-      <property name="geometry">
-       <rect>
-        <x>660</x>
-        <y>230</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Adresse :</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_37">
-      <property name="geometry">
-       <rect>
-        <x>660</x>
-        <y>80</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Nom :</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_38">
-      <property name="geometry">
-       <rect>
-        <x>730</x>
-        <y>10</y>
-        <width>131</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Informations sur le client :</string>
-      </property>
-     </widget>
-     <widget class="QTableWidget" name="tableWidgetMachineClient3">
-      <property name="geometry">
-       <rect>
-        <x>660</x>
-        <y>351</y>
-        <width>256</width>
-        <height>151</height>
-       </rect>
-      </property>
-      <property name="editTriggers">
-       <set>QAbstractItemView::NoEditTriggers</set>
-      </property>
-      <column>
-       <property name="text">
-        <string>Nom</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Date récéption</string>
-       </property>
-      </column>
-     </widget>
-     <widget class="QLabel" name="labelMail_4">
-      <property name="geometry">
-       <rect>
-        <x>660</x>
-        <y>270</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Email :</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_39">
-      <property name="geometry">
-       <rect>
-        <x>660</x>
-        <y>140</y>
-        <width>61</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Téléphone :</string>
-      </property>
-     </widget>
-     <widget class="Line" name="line_35">
-      <property name="geometry">
-       <rect>
-        <x>610</x>
-        <y>570</y>
-        <width>21</width>
-        <height>261</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-     </widget>
-     <widget class="Line" name="line_36">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>820</y>
-        <width>601</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-     <widget class="Line" name="line_37">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>570</y>
-        <width>21</width>
-        <height>261</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-     </widget>
-     <widget class="Line" name="line_38">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>560</y>
-        <width>601</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-     <widget class="Line" name="line_39">
-      <property name="geometry">
-       <rect>
-        <x>310</x>
-        <y>570</y>
-        <width>21</width>
-        <height>261</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelEmailClient_3">
-      <property name="geometry">
-       <rect>
-        <x>740</x>
-        <y>270</y>
-        <width>181</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelCPClient_3">
-      <property name="geometry">
-       <rect>
-        <x>750</x>
-        <y>200</y>
-        <width>171</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelNomClient_3">
-      <property name="geometry">
-       <rect>
-        <x>750</x>
-        <y>80</y>
-        <width>171</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelPrenomClient_3">
-      <property name="geometry">
-       <rect>
-        <x>750</x>
-        <y>110</y>
-        <width>171</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelVilleClient_3">
-      <property name="geometry">
-       <rect>
-        <x>750</x>
-        <y>170</y>
-        <width>171</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelAdresseClient_3">
-      <property name="geometry">
-       <rect>
-        <x>750</x>
-        <y>230</y>
-        <width>171</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelTelClient_3">
-      <property name="geometry">
-       <rect>
-        <x>750</x>
-        <y>140</y>
-        <width>171</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="tabProduit">
-     <attribute name="title">
-      <string>Produits</string>
-     </attribute>
-     <widget class="QTableWidget" name="tableWidget_4">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>40</y>
-        <width>601</width>
-        <height>481</height>
-       </rect>
-      </property>
-      <property name="editTriggers">
-       <set>QAbstractItemView::NoEditTriggers</set>
-      </property>
-      <column>
-       <property name="text">
-        <string>Libellé</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Référence</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Stock</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Machine</string>
-       </property>
-      </column>
-     </widget>
-     <widget class="QLabel" name="label_15">
-      <property name="geometry">
-       <rect>
-        <x>210</x>
-        <y>10</y>
-        <width>111</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Liste des produits :</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEditRechercheMachine_3">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>530</y>
-        <width>501</width>
-        <height>31</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButtonRechercherMachine_3">
-      <property name="geometry">
-       <rect>
-        <x>530</x>
-        <y>530</y>
-        <width>91</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Rechercher</string>
-      </property>
-     </widget>
-     <widget class="Line" name="line_20">
-      <property name="geometry">
-       <rect>
-        <x>630</x>
-        <y>40</y>
-        <width>20</width>
-        <height>481</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-     </widget>
-     <widget class="Line" name="line_21">
-      <property name="geometry">
-       <rect>
-        <x>640</x>
-        <y>30</y>
-        <width>301</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-     <widget class="Line" name="line_22">
-      <property name="geometry">
-       <rect>
-        <x>930</x>
-        <y>40</y>
-        <width>20</width>
-        <height>481</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-     </widget>
-     <widget class="Line" name="line_23">
-      <property name="geometry">
-       <rect>
-        <x>640</x>
-        <y>510</y>
-        <width>301</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_14">
-      <property name="geometry">
-       <rect>
-        <x>100</x>
-        <y>680</y>
-        <width>131</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Voir uniquement stock</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_15">
-      <property name="geometry">
-       <rect>
-        <x>100</x>
-        <y>720</y>
-        <width>131</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Voir uniquement machine</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_13">
-      <property name="geometry">
-       <rect>
-        <x>100</x>
-        <y>640</y>
-        <width>131</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Voir la machine</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_12">
-      <property name="geometry">
-       <rect>
-        <x>100</x>
-        <y>600</y>
-        <width>131</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Voir la commande</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_16">
-      <property name="geometry">
-       <rect>
-        <x>100</x>
-        <y>760</y>
-        <width>131</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Supprimer le produit</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_40">
-      <property name="geometry">
-       <rect>
-        <x>770</x>
-        <y>40</y>
-        <width>31</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Client </string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_41">
-      <property name="geometry">
-       <rect>
-        <x>760</x>
-        <y>330</y>
-        <width>41</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Machine</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_42">
-      <property name="geometry">
-       <rect>
-        <x>660</x>
-        <y>110</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Prénom :</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_43">
-      <property name="geometry">
-       <rect>
-        <x>660</x>
-        <y>170</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Ville :</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_44">
-      <property name="geometry">
-       <rect>
-        <x>660</x>
-        <y>200</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>CP :</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelAdresse_5">
-      <property name="geometry">
-       <rect>
-        <x>660</x>
-        <y>230</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Adresse :</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_45">
-      <property name="geometry">
-       <rect>
-        <x>660</x>
-        <y>80</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Nom :</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_46">
-      <property name="geometry">
-       <rect>
-        <x>730</x>
-        <y>10</y>
-        <width>131</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Informations sur le client :</string>
-      </property>
-     </widget>
-     <widget class="QTableWidget" name="tableWidgetMachineClient4">
-      <property name="geometry">
-       <rect>
-        <x>660</x>
-        <y>351</y>
-        <width>256</width>
-        <height>151</height>
-       </rect>
-      </property>
-      <property name="editTriggers">
-       <set>QAbstractItemView::NoEditTriggers</set>
-      </property>
-      <column>
-       <property name="text">
-        <string>Nom</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Date récéption</string>
-       </property>
-      </column>
-     </widget>
-     <widget class="QLabel" name="labelMail_5">
-      <property name="geometry">
-       <rect>
-        <x>660</x>
-        <y>270</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Email :</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_47">
-      <property name="geometry">
-       <rect>
-        <x>660</x>
-        <y>140</y>
-        <width>61</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Téléphone :</string>
-      </property>
-     </widget>
-     <widget class="Line" name="line_25">
-      <property name="geometry">
-       <rect>
-        <x>640</x>
-        <y>320</y>
-        <width>301</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-     <widget class="Line" name="line_41">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>820</y>
-        <width>301</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-     <widget class="Line" name="line_42">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>570</y>
-        <width>21</width>
-        <height>261</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-     </widget>
-     <widget class="Line" name="line_43">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>560</y>
-        <width>301</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-     <widget class="Line" name="line_44">
-      <property name="geometry">
-       <rect>
-        <x>310</x>
-        <y>570</y>
-        <width>21</width>
-        <height>261</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_48">
-      <property name="geometry">
-       <rect>
-        <x>140</x>
-        <y>570</y>
-        <width>47</width>
-        <height>13</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Actions :</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelEmailClient_4">
-      <property name="geometry">
-       <rect>
-        <x>740</x>
-        <y>270</y>
-        <width>181</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelCPClient_4">
-      <property name="geometry">
-       <rect>
-        <x>750</x>
-        <y>200</y>
-        <width>171</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelNomClient_4">
-      <property name="geometry">
-       <rect>
-        <x>750</x>
-        <y>80</y>
-        <width>171</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelPrenomClient_4">
-      <property name="geometry">
-       <rect>
-        <x>750</x>
-        <y>110</y>
-        <width>171</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelVilleClient_4">
-      <property name="geometry">
-       <rect>
-        <x>750</x>
-        <y>170</y>
-        <width>171</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelAdresseClient_4">
-      <property name="geometry">
-       <rect>
-        <x>750</x>
-        <y>230</y>
-        <width>171</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelTelClient_4">
-      <property name="geometry">
-       <rect>
-        <x>750</x>
-        <y>140</y>
-        <width>171</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </widget>
-   </widget>
+       </attribute>
+       <widget class="QTableWidget" name="tableWidgetMachine">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>40</y>
+          <width>1101</width>
+          <height>481</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>11</pointsize>
+         </font>
+        </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
+        <property name="sizeAdjustPolicy">
+         <enum>QAbstractScrollArea::AdjustIgnored</enum>
+        </property>
+        <property name="editTriggers">
+         <set>QAbstractItemView::NoEditTriggers</set>
+        </property>
+        <property name="tabKeyNavigation">
+         <bool>false</bool>
+        </property>
+        <property name="showDropIndicator" stdset="0">
+         <bool>false</bool>
+        </property>
+        <property name="dragDropOverwriteMode">
+         <bool>false</bool>
+        </property>
+        <property name="alternatingRowColors">
+         <bool>true</bool>
+        </property>
+        <property name="selectionMode">
+         <enum>QAbstractItemView::SingleSelection</enum>
+        </property>
+        <property name="selectionBehavior">
+         <enum>QAbstractItemView::SelectRows</enum>
+        </property>
+        <property name="sortingEnabled">
+         <bool>true</bool>
+        </property>
+        <column>
+         <property name="text">
+          <string>Machine</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Marque</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Modèle</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Type</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Client</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Panne</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Etat</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Devis</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Date d'arrivée</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Date de sortie</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Technicien</string>
+         </property>
+        </column>
+       </widget>
+       <widget class="QLabel" name="label_2">
+        <property name="geometry">
+         <rect>
+          <x>260</x>
+          <y>10</y>
+          <width>101</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Liste des machines :</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEditRechercheMachine">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>530</y>
+          <width>501</width>
+          <height>31</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonRechercherMachine">
+        <property name="geometry">
+         <rect>
+          <x>530</x>
+          <y>530</y>
+          <width>91</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Rechercher</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelAjouterClient_2">
+        <property name="geometry">
+         <rect>
+          <x>220</x>
+          <y>570</y>
+          <width>111</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Ajouter une machine :</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_5">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>690</y>
+          <width>61</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Modèle :</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonAjouterMachine">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>780</y>
+          <width>111</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Ajouter une machine</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_6">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>740</y>
+          <width>47</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Type :</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEditReference">
+        <property name="geometry">
+         <rect>
+          <x>120</x>
+          <y>690</y>
+          <width>151</width>
+          <height>20</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QRadioButton" name="radioButtonElectrique">
+        <property name="geometry">
+         <rect>
+          <x>210</x>
+          <y>740</y>
+          <width>82</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Eléctrique</string>
+        </property>
+       </widget>
+       <widget class="QRadioButton" name="radioButtonThermique">
+        <property name="geometry">
+         <rect>
+          <x>120</x>
+          <y>740</y>
+          <width>82</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Thermique</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_4">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>610</y>
+          <width>47</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Machine :</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_25">
+        <property name="geometry">
+         <rect>
+          <x>1250</x>
+          <y>330</y>
+          <width>41</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Machine</string>
+        </property>
+       </widget>
+       <widget class="Line" name="line_31">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>570</y>
+          <width>21</width>
+          <height>251</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+       <widget class="Line" name="line_32">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>810</y>
+          <width>831</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+       <widget class="Line" name="line_33">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>560</y>
+          <width>831</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEditNomMachine">
+        <property name="geometry">
+         <rect>
+          <x>120</x>
+          <y>610</y>
+          <width>151</width>
+          <height>20</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_24">
+        <property name="geometry">
+         <rect>
+          <x>1250</x>
+          <y>40</y>
+          <width>31</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Client </string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_30">
+        <property name="geometry">
+         <rect>
+          <x>1140</x>
+          <y>140</y>
+          <width>61</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Téléphone :</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_31">
+        <property name="geometry">
+         <rect>
+          <x>1210</x>
+          <y>10</y>
+          <width>131</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Informations sur le client :</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelTelClient_2">
+        <property name="geometry">
+         <rect>
+          <x>1230</x>
+          <y>140</y>
+          <width>171</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="Line" name="line_6">
+        <property name="geometry">
+         <rect>
+          <x>1120</x>
+          <y>30</y>
+          <width>301</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelEmailClient_2">
+        <property name="geometry">
+         <rect>
+          <x>1220</x>
+          <y>270</y>
+          <width>181</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_26">
+        <property name="geometry">
+         <rect>
+          <x>1140</x>
+          <y>110</y>
+          <width>47</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Prénom :</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_29">
+        <property name="geometry">
+         <rect>
+          <x>1140</x>
+          <y>80</y>
+          <width>47</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Nom :</string>
+        </property>
+       </widget>
+       <widget class="Line" name="line_10">
+        <property name="geometry">
+         <rect>
+          <x>1120</x>
+          <y>310</y>
+          <width>301</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+       <widget class="Line" name="line_7">
+        <property name="geometry">
+         <rect>
+          <x>1110</x>
+          <y>40</y>
+          <width>20</width>
+          <height>781</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_27">
+        <property name="geometry">
+         <rect>
+          <x>1140</x>
+          <y>170</y>
+          <width>47</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Ville :</string>
+        </property>
+       </widget>
+       <widget class="Line" name="line_8">
+        <property name="geometry">
+         <rect>
+          <x>1410</x>
+          <y>40</y>
+          <width>20</width>
+          <height>781</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelAdresseClient_2">
+        <property name="geometry">
+         <rect>
+          <x>1230</x>
+          <y>230</y>
+          <width>171</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelMail_3">
+        <property name="geometry">
+         <rect>
+          <x>1140</x>
+          <y>270</y>
+          <width>47</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Email :</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelAdresse_3">
+        <property name="geometry">
+         <rect>
+          <x>1140</x>
+          <y>230</y>
+          <width>47</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Adresse :</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelCPClient_2">
+        <property name="geometry">
+         <rect>
+          <x>1230</x>
+          <y>200</y>
+          <width>171</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelPrenomClient_2">
+        <property name="geometry">
+         <rect>
+          <x>1230</x>
+          <y>110</y>
+          <width>171</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QTableWidget" name="tableWidgetMachineClient2">
+        <property name="geometry">
+         <rect>
+          <x>1140</x>
+          <y>351</y>
+          <width>256</width>
+          <height>421</height>
+         </rect>
+        </property>
+        <property name="editTriggers">
+         <set>QAbstractItemView::NoEditTriggers</set>
+        </property>
+        <column>
+         <property name="text">
+          <string>Nom</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Date récéption</string>
+         </property>
+        </column>
+       </widget>
+       <widget class="Line" name="line_9">
+        <property name="geometry">
+         <rect>
+          <x>1120</x>
+          <y>810</y>
+          <width>301</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelNomClient_2">
+        <property name="geometry">
+         <rect>
+          <x>1230</x>
+          <y>80</y>
+          <width>171</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelVilleClient_2">
+        <property name="geometry">
+         <rect>
+          <x>1230</x>
+          <y>170</y>
+          <width>171</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_28">
+        <property name="geometry">
+         <rect>
+          <x>1140</x>
+          <y>200</y>
+          <width>47</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>CP :</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_5">
+        <property name="geometry">
+         <rect>
+          <x>920</x>
+          <y>680</y>
+          <width>121</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Attribuer technicien</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_2">
+        <property name="geometry">
+         <rect>
+          <x>920</x>
+          <y>640</y>
+          <width>121</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Supprimer une machine</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_3">
+        <property name="geometry">
+         <rect>
+          <x>960</x>
+          <y>580</y>
+          <width>47</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Actions :</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_3">
+        <property name="geometry">
+         <rect>
+          <x>910</x>
+          <y>720</y>
+          <width>141</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Voir client de la machine</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton">
+        <property name="geometry">
+         <rect>
+          <x>920</x>
+          <y>600</y>
+          <width>121</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Modifier une machine</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_4">
+        <property name="geometry">
+         <rect>
+          <x>910</x>
+          <y>760</y>
+          <width>141</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Voir commande de pièces</string>
+        </property>
+       </widget>
+       <widget class="Line" name="line_34">
+        <property name="geometry">
+         <rect>
+          <x>850</x>
+          <y>560</y>
+          <width>251</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+       <widget class="Line" name="line_40">
+        <property name="geometry">
+         <rect>
+          <x>850</x>
+          <y>810</y>
+          <width>251</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+       <widget class="Line" name="line_45">
+        <property name="geometry">
+         <rect>
+          <x>1090</x>
+          <y>570</y>
+          <width>21</width>
+          <height>251</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_7">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>650</y>
+          <width>47</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Marque :</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEditMarque">
+        <property name="geometry">
+         <rect>
+          <x>120</x>
+          <y>650</y>
+          <width>151</width>
+          <height>20</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="Line" name="line_46">
+        <property name="geometry">
+         <rect>
+          <x>530</x>
+          <y>570</y>
+          <width>21</width>
+          <height>251</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+       <widget class="QListWidget" name="listWidgetResultatRecherche">
+        <property name="geometry">
+         <rect>
+          <x>560</x>
+          <y>580</y>
+          <width>271</width>
+          <height>221</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="Line" name="line_47">
+        <property name="geometry">
+         <rect>
+          <x>840</x>
+          <y>570</y>
+          <width>21</width>
+          <height>251</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_8">
+        <property name="geometry">
+         <rect>
+          <x>390</x>
+          <y>590</y>
+          <width>47</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Panne :</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonDeselectionner_2">
+        <property name="geometry">
+         <rect>
+          <x>1190</x>
+          <y>780</y>
+          <width>161</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Désélectionner un client</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEditPanne1">
+        <property name="geometry">
+         <rect>
+          <x>340</x>
+          <y>610</y>
+          <width>141</width>
+          <height>20</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEditPanne2">
+        <property name="geometry">
+         <rect>
+          <x>340</x>
+          <y>640</y>
+          <width>141</width>
+          <height>20</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEditPanne3">
+        <property name="geometry">
+         <rect>
+          <x>340</x>
+          <y>670</y>
+          <width>141</width>
+          <height>20</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEditPanne4">
+        <property name="geometry">
+         <rect>
+          <x>340</x>
+          <y>700</y>
+          <width>141</width>
+          <height>20</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEditPanne5">
+        <property name="geometry">
+         <rect>
+          <x>340</x>
+          <y>730</y>
+          <width>141</width>
+          <height>20</height>
+         </rect>
+        </property>
+       </widget>
+       <zorder>tableWidgetMachine</zorder>
+       <zorder>label_2</zorder>
+       <zorder>lineEditRechercheMachine</zorder>
+       <zorder>pushButtonRechercherMachine</zorder>
+       <zorder>labelAjouterClient_2</zorder>
+       <zorder>label_5</zorder>
+       <zorder>pushButtonAjouterMachine</zorder>
+       <zorder>label_6</zorder>
+       <zorder>lineEditReference</zorder>
+       <zorder>radioButtonElectrique</zorder>
+       <zorder>radioButtonThermique</zorder>
+       <zorder>label_4</zorder>
+       <zorder>line_31</zorder>
+       <zorder>line_32</zorder>
+       <zorder>line_33</zorder>
+       <zorder>lineEditNomMachine</zorder>
+       <zorder>label_25</zorder>
+       <zorder>label_24</zorder>
+       <zorder>label_30</zorder>
+       <zorder>label_31</zorder>
+       <zorder>labelTelClient_2</zorder>
+       <zorder>line_6</zorder>
+       <zorder>labelEmailClient_2</zorder>
+       <zorder>label_26</zorder>
+       <zorder>label_29</zorder>
+       <zorder>line_10</zorder>
+       <zorder>line_7</zorder>
+       <zorder>label_27</zorder>
+       <zorder>line_8</zorder>
+       <zorder>labelAdresseClient_2</zorder>
+       <zorder>labelMail_3</zorder>
+       <zorder>labelAdresse_3</zorder>
+       <zorder>labelCPClient_2</zorder>
+       <zorder>labelPrenomClient_2</zorder>
+       <zorder>tableWidgetMachineClient2</zorder>
+       <zorder>line_9</zorder>
+       <zorder>labelNomClient_2</zorder>
+       <zorder>labelVilleClient_2</zorder>
+       <zorder>label_28</zorder>
+       <zorder>pushButton_5</zorder>
+       <zorder>pushButton_2</zorder>
+       <zorder>label_3</zorder>
+       <zorder>pushButton_3</zorder>
+       <zorder>pushButton</zorder>
+       <zorder>pushButton_4</zorder>
+       <zorder>line_34</zorder>
+       <zorder>line_40</zorder>
+       <zorder>line_45</zorder>
+       <zorder>label_7</zorder>
+       <zorder>lineEditMarque</zorder>
+       <zorder>line_46</zorder>
+       <zorder>listWidgetResultatRecherche</zorder>
+       <zorder>line_47</zorder>
+       <zorder>label_8</zorder>
+       <zorder>pushButtonDeselectionner_2</zorder>
+       <zorder>lineEditPanne1</zorder>
+       <zorder>lineEditPanne2</zorder>
+       <zorder>lineEditPanne3</zorder>
+       <zorder>lineEditPanne4</zorder>
+       <zorder>lineEditPanne5</zorder>
+      </widget>
+      <widget class="QWidget" name="tabCommande">
+       <attribute name="title">
+        <string>Commande</string>
+       </attribute>
+       <widget class="QTableWidget" name="tableWidget_3">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>40</y>
+          <width>601</width>
+          <height>481</height>
+         </rect>
+        </property>
+        <property name="editTriggers">
+         <set>QAbstractItemView::NoEditTriggers</set>
+        </property>
+        <column>
+         <property name="text">
+          <string>Numéro </string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Fournisseur</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Date commande</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Date livraison</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Date réception</string>
+         </property>
+        </column>
+       </widget>
+       <widget class="Line" name="line_11">
+        <property name="geometry">
+         <rect>
+          <x>630</x>
+          <y>40</y>
+          <width>20</width>
+          <height>481</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+       <widget class="Line" name="line_12">
+        <property name="geometry">
+         <rect>
+          <x>930</x>
+          <y>40</y>
+          <width>20</width>
+          <height>481</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_9">
+        <property name="geometry">
+         <rect>
+          <x>250</x>
+          <y>10</y>
+          <width>111</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Liste des commandes :</string>
+        </property>
+       </widget>
+       <widget class="Line" name="line_13">
+        <property name="geometry">
+         <rect>
+          <x>640</x>
+          <y>30</y>
+          <width>301</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+       <widget class="Line" name="line_14">
+        <property name="geometry">
+         <rect>
+          <x>640</x>
+          <y>510</y>
+          <width>301</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEditRechercheMachine_2">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>530</y>
+          <width>501</width>
+          <height>31</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonRechercherMachine_2">
+        <property name="geometry">
+         <rect>
+          <x>530</x>
+          <y>530</y>
+          <width>91</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Rechercher</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_11">
+        <property name="geometry">
+         <rect>
+          <x>440</x>
+          <y>570</y>
+          <width>47</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Actions :</string>
+        </property>
+       </widget>
+       <widget class="Line" name="line_19">
+        <property name="geometry">
+         <rect>
+          <x>640</x>
+          <y>320</y>
+          <width>301</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_14">
+        <property name="geometry">
+         <rect>
+          <x>60</x>
+          <y>730</y>
+          <width>131</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Produits de la commande :</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_7">
+        <property name="geometry">
+         <rect>
+          <x>170</x>
+          <y>750</y>
+          <width>111</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Ajouter produits</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_6">
+        <property name="geometry">
+         <rect>
+          <x>180</x>
+          <y>800</y>
+          <width>111</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Ajouter commande</string>
+        </property>
+       </widget>
+       <widget class="QDateEdit" name="dateEdit_2">
+        <property name="geometry">
+         <rect>
+          <x>130</x>
+          <y>680</y>
+          <width>161</width>
+          <height>22</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="Line" name="line_18">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>720</y>
+          <width>251</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+       <widget class="Line" name="line_16">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>730</y>
+          <width>20</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_12">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>640</y>
+          <width>91</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Date commande :</string>
+        </property>
+       </widget>
+       <widget class="Line" name="line_17">
+        <property name="geometry">
+         <rect>
+          <x>273</x>
+          <y>730</y>
+          <width>31</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelAjouterClient_3">
+        <property name="geometry">
+         <rect>
+          <x>110</x>
+          <y>570</y>
+          <width>121</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Ajouter une commande :</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_10">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>600</y>
+          <width>71</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Fournisseur :</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_8">
+        <property name="geometry">
+         <rect>
+          <x>50</x>
+          <y>750</y>
+          <width>111</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Voir les produits</string>
+        </property>
+       </widget>
+       <widget class="Line" name="line_15">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>770</y>
+          <width>251</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_13">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>680</y>
+          <width>91</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Date livraison :</string>
+        </property>
+       </widget>
+       <widget class="QDateEdit" name="dateEdit">
+        <property name="geometry">
+         <rect>
+          <x>130</x>
+          <y>640</y>
+          <width>161</width>
+          <height>22</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="comboBox">
+        <property name="geometry">
+         <rect>
+          <x>130</x>
+          <y>600</y>
+          <width>161</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="editable">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_11">
+        <property name="geometry">
+         <rect>
+          <x>390</x>
+          <y>600</y>
+          <width>151</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Modifier une commande</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_9">
+        <property name="geometry">
+         <rect>
+          <x>390</x>
+          <y>680</y>
+          <width>151</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Voir produits de la commande</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_10">
+        <property name="geometry">
+         <rect>
+          <x>390</x>
+          <y>640</y>
+          <width>151</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Supprimer commande</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_32">
+        <property name="geometry">
+         <rect>
+          <x>770</x>
+          <y>40</y>
+          <width>31</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Client </string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_33">
+        <property name="geometry">
+         <rect>
+          <x>760</x>
+          <y>330</y>
+          <width>41</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Machine</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_34">
+        <property name="geometry">
+         <rect>
+          <x>660</x>
+          <y>110</y>
+          <width>47</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Prénom :</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_35">
+        <property name="geometry">
+         <rect>
+          <x>660</x>
+          <y>170</y>
+          <width>47</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Ville :</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_36">
+        <property name="geometry">
+         <rect>
+          <x>660</x>
+          <y>200</y>
+          <width>47</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>CP :</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelAdresse_4">
+        <property name="geometry">
+         <rect>
+          <x>660</x>
+          <y>230</y>
+          <width>47</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Adresse :</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_37">
+        <property name="geometry">
+         <rect>
+          <x>660</x>
+          <y>80</y>
+          <width>47</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Nom :</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_38">
+        <property name="geometry">
+         <rect>
+          <x>730</x>
+          <y>10</y>
+          <width>131</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Informations sur le client :</string>
+        </property>
+       </widget>
+       <widget class="QTableWidget" name="tableWidgetMachineClient3">
+        <property name="geometry">
+         <rect>
+          <x>660</x>
+          <y>351</y>
+          <width>256</width>
+          <height>151</height>
+         </rect>
+        </property>
+        <property name="editTriggers">
+         <set>QAbstractItemView::NoEditTriggers</set>
+        </property>
+        <column>
+         <property name="text">
+          <string>Nom</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Date récéption</string>
+         </property>
+        </column>
+       </widget>
+       <widget class="QLabel" name="labelMail_4">
+        <property name="geometry">
+         <rect>
+          <x>660</x>
+          <y>270</y>
+          <width>47</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Email :</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_39">
+        <property name="geometry">
+         <rect>
+          <x>660</x>
+          <y>140</y>
+          <width>61</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Téléphone :</string>
+        </property>
+       </widget>
+       <widget class="Line" name="line_35">
+        <property name="geometry">
+         <rect>
+          <x>610</x>
+          <y>570</y>
+          <width>21</width>
+          <height>261</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+       <widget class="Line" name="line_36">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>820</y>
+          <width>601</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+       <widget class="Line" name="line_37">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>570</y>
+          <width>21</width>
+          <height>261</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+       <widget class="Line" name="line_38">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>560</y>
+          <width>601</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+       <widget class="Line" name="line_39">
+        <property name="geometry">
+         <rect>
+          <x>310</x>
+          <y>570</y>
+          <width>21</width>
+          <height>261</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelEmailClient_3">
+        <property name="geometry">
+         <rect>
+          <x>740</x>
+          <y>270</y>
+          <width>181</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelCPClient_3">
+        <property name="geometry">
+         <rect>
+          <x>750</x>
+          <y>200</y>
+          <width>171</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelNomClient_3">
+        <property name="geometry">
+         <rect>
+          <x>750</x>
+          <y>80</y>
+          <width>171</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelPrenomClient_3">
+        <property name="geometry">
+         <rect>
+          <x>750</x>
+          <y>110</y>
+          <width>171</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelVilleClient_3">
+        <property name="geometry">
+         <rect>
+          <x>750</x>
+          <y>170</y>
+          <width>171</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelAdresseClient_3">
+        <property name="geometry">
+         <rect>
+          <x>750</x>
+          <y>230</y>
+          <width>171</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelTelClient_3">
+        <property name="geometry">
+         <rect>
+          <x>750</x>
+          <y>140</y>
+          <width>171</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tabProduit">
+       <attribute name="title">
+        <string>Produits</string>
+       </attribute>
+       <widget class="QTableWidget" name="tableWidget_4">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>40</y>
+          <width>601</width>
+          <height>481</height>
+         </rect>
+        </property>
+        <property name="editTriggers">
+         <set>QAbstractItemView::NoEditTriggers</set>
+        </property>
+        <column>
+         <property name="text">
+          <string>Libellé</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Référence</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Stock</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Machine</string>
+         </property>
+        </column>
+       </widget>
+       <widget class="QLabel" name="label_15">
+        <property name="geometry">
+         <rect>
+          <x>210</x>
+          <y>10</y>
+          <width>111</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Liste des produits :</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEditRechercheMachine_3">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>530</y>
+          <width>501</width>
+          <height>31</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonRechercherMachine_3">
+        <property name="geometry">
+         <rect>
+          <x>530</x>
+          <y>530</y>
+          <width>91</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Rechercher</string>
+        </property>
+       </widget>
+       <widget class="Line" name="line_20">
+        <property name="geometry">
+         <rect>
+          <x>630</x>
+          <y>40</y>
+          <width>20</width>
+          <height>481</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+       <widget class="Line" name="line_21">
+        <property name="geometry">
+         <rect>
+          <x>640</x>
+          <y>30</y>
+          <width>301</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+       <widget class="Line" name="line_22">
+        <property name="geometry">
+         <rect>
+          <x>930</x>
+          <y>40</y>
+          <width>20</width>
+          <height>481</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+       <widget class="Line" name="line_23">
+        <property name="geometry">
+         <rect>
+          <x>640</x>
+          <y>510</y>
+          <width>301</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_14">
+        <property name="geometry">
+         <rect>
+          <x>100</x>
+          <y>680</y>
+          <width>131</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Voir uniquement stock</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_15">
+        <property name="geometry">
+         <rect>
+          <x>100</x>
+          <y>720</y>
+          <width>131</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Voir uniquement machine</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_13">
+        <property name="geometry">
+         <rect>
+          <x>100</x>
+          <y>640</y>
+          <width>131</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Voir la machine</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_12">
+        <property name="geometry">
+         <rect>
+          <x>100</x>
+          <y>600</y>
+          <width>131</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Voir la commande</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_16">
+        <property name="geometry">
+         <rect>
+          <x>100</x>
+          <y>760</y>
+          <width>131</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Supprimer le produit</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_40">
+        <property name="geometry">
+         <rect>
+          <x>770</x>
+          <y>40</y>
+          <width>31</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Client </string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_41">
+        <property name="geometry">
+         <rect>
+          <x>760</x>
+          <y>330</y>
+          <width>41</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Machine</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_42">
+        <property name="geometry">
+         <rect>
+          <x>660</x>
+          <y>110</y>
+          <width>47</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Prénom :</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_43">
+        <property name="geometry">
+         <rect>
+          <x>660</x>
+          <y>170</y>
+          <width>47</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Ville :</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_44">
+        <property name="geometry">
+         <rect>
+          <x>660</x>
+          <y>200</y>
+          <width>47</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>CP :</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelAdresse_5">
+        <property name="geometry">
+         <rect>
+          <x>660</x>
+          <y>230</y>
+          <width>47</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Adresse :</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_45">
+        <property name="geometry">
+         <rect>
+          <x>660</x>
+          <y>80</y>
+          <width>47</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Nom :</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_46">
+        <property name="geometry">
+         <rect>
+          <x>730</x>
+          <y>10</y>
+          <width>131</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Informations sur le client :</string>
+        </property>
+       </widget>
+       <widget class="QTableWidget" name="tableWidgetMachineClient4">
+        <property name="geometry">
+         <rect>
+          <x>660</x>
+          <y>351</y>
+          <width>256</width>
+          <height>151</height>
+         </rect>
+        </property>
+        <property name="editTriggers">
+         <set>QAbstractItemView::NoEditTriggers</set>
+        </property>
+        <column>
+         <property name="text">
+          <string>Nom</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Date récéption</string>
+         </property>
+        </column>
+       </widget>
+       <widget class="QLabel" name="labelMail_5">
+        <property name="geometry">
+         <rect>
+          <x>660</x>
+          <y>270</y>
+          <width>47</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Email :</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_47">
+        <property name="geometry">
+         <rect>
+          <x>660</x>
+          <y>140</y>
+          <width>61</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Téléphone :</string>
+        </property>
+       </widget>
+       <widget class="Line" name="line_25">
+        <property name="geometry">
+         <rect>
+          <x>640</x>
+          <y>320</y>
+          <width>301</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+       <widget class="Line" name="line_41">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>820</y>
+          <width>301</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+       <widget class="Line" name="line_42">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>570</y>
+          <width>21</width>
+          <height>261</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+       <widget class="Line" name="line_43">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>560</y>
+          <width>301</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+       <widget class="Line" name="line_44">
+        <property name="geometry">
+         <rect>
+          <x>310</x>
+          <y>570</y>
+          <width>21</width>
+          <height>261</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_48">
+        <property name="geometry">
+         <rect>
+          <x>140</x>
+          <y>570</y>
+          <width>47</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Actions :</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelEmailClient_4">
+        <property name="geometry">
+         <rect>
+          <x>740</x>
+          <y>270</y>
+          <width>181</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelCPClient_4">
+        <property name="geometry">
+         <rect>
+          <x>750</x>
+          <y>200</y>
+          <width>171</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelNomClient_4">
+        <property name="geometry">
+         <rect>
+          <x>750</x>
+          <y>80</y>
+          <width>171</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelPrenomClient_4">
+        <property name="geometry">
+         <rect>
+          <x>750</x>
+          <y>110</y>
+          <width>171</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelVilleClient_4">
+        <property name="geometry">
+         <rect>
+          <x>750</x>
+          <y>170</y>
+          <width>171</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelAdresseClient_4">
+        <property name="geometry">
+         <rect>
+          <x>750</x>
+          <y>230</y>
+          <width>171</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelTelClient_4">
+        <property name="geometry">
+         <rect>
+          <x>750</x>
+          <y>140</y>
+          <width>171</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

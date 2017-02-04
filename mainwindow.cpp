@@ -66,7 +66,9 @@ void MainWindow::chargerLesClients()
    int ligneActu=0;
    //on efface tout
    ui->tableWidgetClient->setRowCount(0);
-   reqChargerClient.prepare("select * from Client");
+   /*CREATE TABLE `Client`(`idClient` int(11),`nomClient` varchar(45),`prenomClient` varchar(45),`telephoneClient` varchar(45),`emailClient` varchar(45),`adresseClient` varchar(45),'cpClient' varchar(6),'villeClient' varchar(45),primary key(`idClient`));
+*/
+   reqChargerClient.prepare("select nomClient,prenomClient,telephoneClient,emailClient,adresseClient,cpClient,villeClient from Client order by nomClient");
    if(reqChargerClient.exec())
    {
        while(reqChargerClient.next())//pour chaque client
@@ -75,7 +77,7 @@ void MainWindow::chargerLesClients()
         //pour chaque champ à afficher
          for(int noCol=0;noCol<7;noCol++)
          {
-            ui->tableWidgetClient->setItem(ligneActu,noCol,new QTableWidgetItem(reqChargerClient.value(noCol+1).toString()));
+            ui->tableWidgetClient->setItem(ligneActu,noCol,new QTableWidgetItem(reqChargerClient.value(noCol).toString()));
          }
           ligneActu++;//on passe à la ligne suivante
 
@@ -300,9 +302,13 @@ void MainWindow::on_tableWidgetClient_cellClicked(int row, int column)
     prenomClient=ui->tableWidgetClient->item(row,1)->text();
     telClient=ui->tableWidgetClient->item(row,2)->text();
     emailCLient=ui->tableWidgetClient->item(row,3)->text();
-    villeClient=ui->tableWidgetClient->item(row,4)->text();
-    adresseClient=ui->tableWidgetClient->item(row,5)->text();
-    cpClient=ui->tableWidgetClient->item(row,6)->text();
+    adresseClient=ui->tableWidgetClient->item(row,4)->text();
+    cpClient=ui->tableWidgetClient->item(row,5)->text();
+    villeClient=ui->tableWidgetClient->item(row,6)->text();
+
+
+
+
 
     int nbLigne=0;
     ui->tableWidgetMachineClient->setRowCount(0);
@@ -447,7 +453,7 @@ void MainWindow::on_pushButtonAjouterMachine_clicked()
     QString maxId;
     QString idClientAct;
 
-    QString dateARentrer;
+    //QString dateARentrer;
 
     QSqlQuery reqMaxIdMach;
     reqMaxIdMach.prepare("select ifnull(max(idReparation),100) from Reparation");
@@ -460,7 +466,7 @@ void MainWindow::on_pushButtonAjouterMachine_clicked()
     }
 
     dateArrivee=dateArrivee.currentDate();
-    dateARentrer=dateArrivee.toString("yyyy/MM/dd");
+    QString dateARentrer=dateArrivee.toString("yyyy/MM/dd");
     nomMachine=ui->lineEditNomMachine->text();
     marqueMachine=ui->lineEditMarque->text();
     //refMachine=ui->lineEditReference->text();
@@ -486,17 +492,17 @@ void MainWindow::on_pushButtonAjouterMachine_clicked()
     QSqlQuery insertMachine;
 /*CREATE TABLE `Reparation`(`idReparation` int(11),`outilNom` varchar(45),`outilType` tinyint(2),`panneReparation` varchar(255),`outilRef` integer not null references Modele(idModel),`dateArrivee` DATE,`tempsPasse` int(11),`dateFinalisation` date,`idClient` int(11) NOT NULL,`idDevis` int(11) NOT NULL,`idEtat` int(11) NOT NULL,`refProduit` varchar(45) ,`idUtilisateur` int(11) NOT NULL, foreign key (`idClient`) references Client(`idClient`), foreign key (`idDevis`) references Devis_Reparation(`idDevis`), foreign key (`idEtat`) references Etat_Reparation(`idEtat`), foreign key (`refProduit`) references Produit(`refProduit`), foreign key (`idUtilisateur`) references Utilisateur(`idUtilisateur`),primary key(`idReparation`));
  */
-    QString txtReq="insert into Reparation (idReparation,outilNom,outilType,panneReparation,outilRef,dateArrivee,idClient,idEtat,idDevis,idUtilisateur) values("+maxId+","+
-                                                                                                                                                         "'"+nomMachine+"',"
-                                                                                                                                                           //+"'"+marqueMachine+"',"
-                                                                                                                                                           +typeMachine+",'"
-                                                                                                                                                           +panneMachine+"','"
-                                                                                                                                                           +refMachine+"','"
-                                                                                                                                                           +dateARentrer+"',"
-                                                                                                                                                           +idClientAct+",2,2,1)";
+    QString txtReq="insert into Reparation (idReparation,outilNom,outilType,panneReparation,outilRef,dateArrivee,idClient,idEtat,idDevis,idUtilisateur) "
+                   "values("+maxId+","
+                   +"'"+nomMachine+"',"
+                   //+"'"+marqueMachine+"',"
+                   +typeMachine+",'"
+                   +panneMachine+"','"
+                   +refMachine+"','"
+                   +dateARentrer+"',"
+                   +idClientAct+",2,2,1)";
     insertMachine.prepare(txtReq);
     qDebug()<<txtReq;
-    qDebug()<<insertMachine.lastError();
     insertMachine.exec();
     qDebug()<<insertMachine.lastError();
     chargerLesMachines();
