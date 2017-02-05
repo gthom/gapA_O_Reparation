@@ -5,6 +5,7 @@
 #include "QDebug"
 #include <QSqlError>
 #include <QMessageBox>
+#include <QSqlRecord>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -21,14 +22,49 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::majListeRecherche(QString leTexte)
+void MainWindow::majListeRechercheMachine(QString leTexte)
 {
     qDebug()<<"void MainWindow::majListeRecherche(QString leTexte)";
     //s'exécute quand il faut raffraichir la liste de recherche
     if(sender()==ui->lineEditReference)
     {
 
-        QString txtReq="select idModel,codeModel,libelleMarque from Modele inner join Marque on Modele.marque=Marque.idMarque where codeModel like upper('%"+ui->lineEditReference->text()+"%')";
+        QString txtReq="select idModel,nature,codeModel,libelleMarque from Modele inner join Marque on Modele.marque=Marque.idMarque where codeModel like upper('%"+ui->lineEditReference->text()+"%')";
+        qDebug()<<txtReq;
+        QSqlQuery maReq(txtReq);
+        //effacement de la liste
+        ui->listWidgetResultatRecherche->clear();
+        while(maReq.next())
+        {
+            QListWidgetItem*  nouvelElement=new QListWidgetItem(maReq.value("codeModel").toString()+" "+maReq.value("libelleMarque").toString());
+            nouvelElement->setData(32,maReq.value("idModel").toString());
+            nouvelElement->setData(33,maReq.value("codeModel").toString());
+            nouvelElement->setData(34,maReq.value("libelleMarque").toString());
+            nouvelElement->setData(35,maReq.value("nature").toString());
+            ui->listWidgetResultatRecherche->insertItem(0,nouvelElement);
+
+        }
+    }
+    else if(sender()==ui->lineEditMarque)
+    {
+        QString txtReq="select idModel,nature,codeModel,libelleMarque from Modele inner join Marque on Modele.marque=Marque.idMarque where libelleMarque like upper('%"+ui->lineEditMarque->text()+"%')";
+        qDebug()<<txtReq;
+        QSqlQuery maReq(txtReq);
+        //effacement de la liste
+        ui->listWidgetResultatRecherche->clear();
+        while(maReq.next())
+        {
+            QListWidgetItem*  nouvelElement=new QListWidgetItem(maReq.value("codeModel").toString()+" "+maReq.value("libelleMarque").toString());
+            nouvelElement->setData(32,maReq.value("idModel").toString());
+            nouvelElement->setData(33,maReq.value("codeModel").toString());
+            nouvelElement->setData(34,maReq.value("libelleMarque").toString());
+            ui->listWidgetResultatRecherche->insertItem(0,nouvelElement);
+
+        }
+    }
+    else if(sender()==ui->lineEditNomMachine)
+    {
+        QString txtReq="select idModel,nature,codeModel,libelleMarque from Modele inner join Marque on Modele.marque=Marque.idMarque where nature like upper('%"+ui->lineEditNomMachine->text()+"%')";
         qDebug()<<txtReq;
         QSqlQuery maReq(txtReq);
         //effacement de la liste
@@ -50,13 +86,28 @@ void MainWindow::on_focusChanged(QWidget* old, QWidget* nouveau)
     qDebug()<<"void MainWindow::on_focusChanged(QWidget* old, QWidget* nouveau)";
     if(nouveau==ui->lineEditReference)
     {
+        disconnect(ui->lineEditMarque,SIGNAL(textChanged(QString)),this, SLOT(majListeRechercheMachine(QString)));
+        disconnect(ui->lineEditNomMachine,SIGNAL(textChanged(QString)),this, SLOT(majListeRechercheMachine(QString)));
         //il est dans le modele on affiche les références
         //attacher l'evenement textChanged à la maj de la zone de droite
-        connect(ui->lineEditReference,SIGNAL(textChanged(QString)),this, SLOT(majListeRecherche(QString)));
+        connect(ui->lineEditReference,SIGNAL(textChanged(QString)),this, SLOT(majListeRechercheMachine(QString)));
     }
-    else
+    else if(nouveau==ui->lineEditNomMachine)
     {
-        disconnect(ui->lineEditReference,SIGNAL(textChanged(QString)),this, SLOT(majListeRecherche(QString)));
+        disconnect(ui->lineEditReference,SIGNAL(textChanged(QString)),this, SLOT(majListeRecherche(QString)));    
+        disconnect(ui->lineEditMarque,SIGNAL(textChanged(QString)),this, SLOT(majListeRechercheMachine(QString)));
+        //il est dans le modele on affiche les références
+        //attacher l'evenement textChanged à la maj de la zone de droite
+        connect(ui->lineEditNomMachine,SIGNAL(textChanged(QString)),this, SLOT(majListeRechercheMachine(QString)));
+
+    }
+    else if(nouveau==ui->lineEditMarque)
+    {
+        disconnect(ui->lineEditReference,SIGNAL(textChanged(QString)),this, SLOT(majListeRechercheMachine(QString)));
+        disconnect(ui->lineEditNomMachine,SIGNAL(textChanged(QString)),this, SLOT(majListeRechercheMachine(QString)));
+        //il est dans le modele on affiche les références
+        //attacher l'evenement textChanged à la maj de la zone de droite
+        connect(ui->lineEditMarque,SIGNAL(textChanged(QString)),this, SLOT(majListeRechercheMachine(QString)));
     }
 }
 
@@ -93,7 +144,7 @@ void MainWindow::chargerLesClients()
 
 void MainWindow::chargerLesMachines()
 {
-    QString txtReq="select outilNom,libelleMarque,codeModel,outilType,concat(nomClient,concat(' ',prenomClient)), panneReparation, libelleEtat, idDevis,dateArrivee,dateFinalisation, nomUtilisateur "
+    QString txtReq="select nature,libelleMarque,codeModel,typeMoteur,concat(nomClient,concat(' ',prenomClient)), panneReparation, libelleEtat, idDevis,dateArrivee,dateFinalisation, nomUtilisateur "
                    "from Modele inner join Reparation on Reparation.outilRef=Modele.idModel "
                    "inner join Marque on Marque.idMarque=Modele.marque "
                    "inner join Client on Reparation.idClient=Client.idClient "
@@ -171,29 +222,11 @@ void MainWindow::viderLesChamps()
     ui->labelAdresseClient->setText(adresseClient);
     ui->labelVilleClient->setText(villeClient);
 
-    ui->labelNomClient_2->setText(nomClient);
-    ui->labelPrenomClient_2->setText(prenomClient);
-    ui->labelTelClient_2->setText(telClient);
-    ui->labelEmailClient_2->setText(emailCLient);
-    ui->labelCPClient_2->setText(cpClient);
-    ui->labelAdresseClient_2->setText(adresseClient);
-    ui->labelVilleClient_2->setText(villeClient);
 
-    ui->labelNomClient_3->setText(nomClient);
-    ui->labelPrenomClient_3->setText(prenomClient);
-    ui->labelTelClient_3->setText(telClient);
-    ui->labelEmailClient_3->setText(emailCLient);
-    ui->labelCPClient_3->setText(cpClient);
-    ui->labelAdresseClient_3->setText(adresseClient);
-    ui->labelVilleClient_3->setText(villeClient);
 
-    ui->labelNomClient_4->setText(nomClient);
-    ui->labelPrenomClient_4->setText(prenomClient);
-    ui->labelTelClient_4->setText(telClient);
-    ui->labelEmailClient_4->setText(emailCLient);
-    ui->labelCPClient_4->setText(cpClient);
-    ui->labelAdresseClient_4->setText(adresseClient);
-    ui->labelVilleClient_4->setText(villeClient);
+
+
+
 
     ui->lineEditNom->setText(nomClient);
     ui->lineEditPrenom->setText(prenomClient);
@@ -204,9 +237,6 @@ void MainWindow::viderLesChamps()
     ui->lineEditVille->setText(villeClient);
 
     ui->tableWidgetMachineClient->setRowCount(0);
-    ui->tableWidgetMachineClient2->setRowCount(0);
-    ui->tableWidgetMachineClient3->setRowCount(0);
-    ui->tableWidgetMachineClient4->setRowCount(0);
 
     ui->pushButtonSupprimerClient->setDisabled(true);
     ui->pushButtonAjouterMachine->setDisabled(true);
@@ -271,6 +301,7 @@ void MainWindow::on_pushButtonSupprimerClient_clicked()
  */
 void MainWindow::on_tableWidgetClient_cellClicked(int row, int column)
 {
+    //affichage des infos dans la zone de modification
     nomClient=ui->tableWidgetClient->item(row,0)->text();
     prenomClient=ui->tableWidgetClient->item(row,1)->text();
     telClient=ui->tableWidgetClient->item(row,2)->text();
@@ -278,50 +309,46 @@ void MainWindow::on_tableWidgetClient_cellClicked(int row, int column)
     adresseClient=ui->tableWidgetClient->item(row,4)->text();
     cpClient=ui->tableWidgetClient->item(row,5)->text();
     villeClient=ui->tableWidgetClient->item(row,6)->text();
-
-
-
-
-//on vide les machines du client
-
+    //on vide les machines du client
     ui->tableWidgetMachineClient->setRowCount(0);
-    ui->tableWidgetMachineClient2->setRowCount(0);
-    ui->tableWidgetMachineClient3->setRowCount(0);
-    ui->tableWidgetMachineClient4->setRowCount(0);
+    //à revoir
     int idClient=chercherIdClient();
     QString idClientS=QString::number(idClient);
-    QString txtReq="select outilNom,libelleMarque,codeModel,outilType,nomClient || prenomClient, panneReparation, libelleEtat, idDevis,dateArrivee,dateFinalisation, nomUtilisateur from Modele inner join Reparation on Reparation.outilRef=Modele.idModel inner join Marque on Marque.idMarque=Modele.marque inner join Client on Reparation.idClient=Client.idClient natural join Etat_Reparation natural join Utilisateur where Client.idClient="+idClientS;
+    QString txtReq="select concat(outilNom,concat(' ',concat(libelleMarque,concat(' ',codeModel)))),date_format(dateArrivee,'%d/%m'),libelleEtat,if(dateFinalisation is null,datediff(now(),dateArrivee),'OK'),outilType,concat(nomClient,concat(' ', prenomClient)), panneReparation, idDevis,dateFinalisation, nomUtilisateur from Modele inner join Reparation on Reparation.outilRef=Modele.idModel inner join Marque on Marque.idMarque=Modele.marque inner join Client on Reparation.idClient=Client.idClient natural join Etat_Reparation natural join Utilisateur where Client.idClient="+idClientS+" order by Reparation.idEtat asc, dateArrivee desc";
     qDebug()<<txtReq;
     QSqlQuery chercherMachineDuClient;
-    chercherMachineDuClient.exec(txtReq);
-    qDebug()<<chercherMachineDuClient.lastError().databaseText();
-    int nbLigne=chercherMachineDuClient.size();
-    if(nbLigne>0)
+    chercherMachineDuClient.prepare(txtReq);
+    if(chercherMachineDuClient.exec())
     {
 
-        ui->tableWidgetMachineClient->setRowCount(nbLigne);
-        ui->tableWidgetMachineClient2->setRowCount(nbLigne);
-        ui->tableWidgetMachineClient3->setRowCount(nbLigne);
-        ui->tableWidgetMachineClient4->setRowCount(nbLigne);
-        int noLigne=0;
-        while(chercherMachineDuClient.next())
+        int nbLigne=chercherMachineDuClient.size();
+        if(nbLigne>0)
         {
-            //pour chaque champ à afficher
-             for(int noCol=0;noCol<10;noCol++)
-             {
-                ui->tableWidgetMachineClient->setItem(noLigne,noCol,new QTableWidgetItem(chercherMachineDuClient.value(noCol).toString()));
-                ui->tableWidgetMachineClient2->setItem(noLigne,noCol,new QTableWidgetItem(chercherMachineDuClient.value(noCol).toString()));
-                ui->tableWidgetMachineClient3->setItem(noLigne,noCol,new QTableWidgetItem(chercherMachineDuClient.value(noCol).toString()));
-                ui->tableWidgetMachineClient4->setItem(noLigne,noCol,new QTableWidgetItem(chercherMachineDuClient.value(noCol).toString()));
-             }
-              noLigne++;//on passe à la ligne suivante
+
+            ui->tableWidgetMachineClient->setRowCount(nbLigne);
+
+            int noLigne=0;
+            while(chercherMachineDuClient.next())
+            {
+                QSqlRecord enregistrement=chercherMachineDuClient.record();
+                //pour chaque champ à afficher
+                for(int noCol=0;noCol<enregistrement.count();noCol++)
+                {
+                    ui->tableWidgetMachineClient->setItem(noLigne,noCol,new QTableWidgetItem(chercherMachineDuClient.value(noCol).toString()));
+
+                }
+                noLigne++;//on passe à la ligne suivante
+            }
+        }
+        else
+        {
+            qDebug()<<"Ce client n'a pas de machine";
         }
     }
     else
     {
-        qDebug()<<"Ce client n'a pas de machine";
+        qDebug()<<chercherMachineDuClient.lastError().databaseText();
     }
-
 
     ui->labelNomClient->setText(nomClient);
     ui->labelPrenomClient->setText(prenomClient);
@@ -331,29 +358,6 @@ void MainWindow::on_tableWidgetClient_cellClicked(int row, int column)
     ui->labelAdresseClient->setText(adresseClient);
     ui->labelVilleClient->setText(villeClient);
 
-    ui->labelNomClient_2->setText(nomClient);
-    ui->labelPrenomClient_2->setText(prenomClient);
-    ui->labelTelClient_2->setText(telClient);
-    ui->labelEmailClient_2->setText(emailCLient);
-    ui->labelCPClient_2->setText(cpClient);
-    ui->labelAdresseClient_2->setText(adresseClient);
-    ui->labelVilleClient_2->setText(villeClient);
-
-    ui->labelNomClient_3->setText(nomClient);
-    ui->labelPrenomClient_3->setText(prenomClient);
-    ui->labelTelClient_3->setText(telClient);
-    ui->labelEmailClient_3->setText(emailCLient);
-    ui->labelCPClient_3->setText(cpClient);
-    ui->labelAdresseClient_3->setText(adresseClient);
-    ui->labelVilleClient_3->setText(villeClient);
-
-    ui->labelNomClient_4->setText(nomClient);
-    ui->labelPrenomClient_4->setText(prenomClient);
-    ui->labelTelClient_4->setText(telClient);
-    ui->labelEmailClient_4->setText(emailCLient);
-    ui->labelCPClient_4->setText(cpClient);
-    ui->labelAdresseClient_4->setText(adresseClient);
-    ui->labelVilleClient_4->setText(villeClient);
 
     ui->lineEditNom->setText(nomClient);
     ui->lineEditPrenom->setText(prenomClient);
@@ -451,8 +455,8 @@ void MainWindow::on_pushButtonAjouterMachine_clicked()
     QString dateARentrer=dateArrivee.toString("yyyy/MM/dd");
     nomMachine=ui->lineEditNomMachine->text();
     marqueMachine=ui->lineEditMarque->text();
-    //refMachine=ui->lineEditReference->text();
-    refMachine=ui->lineEditReference->property("numeroModele").toString();
+    refMachine=ui->lineEditReference->text();
+    //refMachine=ui->lineEditReference->property("numeroModele").toString();
     panneMachine=ui->lineEditPanne1->text();
     panneMachine=panneMachine+"&&"+ui->lineEditPanne2->text();
     panneMachine=panneMachine+"&&"+ui->lineEditPanne3->text();
@@ -468,21 +472,54 @@ void MainWindow::on_pushButtonAjouterMachine_clicked()
         typeMachineInt=1;
     }
     idClientAct=QString::number(chercherIdClient());
-
     typeMachine=QString::number(typeMachineInt);
-
+    //s'il y a besoin créer la marque
+    QSqlQuery reqIdMarque("select idMarque from Marque where upper(libelleMarque)=upper('"+marqueMachine+"')");
+    if(reqIdMarque.size()==0)
+    {
+        QSqlQuery reqObtientIdMarque("select ifnull(max(idMarque),0)+1 from Marque");
+        reqObtientIdMarque.first();
+        QString sonId=reqObtientIdMarque.value(0).toString();
+        QSqlQuery reqInsertMarque("insert into Marque values("+sonId+",'"+marqueMachine+"'");
+        reqInsertMarque.exec();
+        qDebug()<<reqInsertMarque.lastError().text();
+    }
+    //obtention de l'identifiant de la marque
+    reqIdMarque.exec();
+    reqIdMarque.first();
+    QString idMarque=reqIdMarque.value(0).toString();
+    //recherche du modèle
+    QString textReaq="select idModel from Modele where upper(codeModel)=upper('"+refMachine+"') and marque ="+idMarque;
+    qDebug()<<textReaq;
+    QSqlQuery reqIdModele(textReaq);
+    reqIdModele.exec();
+    qDebug()<<reqIdModele.lastError().text();
+    //s'il y a besoin créer le modèle
+    if(reqIdModele.size()==0)
+    {
+        QSqlQuery reqObtientIdModele("select ifnull(max(idModel),1)+1 from Modele");
+        reqObtientIdModele.first();
+        QString idDuModele=reqObtientIdModele.value(0).toString();
+        qDebug()<<"creation du modele"<<idDuModele;
+        QString txtRaq="insert into Modele values("+idDuModele+",'"+refMachine+"',"+idMarque+",'"+nomMachine+"',"+idMarque+")";
+        qDebug()<<txtRaq;
+        QSqlQuery reqInsertModele(txtRaq);
+        reqInsertModele.exec();
+        qDebug()<<reqInsertModele.lastError().text();
+    }
+    reqIdModele.exec();
+    reqIdModele.first();
+    QString idModele=reqIdModele.value(0).toString();
+    //créer la réparation
     QSqlQuery insertMachine;
 /*CREATE TABLE `Reparation`(`idReparation` int(11),`outilNom` varchar(45),`outilType` tinyint(2),`panneReparation` varchar(255),`outilRef` integer not null references Modele(idModel),`dateArrivee` DATE,`tempsPasse` int(11),`dateFinalisation` date,`idClient` int(11) NOT NULL,`idDevis` int(11) NOT NULL,`idEtat` int(11) NOT NULL,`refProduit` varchar(45) ,`idUtilisateur` int(11) NOT NULL, foreign key (`idClient`) references Client(`idClient`), foreign key (`idDevis`) references Devis_Reparation(`idDevis`), foreign key (`idEtat`) references Etat_Reparation(`idEtat`), foreign key (`refProduit`) references Produit(`refProduit`), foreign key (`idUtilisateur`) references Utilisateur(`idUtilisateur`),primary key(`idReparation`));
  */
-    QString txtReq="insert into Reparation (idReparation,outilNom,outilType,panneReparation,outilRef,dateArrivee,idClient,idEtat,idDevis,idUtilisateur) "
-                   "values("+maxId+","
-                   +"'"+nomMachine+"',"
-                   //+"'"+marqueMachine+"',"
-                   +typeMachine+",'"
-                   +panneMachine+"','"
-                   +refMachine+"','"
+    QString txtReq="insert into Reparation (idReparation,panneReparation,outilRef,dateArrivee,idClient,idEtat,idDevis,idUtilisateur) "
+                   "values("+maxId+",'"
+                   +panneMachine+"',"
+                   +idModele+",'"
                    +dateARentrer+"',"
-                   +idClientAct+",2,2,1)";
+                   +idClientAct+",1,NULL,NULL)";//plannifier,pas de devis, pas de mecano affecté
     insertMachine.prepare(txtReq);
     qDebug()<<txtReq;
     insertMachine.exec();
@@ -517,7 +554,14 @@ void MainWindow::on_lineEditMarque_returnPressed()
 
 void MainWindow::on_listWidgetResultatRecherche_itemActivated(QListWidgetItem *item)
 {
+    //en 32 l'identifiant, 33 le modèle, 34 la marque, 35 la nature
     ui->lineEditReference->setText(item->data(33).toString());
     ui->lineEditReference->setProperty("numeroModele",item->data(32).toString());
     ui->lineEditMarque->setText(item->data(34).toString());
+    ui->lineEditNomMachine->setText(item->data(35).toString());
+}
+
+void MainWindow::on_action_Fermer_triggered()
+{
+    close();
 }

@@ -22,7 +22,7 @@ public:
     ~MainWindow();
 
 private slots:
-    void majListeRecherche(QString);
+    void majListeRechercheMachine(QString);
     void on_focusChanged(QWidget *, QWidget*);
     void on_pushButtonAjouterClient_clicked();
 
@@ -45,6 +45,8 @@ private slots:
     void on_lineEditMarque_returnPressed();
 
     void on_listWidgetResultatRecherche_itemActivated(QListWidgetItem *item);
+
+    void on_action_Fermer_triggered();
 
 private:
     Ui::MainWindow *ui;
