@@ -17,7 +17,6 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     QString numeroClient,nomClient,prenomClient,telClient,emailCLient,adresseClient,cpClient,villeClient;
     QString nomMachine,marqueMachine,panneMachine,refMachine,etatMachine,typeMachine,clientMachine,devisMachine,techMachine,tempsPasse;
-
     QDate dateArrivee,dateSortie;
 
     ~MainWindow();
@@ -56,7 +55,6 @@ private:
     void viderLesChamps();
 
     void chargerLesMachines();
-
 
 };
 

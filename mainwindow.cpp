@@ -71,9 +71,10 @@ void MainWindow::chargerLesClients()
    reqChargerClient.prepare("select nomClient,prenomClient,telephoneClient,emailClient,adresseClient,cpClient,villeClient from Client order by nomClient");
    if(reqChargerClient.exec())
    {
+       ui->tableWidgetClient->setRowCount(reqChargerClient.size());
        while(reqChargerClient.next())//pour chaque client
        {
-        ui->tableWidgetClient->setRowCount(ligneActu+1);
+
         //pour chaque champ à afficher
          for(int noCol=0;noCol<7;noCol++)
          {
@@ -92,84 +93,51 @@ void MainWindow::chargerLesClients()
 
 void MainWindow::chargerLesMachines()
 {
+    QString txtReq="select outilNom,libelleMarque,codeModel,outilType,concat(nomClient,concat(' ',prenomClient)), panneReparation, libelleEtat, idDevis,dateArrivee,dateFinalisation, nomUtilisateur "
+                   "from Modele inner join Reparation on Reparation.outilRef=Modele.idModel "
+                   "inner join Marque on Marque.idMarque=Modele.marque "
+                   "inner join Client on Reparation.idClient=Client.idClient "
+                   "inner join Etat_Reparation on Etat_Reparation.idEtat=Reparation.idEtat "
+                   "inner join Utilisateur on Reparation.idUtilisateur=Utilisateur.idUtilisateur";
+    qDebug()<<txtReq;
     QSqlQuery reqChargerMachine;
-    int ligneActu=0;
-    ui->tableWidgetMachine->setRowCount(0);
-    reqChargerMachine.prepare("select * from Reparation");
+    reqChargerMachine.prepare(txtReq);
     if(reqChargerMachine.exec())
     {
-        while(reqChargerMachine.next())
+        int ligneActu=0;
+        ui->tableWidgetMachine->setRowCount(reqChargerMachine.size());
+        if(reqChargerMachine.size()>0)
         {
-          ui->tableWidgetMachine->setRowCount(ligneActu+1);
-          nomMachine=reqChargerMachine.value(1).toString();
-          marqueMachine=reqChargerMachine.value(2).toString();
-          QString idType=reqChargerMachine.value(3).toString();
-          if(idType=="1")
-          {
-              typeMachine="Thermique";
-          }
-          else
-          {
-              typeMachine="Eléctrique";
-          }
-
-          refMachine=reqChargerMachine.value(4).toString();
-          panneMachine=reqChargerMachine.value(6).toString();
-          dateArrivee=reqChargerMachine.value(7).toDate();
-          tempsPasse=reqChargerMachine.value(8).toString();
-          dateSortie=reqChargerMachine.value(9).toDate();
-
-          QString idClient=reqChargerMachine.value(10).toString();
-          QSqlQuery reqChercheClient;
-          reqChercheClient.prepare("select nomClient,prenomClient from Client where idClient="+idClient+"");
-          if(reqChercheClient.exec())
-          {
-              reqChercheClient.first();
-              clientMachine=reqChercheClient.value(0).toString()+" "+reqChercheClient.value(1).toString();
-          }
-
-          QString idDevis=reqChargerMachine.value(11).toString();
-          QSqlQuery reqChercheDevis;
-          reqChercheDevis.prepare("select etatDevis from Devis_Reparation where idDevis="+idDevis+"");
-          if(reqChercheDevis.exec())
-          {
-              reqChercheDevis.first();
-              devisMachine=reqChercheDevis.value(0).toString();
-          }
-
-          QString idEtat=reqChargerMachine.value(12).toString();
-          QSqlQuery reqChercheEtat;
-          reqChercheEtat.prepare("select libelleEtat from Etat_Reparation where idEtat="+idEtat+"");
-          if(reqChercheEtat.exec())
-          {
-              reqChercheEtat.first();
-              etatMachine=reqChercheEtat.value(0).toString();
-          }
-
-          QString idTech=reqChargerMachine.value(13).toString();
-          QSqlQuery reqChercheTech;
-          reqChercheTech.prepare("select nomUtilisateur from Utilisateur where idUtilisateur="+idTech+"");
-          if(reqChercheTech.exec())
-          {
-              reqChercheTech.first();
-              techMachine=reqChercheTech.value(0).toString();
-          }
-
-          ui->tableWidgetMachine->setItem(ligneActu,0,new QTableWidgetItem(nomMachine));
-          ui->tableWidgetMachine->setItem(ligneActu,1,new QTableWidgetItem(marqueMachine));
-          ui->tableWidgetMachine->setItem(ligneActu,2,new QTableWidgetItem(refMachine));
-          ui->tableWidgetMachine->setItem(ligneActu,3,new QTableWidgetItem(typeMachine));
-          ui->tableWidgetMachine->setItem(ligneActu,4,new QTableWidgetItem(clientMachine));
-          ui->tableWidgetMachine->setItem(ligneActu,5,new QTableWidgetItem(panneMachine));
-          ui->tableWidgetMachine->setItem(ligneActu,6,new QTableWidgetItem(etatMachine));
-          ui->tableWidgetMachine->setItem(ligneActu,7,new QTableWidgetItem(devisMachine));
-          ui->tableWidgetMachine->setItem(ligneActu,8,new QTableWidgetItem(dateArrivee.toString()));
-          ui->tableWidgetMachine->setItem(ligneActu,9,new QTableWidgetItem(dateSortie.toString()));
-          ui->tableWidgetMachine->setItem(ligneActu,10,new QTableWidgetItem(techMachine));
-          ui->tableWidgetMachine->setItem(ligneActu,11,new QTableWidgetItem(tempsPasse));
-
-          ligneActu++;
+            while(reqChargerMachine.next())
+            {
+                for(int noCol=0;noCol<11;noCol++)
+                {
+                    ui->tableWidgetMachine->setItem(ligneActu,noCol,new QTableWidgetItem(reqChargerMachine.value(noCol).toString()));
+                }
+                /*nomMachine=reqChargerMachine.value(0).toString();
+          marqueMachine=reqChargerMachine.value(1).toString();*/
+                int idType=reqChargerMachine.value(3).toInt();
+                if(idType==1)
+                {
+                    typeMachine="Thermique";
+                }
+                else
+                {
+                    typeMachine="Electrique";
+                }
+                ui->tableWidgetMachine->setItem(ligneActu,3,new QTableWidgetItem(typeMachine));
+                ligneActu++;
+            }
+        }//fin de requête ok
+        else//la requête renvoie 0 ligne
+        {
+            //il n'y a pas de machine
+            qDebug()<<"pas de machine pour l'instant";
         }
+    }
+    else//erreur lors du select des machines
+    {
+        qDebug()<<reqChargerMachine.lastError().text();
     }
 
 }
@@ -295,7 +263,12 @@ void MainWindow::on_pushButtonSupprimerClient_clicked()
        chargerLesClients();
    }
 }
-
+/**
+ * @brief MainWindow::on_tableWidgetClient_cellClicked
+ * @param row
+ * @param column
+ * Selection du client sur lequel on souhaite travailler
+ */
 void MainWindow::on_tableWidgetClient_cellClicked(int row, int column)
 {
     nomClient=ui->tableWidgetClient->item(row,0)->text();
@@ -309,34 +282,44 @@ void MainWindow::on_tableWidgetClient_cellClicked(int row, int column)
 
 
 
+//on vide les machines du client
 
-    int nbLigne=0;
     ui->tableWidgetMachineClient->setRowCount(0);
     ui->tableWidgetMachineClient2->setRowCount(0);
     ui->tableWidgetMachineClient3->setRowCount(0);
     ui->tableWidgetMachineClient4->setRowCount(0);
     int idClient=chercherIdClient();
     QString idClientS=QString::number(idClient);
+    QString txtReq="select outilNom,libelleMarque,codeModel,outilType,nomClient || prenomClient, panneReparation, libelleEtat, idDevis,dateArrivee,dateFinalisation, nomUtilisateur from Modele inner join Reparation on Reparation.outilRef=Modele.idModel inner join Marque on Marque.idMarque=Modele.marque inner join Client on Reparation.idClient=Client.idClient natural join Etat_Reparation natural join Utilisateur where Client.idClient="+idClientS;
+    qDebug()<<txtReq;
     QSqlQuery chercherMachineDuClient;
-    chercherMachineDuClient.prepare("select outilNom,dateArrivee from Reparation where idClient="+idClientS+"");
-    if(chercherMachineDuClient.exec())
+    chercherMachineDuClient.exec(txtReq);
+    qDebug()<<chercherMachineDuClient.lastError().databaseText();
+    int nbLigne=chercherMachineDuClient.size();
+    if(nbLigne>0)
     {
+
+        ui->tableWidgetMachineClient->setRowCount(nbLigne);
+        ui->tableWidgetMachineClient2->setRowCount(nbLigne);
+        ui->tableWidgetMachineClient3->setRowCount(nbLigne);
+        ui->tableWidgetMachineClient4->setRowCount(nbLigne);
+        int noLigne=0;
         while(chercherMachineDuClient.next())
         {
-            ui->tableWidgetMachineClient->setRowCount(nbLigne+1);
-            ui->tableWidgetMachineClient2->setRowCount(nbLigne+1);
-            ui->tableWidgetMachineClient3->setRowCount(nbLigne+1);
-            ui->tableWidgetMachineClient4->setRowCount(nbLigne+1);
             //pour chaque champ à afficher
-             for(int noCol=0;noCol<7;noCol++)
+             for(int noCol=0;noCol<10;noCol++)
              {
-                ui->tableWidgetMachineClient->setItem(nbLigne,noCol,new QTableWidgetItem(chercherMachineDuClient.value(noCol).toString()));
-                ui->tableWidgetMachineClient2->setItem(nbLigne,noCol,new QTableWidgetItem(chercherMachineDuClient.value(noCol).toString()));
-                ui->tableWidgetMachineClient3->setItem(nbLigne,noCol,new QTableWidgetItem(chercherMachineDuClient.value(noCol).toString()));
-                ui->tableWidgetMachineClient4->setItem(nbLigne,noCol,new QTableWidgetItem(chercherMachineDuClient.value(noCol).toString()));
+                ui->tableWidgetMachineClient->setItem(noLigne,noCol,new QTableWidgetItem(chercherMachineDuClient.value(noCol).toString()));
+                ui->tableWidgetMachineClient2->setItem(noLigne,noCol,new QTableWidgetItem(chercherMachineDuClient.value(noCol).toString()));
+                ui->tableWidgetMachineClient3->setItem(noLigne,noCol,new QTableWidgetItem(chercherMachineDuClient.value(noCol).toString()));
+                ui->tableWidgetMachineClient4->setItem(noLigne,noCol,new QTableWidgetItem(chercherMachineDuClient.value(noCol).toString()));
              }
-              nbLigne++;//on passe à la ligne suivante
+              noLigne++;//on passe à la ligne suivante
         }
+    }
+    else
+    {
+        qDebug()<<"Ce client n'a pas de machine";
     }
 
 
@@ -409,7 +392,6 @@ void MainWindow::on_pushButtonModifierClient_clicked()
     qDebug()<<reqModif;
     reqAjouterClient.prepare(reqModif);
     reqAjouterClient.exec();
-
     viderLesChamps();
     chargerLesClients();
 }
