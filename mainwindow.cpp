@@ -17,16 +17,51 @@ MainWindow::MainWindow(QWidget *parent) :
     chargerLesMachines();
     connect(qApp,SIGNAL(focusChanged(QWidget*,QWidget*)),this,SLOT(on_focusChanged(QWidget*,QWidget*)));
     chargerLesTechniciens();
+    chargerLesEtats();
+    chargerLesEtatsDevis();
+}
+void MainWindow::chargerLesEtats()
+{
+    ui->comboBoxTaf->clear();
+    qDebug()<<"void MainWindow::chargerLesEtats()";
+    QSqlQuery reqTousLesEtats("select idEtat,libelleEtat from Etat_Reparation");
+    while(reqTousLesEtats.next())
+    {
+        QString idEtat=reqTousLesEtats.value("idEtat").toString();
+        QString libelleEtat=reqTousLesEtats.value("libelleEtat").toString();
+        ui->comboBoxTaf->addItem(libelleEtat,idEtat);
+    }
+}
+void MainWindow::chargerLesEtatsDevis()
+{
+    ui->comboBoxDevis->clear();
+    qDebug()<<"void MainWindow::chargerLesEtatsDevis()";
+    QSqlQuery reqTousLesEtatsDevis("select select idDevis,etat from Devis_Reparation");
+    while(reqTousLesEtatsDevis.next())
+    {
+        QString idEtat=reqTousLesEtatsDevis.value("idDevis").toString();
+        QString libelleEtat=reqTousLesEtatsDevis.value("etat").toString();
+        ui->comboBoxDevis->addItem(libelleEtat,idEtat);
+    }
 }
 void MainWindow::chargerLesTechniciens()
 {
+    ui->comboBoxMecano->clear();
+    qDebug()<<"void MainWindow::chargerLesTechniciens()";
     tableModelTechnicien=new QSqlRelationalTableModel(this);
     tableModelTechnicien->setTable("Utilisateur");
     tableModelTechnicien->setRelation(2,QSqlRelation("typeUtilisateur","idType","libelleType"));
     ui->tableViewTechniciens->setModel(tableModelTechnicien);
     tableModelTechnicien->select();
     ui->tableViewTechniciens->setItemDelegate(new QSqlRelationalDelegate(ui->tableViewTechniciens));
-
+    //remplir la combo des mécanos
+    QSqlQuery reqTousLesMecanos("select idUtilisateur,nomUtilisateur from Utilisateur where not supprime andilisateur!=5");
+    while(reqTousLesMecanos.next())
+    {
+        QString idMecano=reqTousLesMecanos.value("idUtilisateur").toString();
+        QString nomUtilisateur=reqTousLesMecanos.value("nomUtilisateur").toString();
+        ui->comboBoxMecano->addItem(nomUtilisateur,idMecano);
+    }
 }
 
 MainWindow::~MainWindow()
@@ -598,4 +633,27 @@ void MainWindow::on_pushButtonAddTechnicien_clicked()
    nouveauTechnicien.setValue("supprime","0");
    tableModelTechnicien->insertRecord(-1,nouveauTechnicien);
    tableModelTechnicien->select();
+}
+
+void MainWindow::on_tableWidgetMachine_cellClicked(int row, int column)
+{
+    //sélection d'une machine
+    //on va ouvrir la modif de la machine
+    //recup des infos:
+    QString rNomMachine=ui->tableWidgetMachine->item(row,0)->text();
+    QString rMarque=ui->tableWidgetMachine->item(row,1)->text();
+    QString rModele=ui->tableWidgetMachine->item(row,2)->text();
+    QString rType=ui->tableWidgetMachine->item(row,3)->text();
+    QString rPanne=ui->tableWidgetMachine->item(row,4)->text();
+    QString rEtat=ui->tableWidgetMachine->item(row,5)->text();
+    QString rDevis=ui->tableWidgetMachine->item(row,6)->text();
+    QString rDateSortie=ui->tableWidgetMachine->item(row,8)->text();
+    QString rTechnicien=ui->tableWidgetMachine->item(row,9)->text();
+    //on rempli les zones de saisie avec
+    ui->lineEditNomMachine->setText(rNomMachine);
+    ui->lineEditMarque->setText(rMarque);
+    ui->lineEditReference->setText(rModele);
+    if(rType=="Electrique")ui->radioButtonElectrique->setChecked(true);
+    else ui->radioButtonThermique->setChecked(true);
+
 }

@@ -21,6 +21,8 @@ public:
     QDate dateArrivee,dateSortie;
     ~MainWindow();  
     void chargerLesTechniciens();
+    void chargerLesEtats();
+    void chargerLesEtatsDevis();
 private slots:
     void majListeRechercheMachine(QString);
     void on_focusChanged(QWidget *, QWidget*);
@@ -49,6 +51,8 @@ private slots:
     void on_action_Fermer_triggered();
 
     void on_pushButtonAddTechnicien_clicked();
+
+    void on_tableWidgetMachine_cellClicked(int row, int column);
 
 private:
     Ui::MainWindow *ui;
