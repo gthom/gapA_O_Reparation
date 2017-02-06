@@ -82,7 +82,7 @@ DROP TABLE IF EXISTS `Devis_Reparation`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Devis_Reparation` (
   `idDevis` int(11) NOT NULL DEFAULT '0',
-  `etatDevis` tinyint(2) DEFAULT NULL,
+  `etatDevis` varchar(30) not NULL,
   PRIMARY KEY (`idDevis`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -93,7 +93,7 @@ CREATE TABLE `Devis_Reparation` (
 
 LOCK TABLES `Devis_Reparation` WRITE;
 /*!40000 ALTER TABLE `Devis_Reparation` DISABLE KEYS */;
-INSERT INTO `Devis_Reparation` VALUES (1,1),(2,1);
+INSERT INTO `Devis_Reparation` VALUES (1,'à réaliser'),(2,'à communiquer'),(3,'communiqué'),(4,'accepté'),(5,'refusé');
 /*!40000 ALTER TABLE `Devis_Reparation` ENABLE KEYS */;
 UNLOCK TABLES;
 
