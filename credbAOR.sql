@@ -41,7 +41,7 @@ CREATE TABLE `Client` (
 
 LOCK TABLES `Client` WRITE;
 /*!40000 ALTER TABLE `Client` DISABLE KEYS */;
-INSERT INTO `Client` VALUES (1,'Lesieur','Robin','08 58 15 65 70','r.lesieur11@gmail.com','15 rue Aubanel','05000','Gap'),(2,'Thomassin','Gilles','04 99 55 41 92','gthomassip@gmail.com','le Collet','05110','Lardier et Valença'),(3,'Duval','Christophe','06 56 25 41 12','gthoedede@france.org','11 bis Place aux herbes','05000','Gap'),(4,'Feraud','Gérard','04 24 36 25 96','gferaud@gmail.com','15 rue Carnot','05000','Gap');
+INSERT INTO `Client` VALUES (1,'Lesieur','Robin','06 58 15 65 70','r.lesieur13@gmail.com','15 rue Aubanel','05000','Gap'),(2,'Thomassin','Gilles','04 92 53 41 92','gthomassingap@gmail.com','le Collet','05110','Lardier et Valença'),(3,'Duval','Christophe','06 56 25 41 12','gthom@btsinfogap.org','11 bis Place aux herbes','05000','Gap'),(4,'Feraud','Gérard','04 24 36 25 96','gferaud@gmail.com','15 rue Carnot','05000','Gap');
 /*!40000 ALTER TABLE `Client` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -164,7 +164,7 @@ CREATE TABLE `Marque` (
 
 LOCK TABLES `Marque` WRITE;
 /*!40000 ALTER TABLE `Marque` DISABLE KEYS */;
-INSERT INTO `Marque` VALUES (1,'Honda'),(2,'Stihl'),(3,'Husqvarna'),(4,'silex');
+INSERT INTO `Marque` VALUES (1,'Honda'),(2,'Stihl'),(3,'Husqvarna'),(4,'silex'),(5,'Gardena');
 /*!40000 ALTER TABLE `Marque` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -191,7 +191,7 @@ CREATE TABLE `Modele` (
 
 LOCK TABLES `Modele` WRITE;
 /*!40000 ALTER TABLE `Modele` DISABLE KEYS */;
-INSERT INTO `Modele` VALUES (1,'550XP 45SN',3,'Tronconneuse',0),(2,'550XP 50SN',3,'Tronconneuse',0),(3,'MS 170',2,'Tronconneuse',0),(4,'MS 180',2,'Tronconneuse',0),(5,'HR 21',1,'Tondeuse',0),(6,'BL 510 SHQ',1,'Tondeuse',0),(7,'Inverter EU 20i',1,'Groupe Electrogne',1);
+INSERT INTO `Modele` VALUES (1,'550XP 45SN',3,'Tronconneuse',0),(2,'550XP 50SN',3,'Tronconneuse',0),(3,'MS 170',2,'Tronconneuse',0),(4,'MS 180',2,'Tronconneuse',0),(5,'HR 21',1,'Tondeuse',0),(6,'BL 510 SHQ',1,'Tondeuse',0),(7,'Inverter EU 20i',1,'Groupe Electrogne',1),(8,'EasyCut 48 PLUS',5,'Taille Haie',5);
 /*!40000 ALTER TABLE `Modele` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -265,7 +265,7 @@ CREATE TABLE `Reparation` (
   `idClient` int(11) NOT NULL,
   `idDevis` int(11) DEFAULT NULL,
   `idEtat` int(11) NOT NULL,
-  `idUtilisateur` int(11) NOT NULL,
+  `idUtilisateur` int(11) DEFAULT NULL,
   PRIMARY KEY (`idReparation`),
   KEY `idClient` (`idClient`),
   KEY `idDevis` (`idDevis`),
@@ -284,7 +284,7 @@ CREATE TABLE `Reparation` (
 
 LOCK TABLES `Reparation` WRITE;
 /*!40000 ALTER TABLE `Reparation` DISABLE KEYS */;
-INSERT INTO `Reparation` VALUES (101,'&&&&&&&&',5,'2017-02-03',NULL,NULL,2,2,2,1),(102,'chane trop srre&&&&&&&&',2,'2017-02-04',NULL,NULL,1,2,2,1),(103,'affuter la lâme&&&&&&&&',5,'2017-02-05',NULL,NULL,1,2,2,1),(104,'&&&&&&&&',0,'2017-02-05',NULL,NULL,4,2,2,1);
+INSERT INTO `Reparation` VALUES (101,'&&&&&&&&',5,'2017-02-03',NULL,NULL,2,2,2,1),(102,'chane trop srre&&&&&&&&',2,'2017-02-04',NULL,NULL,1,2,2,1),(103,'affuter la lâme&&&&&&&&',5,'2017-02-05',NULL,NULL,1,2,2,1),(104,'&&&&&&&&',0,'2017-02-05',NULL,NULL,4,2,2,1),(105,'&&&&&&&&',7,'2017-02-06',NULL,NULL,3,NULL,1,NULL),(106,'fil abimé&&&&&&&&',8,'2017-02-06',NULL,NULL,4,NULL,1,NULL);
 /*!40000 ALTER TABLE `Reparation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -349,4 +349,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-02-06  6:40:38
+-- Dump completed on 2017-02-06  7:55:48
