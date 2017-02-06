@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "QDateEdit"
 #include <QListWidgetItem>
+#include <QSqlRelationalTableModel>
 
 namespace Ui {
 class MainWindow;
@@ -18,9 +19,8 @@ public:
     QString numeroClient,nomClient,prenomClient,telClient,emailCLient,adresseClient,cpClient,villeClient;
     QString nomMachine,marqueMachine,panneMachine,refMachine,etatMachine,typeMachine,clientMachine,devisMachine,techMachine,tempsPasse;
     QDate dateArrivee,dateSortie;
-
-    ~MainWindow();
-
+    ~MainWindow();  
+    void chargerLesTechniciens();
 private slots:
     void majListeRechercheMachine(QString);
     void on_focusChanged(QWidget *, QWidget*);
@@ -57,6 +57,7 @@ private:
     void viderLesChamps();
 
     void chargerLesMachines();
+    QSqlRelationalTableModel * tableModelTechnicien;
 
 };
 

@@ -6,6 +6,7 @@
 #include <QSqlError>
 #include <QMessageBox>
 #include <QSqlRecord>
+#include <QSqlRelationalDelegate>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -15,6 +16,17 @@ MainWindow::MainWindow(QWidget *parent) :
     chargerLesClients();
     chargerLesMachines();
     connect(qApp,SIGNAL(focusChanged(QWidget*,QWidget*)),this,SLOT(on_focusChanged(QWidget*,QWidget*)));
+    chargerLesTechniciens();
+}
+void MainWindow::chargerLesTechniciens()
+{
+    tableModelTechnicien=new QSqlRelationalTableModel(this);
+    tableModelTechnicien->setTable("Utilisateur");
+    tableModelTechnicien->setRelation(2,QSqlRelation("typeUtilisateur","idType","libelleType"));
+    ui->tableViewTechniciens->setModel(tableModelTechnicien);
+    tableModelTechnicien->select();
+    ui->tableViewTechniciens->setItemDelegate(new QSqlRelationalDelegate(ui->tableViewTechniciens));
+
 }
 
 MainWindow::~MainWindow()
@@ -510,8 +522,8 @@ void MainWindow::on_pushButtonAjouterMachine_clicked()
         qDebug()<<"creation du modele"<<idDuModele;
         QString txtRaq="insert into Modele values("+idDuModele+",'"+refMachine+"',"+idMarque+",'"+nomMachine+"',"+idMarque+")";
         qDebug()<<txtRaq;
-        QSqlQuery reqInsertModele(txtRaq);
-        reqInsertModele.exec();
+        QSqlQuery reqInsertModele;
+        reqInsertModele.exec(txtRaq);
         qDebug()<<reqInsertModele.lastError().text();
     }
     reqIdModele.exec();
