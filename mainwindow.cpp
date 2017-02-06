@@ -58,6 +58,7 @@ void MainWindow::majListeRechercheMachine(QString leTexte)
             nouvelElement->setData(32,maReq.value("idModel").toString());
             nouvelElement->setData(33,maReq.value("codeModel").toString());
             nouvelElement->setData(34,maReq.value("libelleMarque").toString());
+            nouvelElement->setData(35,maReq.value("nature").toString());
             ui->listWidgetResultatRecherche->insertItem(0,nouvelElement);
 
         }
@@ -75,6 +76,7 @@ void MainWindow::majListeRechercheMachine(QString leTexte)
             nouvelElement->setData(32,maReq.value("idModel").toString());
             nouvelElement->setData(33,maReq.value("codeModel").toString());
             nouvelElement->setData(34,maReq.value("libelleMarque").toString());
+            nouvelElement->setData(35,maReq.value("nature").toString());
             ui->listWidgetResultatRecherche->insertItem(0,nouvelElement);
 
         }
@@ -525,7 +527,7 @@ void MainWindow::on_pushButtonAjouterMachine_clicked()
     insertMachine.exec();
     qDebug()<<insertMachine.lastError();
     chargerLesMachines();
-
+//raz des zones de saisie
     ui->lineEditNomMachine->setText("");
     ui->lineEditReference->setText("");
     ui->lineEditMarque->setText("");
