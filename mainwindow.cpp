@@ -316,7 +316,7 @@ void MainWindow::on_tableWidgetClient_cellClicked(int row, int column)
     //à revoir
     int idClient=chercherIdClient();
     QString idClientS=QString::number(idClient);
-    QString txtReq="select concat(outilNom,concat(' ',concat(libelleMarque,concat(' ',codeModel)))),date_format(dateArrivee,'%d/%m'),libelleEtat,if(dateFinalisation is null,datediff(now(),dateArrivee),'OK'),outilType,concat(nomClient,concat(' ', prenomClient)), panneReparation, idDevis,dateFinalisation, nomUtilisateur from Modele inner join Reparation on Reparation.outilRef=Modele.idModel inner join Marque on Marque.idMarque=Modele.marque inner join Client on Reparation.idClient=Client.idClient natural join Etat_Reparation natural join Utilisateur where Client.idClient="+idClientS+" order by Reparation.idEtat asc, dateArrivee desc";
+    QString txtReq="select concat(nature,concat(' ',concat(libelleMarque,concat(' ',codeModel)))),date_format(dateArrivee,'%d/%m'),libelleEtat,if(dateFinalisation is null,datediff(now(),dateArrivee),'OK'),typeMoteur,concat(nomClient,concat(' ', prenomClient)), panneReparation, idDevis,dateFinalisation, nomUtilisateur from Modele inner join Reparation on Reparation.outilRef=Modele.idModel inner join Marque on Marque.idMarque=Modele.marque inner join Client on Reparation.idClient=Client.idClient natural join Etat_Reparation left outer join Utilisateur on Reparation.idUtilisateur=Utilisateur.idUtilisateur where Client.idClient="+idClientS+" order by Reparation.idEtat asc, dateArrivee desc";
     qDebug()<<txtReq;
     QSqlQuery chercherMachineDuClient;
     chercherMachineDuClient.prepare(txtReq);
@@ -476,14 +476,19 @@ void MainWindow::on_pushButtonAjouterMachine_clicked()
     idClientAct=QString::number(chercherIdClient());
     typeMachine=QString::number(typeMachineInt);
     //s'il y a besoin créer la marque
-    QSqlQuery reqIdMarque("select idMarque from Marque where upper(libelleMarque)=upper('"+marqueMachine+"')");
+    QString txtReqIdMarque="select idMarque from Marque where upper(libelleMarque)=upper('"+marqueMachine+"')";
+    qDebug()<<txtReqIdMarque;
+    QSqlQuery reqIdMarque(txtReqIdMarque);
+    reqIdMarque.exec();
     if(reqIdMarque.size()==0)
     {
         QSqlQuery reqObtientIdMarque("select ifnull(max(idMarque),0)+1 from Marque");
         reqObtientIdMarque.first();
         QString sonId=reqObtientIdMarque.value(0).toString();
-        QSqlQuery reqInsertMarque("insert into Marque values("+sonId+",'"+marqueMachine+"'");
-        reqInsertMarque.exec();
+        QString txtReqInsMarque= "insert into Marque values("+sonId+",'"+marqueMachine+"')";
+        qDebug()<<txtReqInsMarque;
+        QSqlQuery reqInsertMarque;
+        reqInsertMarque.exec(txtReqInsMarque);
         qDebug()<<reqInsertMarque.lastError().text();
     }
     //obtention de l'identifiant de la marque
