@@ -48,6 +48,8 @@ private slots:
 
     void on_action_Fermer_triggered();
 
+    void on_pushButtonAddTechnicien_clicked();
+
 private:
     Ui::MainWindow *ui;
     void chargerLesClients();

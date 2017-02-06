@@ -584,3 +584,18 @@ void MainWindow::on_action_Fermer_triggered()
 {
     close();
 }
+
+void MainWindow::on_pushButtonAddTechnicien_clicked()
+{
+  //ajout d'un technicien
+   QSqlRecord nouveauTechnicien;
+   QSqlQuery reqProchainIdTech("select ifnull(max(idUtilisateur),0)+1 from Utilisateur");
+   reqProchainIdTech.first();
+   QString sonId=reqProchainIdTech.value(0).toString();
+   nouveauTechnicien.setValue("idUtilisateur",sonId);
+   nouveauTechnicien.setValue("nomUtilisateur","son nom");
+   nouveauTechnicien.setValue("typeUtilisateur",1);
+   nouveauTechnicien.setValue("supprime","0");
+   tableModelTechnicien->insertRecord(-1,nouveauTechnicien);
+   tableModelTechnicien->select();
+}
