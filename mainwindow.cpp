@@ -36,7 +36,7 @@ void MainWindow::chargerLesEtatsDevis()
 {
     ui->comboBoxDevis->clear();
     qDebug()<<"void MainWindow::chargerLesEtatsDevis()";
-    QSqlQuery reqTousLesEtatsDevis("select select idDevis,etat from Devis_Reparation");
+    QSqlQuery reqTousLesEtatsDevis("select  idDevis,etat from Devis_Reparation");
     while(reqTousLesEtatsDevis.next())
     {
         QString idEtat=reqTousLesEtatsDevis.value("idDevis").toString();
@@ -55,7 +55,7 @@ void MainWindow::chargerLesTechniciens()
     tableModelTechnicien->select();
     ui->tableViewTechniciens->setItemDelegate(new QSqlRelationalDelegate(ui->tableViewTechniciens));
     //remplir la combo des mécanos
-    QSqlQuery reqTousLesMecanos("select idUtilisateur,nomUtilisateur from Utilisateur where not supprime andilisateur!=5");
+    QSqlQuery reqTousLesMecanos("select idUtilisateur,nomUtilisateur from Utilisateur where not supprime and typeUtilisateur!=5");
     while(reqTousLesMecanos.next())
     {
         QString idMecano=reqTousLesMecanos.value("idUtilisateur").toString();
