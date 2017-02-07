@@ -7,6 +7,9 @@
 #include <QMessageBox>
 #include <QSqlRecord>
 #include <QSqlRelationalDelegate>
+#include <QTextDocument>
+#include <QtPrintSupport/QPrintDialog>
+#include <QPrinter>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -193,12 +196,13 @@ void MainWindow::chargerLesClients()
 
 void MainWindow::chargerLesMachines()
 {
-    QString txtReq="select nature,libelleMarque,codeModel,typeMoteur,concat(nomClient,concat(' ',prenomClient)), panneReparation, libelleEtat, idDevis,dateArrivee,dateFinalisation, nomUtilisateur "
+    QString txtReq="select nature,libelleMarque,codeModel,typeMoteur,concat(nomClient,concat(' ',prenomClient)), panneReparation, libelleEtat, etat,dateArrivee,dateFinalisation, nomUtilisateur "
                    "from Modele inner join Reparation on Reparation.outilRef=Modele.idModel "
                    "inner join Marque on Marque.idMarque=Modele.marque "
                    "inner join Client on Reparation.idClient=Client.idClient "
                    "inner join Etat_Reparation on Etat_Reparation.idEtat=Reparation.idEtat "
-                   "inner join Utilisateur on Reparation.idUtilisateur=Utilisateur.idUtilisateur";
+                   "left outer join Utilisateur on Reparation.idUtilisateur=Utilisateur.idUtilisateur "
+                   "left outer join Devis_Reparation on Reparation.idDevis=Devis_Reparation.idDevis";
     qDebug()<<txtReq;
     QSqlQuery reqChargerMachine;
     reqChargerMachine.prepare(txtReq);
@@ -210,6 +214,8 @@ void MainWindow::chargerLesMachines()
         {
             while(reqChargerMachine.next())
             {
+                QString laPanne=reqChargerMachine.value(5).toString();
+                laPanne.replace("&&","\r\n");
                 for(int noCol=0;noCol<11;noCol++)
                 {
                     ui->tableWidgetMachine->setItem(ligneActu,noCol,new QTableWidgetItem(reqChargerMachine.value(noCol).toString()));
@@ -226,6 +232,9 @@ void MainWindow::chargerLesMachines()
                     typeMachine="Electrique";
                 }
                 ui->tableWidgetMachine->setItem(ligneActu,3,new QTableWidgetItem(typeMachine));
+                //affichage correct des pannes
+                ui->tableWidgetMachine->setItem(ligneActu,5,new QTableWidgetItem(laPanne));
+
                 ligneActu++;
             }
         }//fin de requête ok
@@ -483,13 +492,8 @@ void MainWindow::on_pushButtonAjouterMachine_clicked()
     qDebug()<<"void MainWindow::on_pushButtonAjouterMachine_clicked()";
     int typeMachineInt;
     int idMaxMachine;
-
-
     QString maxId;
     QString idClientAct;
-
-    //QString dateARentrer;
-
     QSqlQuery reqMaxIdMach;
     reqMaxIdMach.prepare("select ifnull(max(idReparation),100) from Reparation");
     if(reqMaxIdMach.exec())
@@ -499,7 +503,6 @@ void MainWindow::on_pushButtonAjouterMachine_clicked()
         idMaxMachine++;
         maxId=QString::number(idMaxMachine);
     }
-
     dateArrivee=dateArrivee.currentDate();
     QString dateARentrer=dateArrivee.toString("yyyy/MM/dd");
     nomMachine=ui->lineEditNomMachine->text();
@@ -588,7 +591,33 @@ void MainWindow::on_pushButtonAjouterMachine_clicked()
     ui->lineEditPanne3->setText("");
     ui->lineEditPanne4->setText("");
     ui->lineEditPanne5->setText("");
+    //impression de l'étiquette
+    QTextDocument etiquette;
+    QStringList listeDesLignes;
+    listeDesLignes<<"<body><center><h1>Alpes-Outillage-Reparation</h1></center>";
+    listeDesLignes<<"<div>";
+    listeDesLignes<<"<table>";
+    listeDesLignes<<"<tr><td>Nature:</td><td>"+nomMachine+"</td></tr>";
+    listeDesLignes<<"<tr><td>Modèle:</td><td>"+refMachine+"</td></tr>";
+    listeDesLignes<<"<tr><td>Client:</td><td>"+nomClient+"</td></tr>";
+    listeDesLignes<<"<tr><td>tel:</td><td>"+telClient+"</td></tr>";
+    QStringList listPanne=panneMachine.split("&&",QString::SkipEmptyParts);
+    for (int noPanne=0;noPanne<listPanne.count();noPanne++)
+    {
+        listeDesLignes<<"<tr><td>Panne:</td><td>"+listPanne[noPanne]+"</td></tr>";
+    }
+    listeDesLignes<<"<tr><td>Arrivée:</td><td>"+dateARentrer+"</td></tr>";
+    listeDesLignes<<"</table></div></body>";
 
+    etiquette.setHtml(listeDesLignes.join("\r\n"));
+    QPrinter printer;
+    printer.setPageSize(QPagedPaintDevice::A6);
+    QPrintDialog printDialog(&printer);
+    if(printDialog.exec()==QDialog::Accepted)
+     {
+        etiquette.print(&printer);
+    }
+    chargerLesMachines();
 }
 
 void MainWindow::on_pushButtonRechercher_2_clicked()
