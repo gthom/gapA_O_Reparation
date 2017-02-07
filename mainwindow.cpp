@@ -65,6 +65,8 @@ void MainWindow::chargerLesTechniciens()
         QString nomUtilisateur=reqTousLesMecanos.value("nomUtilisateur").toString();
         ui->comboBoxMecano->addItem(nomUtilisateur,idMecano);
     }
+    //mecano non affecté
+    ui->comboBoxMecano->addItem("","NULL");
 }
 
 MainWindow::~MainWindow()
@@ -196,7 +198,7 @@ void MainWindow::chargerLesClients()
 
 void MainWindow::chargerLesMachines()
 {
-    QString txtReq="select nature,libelleMarque,codeModel,typeMoteur,concat(nomClient,concat(' ',prenomClient)), panneReparation, libelleEtat, etat,dateArrivee,dateFinalisation, nomUtilisateur "
+    QString txtReq="select nature,libelleMarque,codeModel,typeMoteur,concat(nomClient,concat(' ',prenomClient)), panneReparation, libelleEtat, etat,dateArrivee,dateFinalisation, nomUtilisateur, idReparation "
                    "from Modele inner join Reparation on Reparation.outilRef=Modele.idModel "
                    "inner join Marque on Marque.idMarque=Modele.marque "
                    "inner join Client on Reparation.idClient=Client.idClient "
@@ -220,8 +222,10 @@ void MainWindow::chargerLesMachines()
                 {
                     ui->tableWidgetMachine->setItem(ligneActu,noCol,new QTableWidgetItem(reqChargerMachine.value(noCol).toString()));
                 }
-                /*nomMachine=reqChargerMachine.value(0).toString();
-          marqueMachine=reqChargerMachine.value(1).toString();*/
+                /*je range l'identifiant de la réparation dans l'item colonne0*/
+                QString idRep=reqChargerMachine.value("idReparation").toString();
+                qDebug()<<"reparation:"<<idRep;
+                ui->tableWidgetMachine->item(ligneActu,0)->setData(32,idRep);
                 int idType=reqChargerMachine.value(3).toInt();
                 if(idType==1)
                 {
@@ -279,12 +283,6 @@ void MainWindow::viderLesChamps()
     ui->labelCPClient->setText(cpClient);
     ui->labelAdresseClient->setText(adresseClient);
     ui->labelVilleClient->setText(villeClient);
-
-
-
-
-
-
 
     ui->lineEditNom->setText(nomClient);
     ui->lineEditPrenom->setText(prenomClient);
@@ -668,21 +666,76 @@ void MainWindow::on_tableWidgetMachine_cellClicked(int row, int column)
 {
     //sélection d'une machine
     //on va ouvrir la modif de la machine
+    //mémoriser l'identifiant de la réparation en variable globale de la mainwindow
+    idReparation=ui->tableWidgetMachine->item(row,0)->data(32).toString();
+    qDebug()<<"reparation choisie"<<idReparation;
+    //activation du bouton modifier
+    ui->pushButtonModifierMachine->setEnabled(true);
+    //desactivation du bouton ajouter
+    ui->pushButtonAjouterMachine->setEnabled(false);
+
     //recup des infos:
+
     QString rNomMachine=ui->tableWidgetMachine->item(row,0)->text();
     QString rMarque=ui->tableWidgetMachine->item(row,1)->text();
     QString rModele=ui->tableWidgetMachine->item(row,2)->text();
     QString rType=ui->tableWidgetMachine->item(row,3)->text();
-    QString rPanne=ui->tableWidgetMachine->item(row,4)->text();
-    QString rEtat=ui->tableWidgetMachine->item(row,5)->text();
-    QString rDevis=ui->tableWidgetMachine->item(row,6)->text();
-    QString rDateSortie=ui->tableWidgetMachine->item(row,8)->text();
-    QString rTechnicien=ui->tableWidgetMachine->item(row,9)->text();
+    //il y a le client en colonne 4 et on ne s'en sert pas
+    QString rPanne=ui->tableWidgetMachine->item(row,5)->text();
+    QString rEtat=ui->tableWidgetMachine->item(row,6)->text();
+    QString rDevis=ui->tableWidgetMachine->item(row,7)->text();
+    //en 8 il y a la date d'arrivée et on ne la modifie pas
+    QString rDateSortie=ui->tableWidgetMachine->item(row,9)->text();
+    QString rTechnicien=ui->tableWidgetMachine->item(row,10)->text();
     //on rempli les zones de saisie avec
     ui->lineEditNomMachine->setText(rNomMachine);
     ui->lineEditMarque->setText(rMarque);
     ui->lineEditReference->setText(rModele);
     if(rType=="Electrique")ui->radioButtonElectrique->setChecked(true);
     else ui->radioButtonThermique->setChecked(true);
+    //etat devis
+    ui->comboBoxDevis->setCurrentText(rDevis);
+    //TAF
+    ui->comboBoxTaf->setCurrentText(rEtat);
+    //Mecano
+    ui->comboBoxMecano->setCurrentText(rTechnicien);
+    //pannes
+    QStringList listPannes=rPanne.split("\r\n");
+    //vider les pannes
+    ui->lineEditPanne1->setText(listPannes[0]);
+    ui->lineEditPanne2->setText(listPannes[1]);
+    ui->lineEditPanne3->setText(listPannes[2]);
+    ui->lineEditPanne4->setText(listPannes[3]);
+
+
+}
+
+void MainWindow::on_pushButtonModifierMachine_clicked()
+{
+    //recup des infos nécessaires
+    //identifiant de la réparation récupéré de la variable globale de la mainWindow
+    QString sIdReparation=idReparation;
+    //qDebug()<<"current text"<<ui->comboBoxMecano->currentText();
+
+    QString mecano=ui->comboBoxMecano->currentData().toString();
+    //qDebug()<<mecano;
+    QString taf=ui->comboBoxTaf->currentData().toString();
+    QString etatDevis=ui->comboBoxDevis->currentData().toString();
+    //la panne
+    QString laPanne=ui->lineEditPanne1->text()+"&&"+
+            ui->lineEditPanne2->text()+"&&"+
+            ui->lineEditPanne3->text()+"&&"+
+            ui->lineEditPanne4->text();
+    QString txtUpdate="update Reparation set idDevis="+etatDevis+" ,"+" idEtat="+taf+", idUtilisateur="+mecano+", panneReparation='"+laPanne+"' where idReparation="+sIdReparation;
+    QSqlQuery reqUpdateMachine;
+    if(reqUpdateMachine.exec(txtUpdate))
+    {
+        chargerLesMachines();
+    }
+    else
+    {
+        qDebug()<<reqUpdateMachine.lastError().text();
+    }
+    qDebug()<<txtUpdate;
 
 }

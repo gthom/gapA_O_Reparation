@@ -19,6 +19,7 @@ public:
     QString numeroClient,nomClient,prenomClient,telClient,emailCLient,adresseClient,cpClient,villeClient;
     QString nomMachine,marqueMachine,panneMachine,refMachine,etatMachine,typeMachine,clientMachine,devisMachine,techMachine,tempsPasse;
     QDate dateArrivee,dateSortie;
+    QString idReparation;
     ~MainWindow();  
     void chargerLesTechniciens();
     void chargerLesEtats();
@@ -53,6 +54,8 @@ private slots:
     void on_pushButtonAddTechnicien_clicked();
 
     void on_tableWidgetMachine_cellClicked(int row, int column);
+
+    void on_pushButtonModifierMachine_clicked();
 
 private:
     Ui::MainWindow *ui;
