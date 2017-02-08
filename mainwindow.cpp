@@ -18,12 +18,17 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     chargerLesClients();
     chargerLesMachines();
-    connect(qApp,SIGNAL(focusChanged(QWidget*,QWidget*)),this,SLOT(on_focusChanged(QWidget*,QWidget*)));
     chargerLesTechniciens();
-    chargerLesEtats();
+    chargerLesEtatsReparation();
     chargerLesEtatsDevis();
+    connect(qApp,SIGNAL(focusChanged(QWidget*,QWidget*)),this,SLOT(on_focusChanged(QWidget*,QWidget*)));
+    connect(this, SIGNAL(clientSelectionne(QString)),this,SLOT(afficherClientSelectionne(QString)));
+    connect(ui->lineEditNom, SIGNAL(textEdited(QString)),this, SLOT(actDesactBoutonAjouterClient()));
+    connect(ui->lineEditPrenom, SIGNAL(textEdited(QString)),this, SLOT(actDesactBoutonAjouterClient()));
+    connect(ui->lineEditTelephone, SIGNAL(textEdited(QString)),this, SLOT(actDesactBoutonAjouterClient()));
+    connect(ui->lineEditAdresse, SIGNAL(textEdited(QString)),this, SLOT(actDesactBoutonAjouterClient()));
 }
-void MainWindow::chargerLesEtats()
+void MainWindow::chargerLesEtatsReparation()
 {
     ui->comboBoxTaf->clear();
     qDebug()<<"void MainWindow::chargerLesEtats()";
@@ -78,17 +83,18 @@ void MainWindow::majListeRechercheMachine(QString leTexte)
 {
     qDebug()<<"void MainWindow::majListeRecherche(QString leTexte)";
     //s'exécute quand il faut raffraichir la liste de recherche
+    //sender() est l'émetteur du signal donc un des trois lineEdit auquel le slot est attaché
     if(sender()==ui->lineEditReference)
     {
 
-        QString txtReq="select idModel,nature,codeModel,libelleMarque from Modele inner join Marque on Modele.marque=Marque.idMarque where codeModel like upper('%"+ui->lineEditReference->text()+"%')";
+        QString txtReq="select idModel,nature,codeModel,libelleMarque from Modele inner join Marque on Modele.marque=Marque.idMarque where upper(codeModel) like upper('%"+ui->lineEditReference->text()+"%')";
         qDebug()<<txtReq;
         QSqlQuery maReq(txtReq);
         //effacement de la liste
         ui->listWidgetResultatRecherche->clear();
         while(maReq.next())
         {
-            QListWidgetItem*  nouvelElement=new QListWidgetItem(maReq.value("codeModel").toString()+" "+maReq.value("libelleMarque").toString());
+            QListWidgetItem*  nouvelElement=new QListWidgetItem(maReq.value("codeModel").toString()+" "+maReq.value("libelleMarque").toString()+" "+maReq.value("nature").toString());
             nouvelElement->setData(32,maReq.value("idModel").toString());
             nouvelElement->setData(33,maReq.value("codeModel").toString());
             nouvelElement->setData(34,maReq.value("libelleMarque").toString());
@@ -99,14 +105,14 @@ void MainWindow::majListeRechercheMachine(QString leTexte)
     }
     else if(sender()==ui->lineEditMarque)
     {
-        QString txtReq="select idModel,nature,codeModel,libelleMarque from Modele inner join Marque on Modele.marque=Marque.idMarque where libelleMarque like upper('%"+ui->lineEditMarque->text()+"%')";
+        QString txtReq="select idModel,nature,codeModel,libelleMarque from Modele inner join Marque on Modele.marque=Marque.idMarque where upper(libelleMarque) like upper('%"+ui->lineEditMarque->text()+"%')";
         qDebug()<<txtReq;
         QSqlQuery maReq(txtReq);
         //effacement de la liste
         ui->listWidgetResultatRecherche->clear();
         while(maReq.next())
         {
-            QListWidgetItem*  nouvelElement=new QListWidgetItem(maReq.value("codeModel").toString()+" "+maReq.value("libelleMarque").toString());
+            QListWidgetItem*  nouvelElement=new QListWidgetItem(maReq.value("codeModel").toString()+" "+maReq.value("libelleMarque").toString()+" "+maReq.value("nature").toString());
             nouvelElement->setData(32,maReq.value("idModel").toString());
             nouvelElement->setData(33,maReq.value("codeModel").toString());
             nouvelElement->setData(34,maReq.value("libelleMarque").toString());
@@ -117,14 +123,14 @@ void MainWindow::majListeRechercheMachine(QString leTexte)
     }
     else if(sender()==ui->lineEditNomMachine)
     {
-        QString txtReq="select idModel,nature,codeModel,libelleMarque from Modele inner join Marque on Modele.marque=Marque.idMarque where nature like upper('%"+ui->lineEditNomMachine->text()+"%')";
+        QString txtReq="select idModel,nature,codeModel,libelleMarque from Modele inner join Marque on Modele.marque=Marque.idMarque where upper(nature) like upper('%"+ui->lineEditNomMachine->text()+"%')";
         qDebug()<<txtReq;
         QSqlQuery maReq(txtReq);
         //effacement de la liste
         ui->listWidgetResultatRecherche->clear();
         while(maReq.next())
         {
-            QListWidgetItem*  nouvelElement=new QListWidgetItem(maReq.value("codeModel").toString()+" "+maReq.value("libelleMarque").toString());
+            QListWidgetItem*  nouvelElement=new QListWidgetItem(maReq.value("codeModel").toString()+" "+maReq.value("libelleMarque").toString()+" "+maReq.value("nature").toString());
             nouvelElement->setData(32,maReq.value("idModel").toString());
             nouvelElement->setData(33,maReq.value("codeModel").toString());
             nouvelElement->setData(34,maReq.value("libelleMarque").toString());
@@ -148,7 +154,7 @@ void MainWindow::on_focusChanged(QWidget* old, QWidget* nouveau)
     }
     else if(nouveau==ui->lineEditNomMachine)
     {
-        disconnect(ui->lineEditReference,SIGNAL(textChanged(QString)),this, SLOT(majListeRecherche(QString)));    
+        disconnect(ui->lineEditReference,SIGNAL(textChanged(QString)),this, SLOT(majListeRechercheMachine(QString)));
         disconnect(ui->lineEditMarque,SIGNAL(textChanged(QString)),this, SLOT(majListeRechercheMachine(QString)));
         //il est dans le modele on affiche les références
         //attacher l'evenement textChanged à la maj de la zone de droite
@@ -173,18 +179,19 @@ void MainWindow::chargerLesClients()
    ui->tableWidgetClient->setRowCount(0);
    /*CREATE TABLE `Client`(`idClient` int(11),`nomClient` varchar(45),`prenomClient` varchar(45),`telephoneClient` varchar(45),`emailClient` varchar(45),`adresseClient` varchar(45),'cpClient' varchar(6),'villeClient' varchar(45),primary key(`idClient`));
 */
-   reqChargerClient.prepare("select nomClient,prenomClient,telephoneClient,emailClient,adresseClient,cpClient,villeClient from Client order by nomClient");
+   reqChargerClient.prepare("select nomClient,prenomClient,telephoneClient,emailClient,adresseClient,cpClient,villeClient,idClient from Client where not supprime order by nomClient");
    if(reqChargerClient.exec())
    {
        ui->tableWidgetClient->setRowCount(reqChargerClient.size());
        while(reqChargerClient.next())//pour chaque client
        {
-
         //pour chaque champ à afficher
          for(int noCol=0;noCol<7;noCol++)
          {
             ui->tableWidgetClient->setItem(ligneActu,noCol,new QTableWidgetItem(reqChargerClient.value(noCol).toString()));
          }
+         //chargement de l'identifiant du client en data32 de la première colonne
+         ui->tableWidgetClient->item(ligneActu,0)->setData(32,reqChargerClient.value("idClient").toString());
           ligneActu++;//on passe à la ligne suivante
 
        }//fin du pour chaque client
@@ -196,15 +203,16 @@ void MainWindow::chargerLesClients()
 
 }//fin de chargerLesClients
 
-void MainWindow::chargerLesMachines()
+void MainWindow::chargerLesMachines(QString filtre)
 {
-    QString txtReq="select nature,libelleMarque,codeModel,typeMoteur,concat(nomClient,concat(' ',prenomClient)), panneReparation, libelleEtat, etat,dateArrivee,dateFinalisation, nomUtilisateur, idReparation "
+    QString txtReq="select nature,libelleMarque,codeModel,typeMoteur,concat(nomClient,concat(' ',prenomClient)), panneReparation, libelleEtat, etat,dateArrivee,dateFinalisation, nomUtilisateur, idReparation, Client.idClient "
                    "from Modele inner join Reparation on Reparation.outilRef=Modele.idModel "
                    "inner join Marque on Marque.idMarque=Modele.marque "
                    "inner join Client on Reparation.idClient=Client.idClient "
                    "inner join Etat_Reparation on Etat_Reparation.idEtat=Reparation.idEtat "
                    "left outer join Utilisateur on Reparation.idUtilisateur=Utilisateur.idUtilisateur "
-                   "left outer join Devis_Reparation on Reparation.idDevis=Devis_Reparation.idDevis";
+                   "left outer join Devis_Reparation on Reparation.idDevis=Devis_Reparation.idDevis where not libelleEtat like 'Supprimer' ";
+    if(!filtre.isEmpty())txtReq+=" and telephoneClient like '%"+filtre+"%' or nature like '%"+filtre+"%' or codeModel like '%"+filtre+"%'";
     qDebug()<<txtReq;
     QSqlQuery reqChargerMachine;
     reqChargerMachine.prepare(txtReq);
@@ -226,6 +234,12 @@ void MainWindow::chargerLesMachines()
                 QString idRep=reqChargerMachine.value("idReparation").toString();
                 qDebug()<<"reparation:"<<idRep;
                 ui->tableWidgetMachine->item(ligneActu,0)->setData(32,idRep);
+                //je range l'identifiant du client dans l'item colonne4 client
+                QString idClient=reqChargerMachine.value("idClient").toString();
+                qDebug()<<"client:"<<idClient;
+                ui->tableWidgetMachine->item(ligneActu,4)->setData(32,idClient);
+
+                //affichage du type de moteur
                 int idType=reqChargerMachine.value(3).toInt();
                 if(idType==1)
                 {
@@ -253,6 +267,8 @@ void MainWindow::chargerLesMachines()
         qDebug()<<reqChargerMachine.lastError().text();
     }
 
+    ui->pushButtonSupprMachine->setEnabled(false);
+
 }
 int MainWindow::chercherIdClient()
 {
@@ -266,7 +282,7 @@ int MainWindow::chercherIdClient()
     return numClient;
 }
 
-void MainWindow::viderLesChamps()
+void MainWindow::viderLesChampsClient()
 {
     nomClient="";
     prenomClient="";
@@ -297,7 +313,20 @@ void MainWindow::viderLesChamps()
     ui->pushButtonSupprimerClient->setDisabled(true);
     ui->pushButtonAjouterMachine->setDisabled(true);
     ui->pushButtonModifierClient->setDisabled(true);
+    ui->pushButtonAjouterClient->setDisabled(true);
 
+}
+void MainWindow::viderChampsMachine()
+{
+    ui->lineEditNomMachine->setText("");
+    ui->lineEditMarque->setText("");
+    ui->lineEditReference->setText("");
+    ui->lineEditPanne1->setText("");
+    ui->lineEditPanne2->setText("");
+    ui->lineEditPanne3->setText("");
+    ui->lineEditPanne4->setText("");
+    ui->comboBoxMecano->setCurrentText("");
+    ui->comboBoxDevis->setCurrentText("a faire");
 }
 
 void MainWindow::on_pushButtonAjouterClient_clicked()
@@ -326,7 +355,7 @@ void MainWindow::on_pushButtonAjouterClient_clicked()
    reqAjouterClient.prepare(reqAjoutClient);
    reqAjouterClient.exec();
 
-   viderLesChamps();
+   viderLesChampsClient();
    chargerLesClients();
 }
 
@@ -338,14 +367,14 @@ void MainWindow::on_pushButtonSupprimerClient_clicked()
        numClient=chercherIdClient();
        QString numClientSt=QString::number(numClient);
 
-       QString reqSuppr="delete from Client where idClient="+numClientSt+"";
+       QString reqSuppr="update Client set supprime=true where idClient="+numClientSt+"";
        qDebug()<<reqSuppr;
 
        QSqlQuery reqSupprClient;
        reqSupprClient.prepare(reqSuppr);
        reqSupprClient.exec();
 
-       viderLesChamps();
+       viderLesChampsClient();
        chargerLesClients();
    }
 }
@@ -357,80 +386,14 @@ void MainWindow::on_pushButtonSupprimerClient_clicked()
  */
 void MainWindow::on_tableWidgetClient_cellClicked(int row, int column)
 {
-    //affichage des infos dans la zone de modification
-    nomClient=ui->tableWidgetClient->item(row,0)->text();
-    prenomClient=ui->tableWidgetClient->item(row,1)->text();
-    telClient=ui->tableWidgetClient->item(row,2)->text();
-    emailCLient=ui->tableWidgetClient->item(row,3)->text();
-    adresseClient=ui->tableWidgetClient->item(row,4)->text();
-    cpClient=ui->tableWidgetClient->item(row,5)->text();
-    villeClient=ui->tableWidgetClient->item(row,6)->text();
-    //on vide les machines du client
-    ui->tableWidgetMachineClient->setRowCount(0);
-    //à revoir
-    int idClient=chercherIdClient();
-    QString idClientS=QString::number(idClient);
-    QString txtReq="select concat(nature,concat(' ',concat(libelleMarque,concat(' ',codeModel)))),date_format(dateArrivee,'%d/%m'),libelleEtat,if(dateFinalisation is null,datediff(now(),dateArrivee),'OK'),typeMoteur,concat(nomClient,concat(' ', prenomClient)), panneReparation, idDevis,dateFinalisation, nomUtilisateur from Modele inner join Reparation on Reparation.outilRef=Modele.idModel inner join Marque on Marque.idMarque=Modele.marque inner join Client on Reparation.idClient=Client.idClient natural join Etat_Reparation left outer join Utilisateur on Reparation.idUtilisateur=Utilisateur.idUtilisateur where Client.idClient="+idClientS+" order by Reparation.idEtat asc, dateArrivee desc";
-    qDebug()<<txtReq;
-    QSqlQuery chercherMachineDuClient;
-    chercherMachineDuClient.prepare(txtReq);
-    if(chercherMachineDuClient.exec())
-    {
+    QString idClientS=ui->tableWidgetClient->item(row,0)->data(32).toString();
+    emit clientSelectionne(idClientS);
 
-        int nbLigne=chercherMachineDuClient.size();
-        if(nbLigne>0)
-        {
-
-            ui->tableWidgetMachineClient->setRowCount(nbLigne);
-
-            int noLigne=0;
-            while(chercherMachineDuClient.next())
-            {
-                QSqlRecord enregistrement=chercherMachineDuClient.record();
-                //pour chaque champ à afficher
-                for(int noCol=0;noCol<enregistrement.count();noCol++)
-                {
-                    ui->tableWidgetMachineClient->setItem(noLigne,noCol,new QTableWidgetItem(chercherMachineDuClient.value(noCol).toString()));
-
-                }
-                noLigne++;//on passe à la ligne suivante
-            }
-        }
-        else
-        {
-            qDebug()<<"Ce client n'a pas de machine";
-        }
-    }
-    else
-    {
-        qDebug()<<chercherMachineDuClient.lastError().databaseText();
-    }
-
-    ui->labelNomClient->setText(nomClient);
-    ui->labelPrenomClient->setText(prenomClient);
-    ui->labelTelClient->setText(telClient);
-    ui->labelEmailClient->setText(emailCLient);
-    ui->labelCPClient->setText(cpClient);
-    ui->labelAdresseClient->setText(adresseClient);
-    ui->labelVilleClient->setText(villeClient);
-
-
-    ui->lineEditNom->setText(nomClient);
-    ui->lineEditPrenom->setText(prenomClient);
-    ui->lineEditTelephone->setText(telClient);
-    ui->lineEditEmail->setText(emailCLient);
-    ui->lineEditAdresse->setText(adresseClient);
-    ui->lineEditCP->setText(cpClient);
-    ui->lineEditVille->setText(villeClient);
-
-    ui->pushButtonSupprimerClient->setEnabled(true);
-    ui->pushButtonAjouterMachine->setEnabled(true);
-    ui->pushButtonModifierClient->setEnabled(true);
 }
 
-void MainWindow::on_pushButtonDeselectionner_clicked()
+void MainWindow::on_pushButtonDeselectionnerClient_clicked()
 {
-    viderLesChamps();
+
 }
 
 void MainWindow::on_pushButtonModifierClient_clicked()
@@ -452,17 +415,17 @@ void MainWindow::on_pushButtonModifierClient_clicked()
     qDebug()<<reqModif;
     reqAjouterClient.prepare(reqModif);
     reqAjouterClient.exec();
-    viderLesChamps();
+    viderLesChampsClient();
     chargerLesClients();
 }
 
 
-void MainWindow::on_pushButtonRechercher_clicked()
+void MainWindow::on_pushButtonRechercherClient_clicked()
 {
     int ligneActu=0;
     QString nomRecherche=ui->lineEditRechercheClient->text();
     QSqlQuery reqRecherche;
-    reqRecherche.prepare("select * from Client where nomClient='"+nomRecherche+"' OR telephoneClient='"+nomRecherche+"'");
+    reqRecherche.prepare("select * from Client where upper(nomClient) like upper('%"+nomRecherche+"%') OR upper(prenomClient) like upper('%"+nomRecherche+"%') or telephoneClient like '%"+nomRecherche+"%'");
     if(reqRecherche.exec())
     {
         ui->tableWidgetClient->setRowCount(0);
@@ -474,6 +437,7 @@ void MainWindow::on_pushButtonRechercher_clicked()
           {
              ui->tableWidgetClient->setItem(ligneActu,noCol,new QTableWidgetItem(reqRecherche.value(noCol+1).toString()));
           }
+          ui->tableWidgetClient->item(ligneActu,0)->setData(32,reqRecherche.value("idClient").toString());
            ligneActu++;//on passe à la ligne suivante
 
         }//fin du pour chaque client
@@ -503,7 +467,7 @@ void MainWindow::on_pushButtonAjouterMachine_clicked()
     }
     dateArrivee=dateArrivee.currentDate();
     QString dateARentrer=dateArrivee.toString("yyyy/MM/dd");
-    nomMachine=ui->lineEditNomMachine->text();
+    nomMachineSelectionnee=ui->lineEditNomMachine->text();
     marqueMachine=ui->lineEditMarque->text();
     refMachine=ui->lineEditReference->text();
     //refMachine=ui->lineEditReference->property("numeroModele").toString();
@@ -556,7 +520,7 @@ void MainWindow::on_pushButtonAjouterMachine_clicked()
         reqObtientIdModele.first();
         QString idDuModele=reqObtientIdModele.value(0).toString();
         qDebug()<<"creation du modele"<<idDuModele;
-        QString txtRaq="insert into Modele values("+idDuModele+",'"+refMachine+"',"+idMarque+",'"+nomMachine+"',"+idMarque+")";
+        QString txtRaq="insert into Modele values("+idDuModele+",'"+refMachine+"',"+idMarque+",'"+nomMachineSelectionnee+"',"+idMarque+")";
         qDebug()<<txtRaq;
         QSqlQuery reqInsertModele;
         reqInsertModele.exec(txtRaq);
@@ -595,7 +559,7 @@ void MainWindow::on_pushButtonAjouterMachine_clicked()
     listeDesLignes<<"<body><center><h1>Alpes-Outillage-Reparation</h1></center>";
     listeDesLignes<<"<div>";
     listeDesLignes<<"<table>";
-    listeDesLignes<<"<tr><td>Nature:</td><td>"+nomMachine+"</td></tr>";
+    listeDesLignes<<"<tr><td>Nature:</td><td>"+nomMachineSelectionnee+"</td></tr>";
     listeDesLignes<<"<tr><td>Modèle:</td><td>"+refMachine+"</td></tr>";
     listeDesLignes<<"<tr><td>Client:</td><td>"+nomClient+"</td></tr>";
     listeDesLignes<<"<tr><td>tel:</td><td>"+telClient+"</td></tr>";
@@ -625,7 +589,7 @@ void MainWindow::on_pushButtonRechercher_2_clicked()
 
 void MainWindow::on_pushButtonDeselectionner_2_clicked()
 {
-     viderLesChamps();
+     viderLesChampsClient();
 }
 
 void MainWindow::on_lineEditMarque_returnPressed()
@@ -636,8 +600,8 @@ void MainWindow::on_lineEditMarque_returnPressed()
 void MainWindow::on_listWidgetResultatRecherche_itemActivated(QListWidgetItem *item)
 {
     //en 32 l'identifiant, 33 le modèle, 34 la marque, 35 la nature
-    ui->lineEditReference->setText(item->data(33).toString());
     ui->lineEditReference->setProperty("numeroModele",item->data(32).toString());
+    ui->lineEditReference->setText(item->data(33).toString());   
     ui->lineEditMarque->setText(item->data(34).toString());
     ui->lineEditNomMachine->setText(item->data(35).toString());
 }
@@ -649,16 +613,23 @@ void MainWindow::on_action_Fermer_triggered()
 
 void MainWindow::on_pushButtonAddTechnicien_clicked()
 {
+  qDebug()<<"void MainWindow::on_pushButtonAddTechnicien_clicked()";
   //ajout d'un technicien
-   QSqlRecord nouveauTechnicien;
+  tableModelTechnicien->setEditStrategy(QSqlRelationalTableModel::OnRowChange);
+   QSqlRecord nouveauTechnicien=tableModelTechnicien->record();
    QSqlQuery reqProchainIdTech("select ifnull(max(idUtilisateur),0)+1 from Utilisateur");
    reqProchainIdTech.first();
    QString sonId=reqProchainIdTech.value(0).toString();
-   nouveauTechnicien.setValue("idUtilisateur",sonId);
+   QSqlQuery reqInsertTech;
+   reqInsertTech.exec("insert into Utilisateur values("+sonId+",'sonNom',1,false)");
+
+   /*nouveauTechnicien.setValue("idUtilisateur",sonId);
    nouveauTechnicien.setValue("nomUtilisateur","son nom");
    nouveauTechnicien.setValue("typeUtilisateur",1);
-   nouveauTechnicien.setValue("supprime","0");
-   tableModelTechnicien->insertRecord(-1,nouveauTechnicien);
+   nouveauTechnicien.setValue("supprime",false);
+   //tableModelTechnicien->insertRow(tableModelTechnicien->rowCount());
+   tableModelTechnicien->insertRecord(tableModelTechnicien->rowCount(),nouveauTechnicien);*/
+   //tableModelTechnicien->setRecord(tableModelTechnicien->rowCount(),nouveauTechnicien);
    tableModelTechnicien->select();
 }
 
@@ -667,15 +638,19 @@ void MainWindow::on_tableWidgetMachine_cellClicked(int row, int column)
     //sélection d'une machine
     //on va ouvrir la modif de la machine
     //mémoriser l'identifiant de la réparation en variable globale de la mainwindow
-    idReparation=ui->tableWidgetMachine->item(row,0)->data(32).toString();
-    qDebug()<<"reparation choisie"<<idReparation;
+    idReparationSelectionnee=ui->tableWidgetMachine->item(row,0)->data(32).toString();
+    qDebug()<<"reparation choisie"<<idReparationSelectionnee;
     //activation du bouton modifier
     ui->pushButtonModifierMachine->setEnabled(true);
+    ui->pushButtonSupprMachine->setEnabled(true);
     //desactivation du bouton ajouter
     ui->pushButtonAjouterMachine->setEnabled(false);
 
     //recup des infos:
-
+    QString idClient=ui->tableWidgetMachine->item(row,4)->data(32).toString();
+    //mémoriser l'identifiant du client en variable globale de la mainwindow
+    numeroClientSelectionne=idClient;
+    emit(clientSelectionne(idClient));
     QString rNomMachine=ui->tableWidgetMachine->item(row,0)->text();
     QString rMarque=ui->tableWidgetMachine->item(row,1)->text();
     QString rModele=ui->tableWidgetMachine->item(row,2)->text();
@@ -701,11 +676,12 @@ void MainWindow::on_tableWidgetMachine_cellClicked(int row, int column)
     ui->comboBoxMecano->setCurrentText(rTechnicien);
     //pannes
     QStringList listPannes=rPanne.split("\r\n");
-    //vider les pannes
+    //vider les pannes et les afficher
     ui->lineEditPanne1->setText(listPannes[0]);
     ui->lineEditPanne2->setText(listPannes[1]);
     ui->lineEditPanne3->setText(listPannes[2]);
     ui->lineEditPanne4->setText(listPannes[3]);
+    //afficher le client de la machine
 
 
 }
@@ -714,7 +690,7 @@ void MainWindow::on_pushButtonModifierMachine_clicked()
 {
     //recup des infos nécessaires
     //identifiant de la réparation récupéré de la variable globale de la mainWindow
-    QString sIdReparation=idReparation;
+    QString sIdReparation=idReparationSelectionnee;
     //qDebug()<<"current text"<<ui->comboBoxMecano->currentText();
 
     QString mecano=ui->comboBoxMecano->currentData().toString();
@@ -738,4 +714,208 @@ void MainWindow::on_pushButtonModifierMachine_clicked()
     }
     qDebug()<<txtUpdate;
 
+}
+
+void MainWindow::on_pushButtonSupprMachine_clicked()
+{
+    if(QMessageBox::warning(this,this->windowTitle(),"Etes-vous bien certain de vouloir supprimer cette Reparation?",QMessageBox::Yes|QMessageBox::No,QMessageBox::No)==QMessageBox::Yes)
+    {
+        QString txtSuppr="update Reparation set  idEtat=14 where idReparation="+idReparationSelectionnee;
+        QSqlQuery reqSupprMachine;
+        if(reqSupprMachine.exec(txtSuppr))
+        {
+            chargerLesMachines();
+        }
+        else
+        {
+            qDebug()<<reqSupprMachine.lastError().text();
+        }
+        qDebug()<<txtSuppr;
+    }
+}
+
+void MainWindow::on_lineEditRechercheClient_textChanged(const QString &arg1)
+{
+    if(arg1.length()>2)
+    {
+        on_pushButtonRechercherClient_clicked();
+        ui->labelListeClients->setText(tr("Liste filtrée des clients"));
+        ui->labelListeClients->setStyleSheet("background-color:orange;");
+    }
+    else //critère de recherche insuffisant
+    {
+        ui->labelListeClients->setText(tr("Liste des clients"));
+        ui->labelListeClients->setStyleSheet("");
+        chargerLesClients();
+    }
+}
+
+void MainWindow::on_pushButtonAjouterMachineClient_clicked()
+{
+    ui->tabWidget->setCurrentIndex(1);
+    viderChampsMachine();
+    ui->lineEditNomMachine->setFocus();
+}
+
+void MainWindow::afficherClientSelectionne(QString sonNumero)
+{
+    qDebug()<<"void MainWindow::afficherClientSelectionne(QString sonNumero)";
+    //affichage dans la zone de droite des infos concernant le client
+    QSqlQuery reqChargerClient;
+    QString txtReq="select nomClient,prenomClient,telephoneClient,emailClient,adresseClient,cpClient,villeClient,idClient from Client where not supprime and idClient="+sonNumero;
+    qDebug()<<txtReq;
+    reqChargerClient.prepare(txtReq);
+    if(reqChargerClient.exec())
+    {
+        reqChargerClient.first();
+        //affichage des infos dans la zone de modification
+        nomClient=reqChargerClient.value("nomClient").toString();
+        numeroClientSelectionne=sonNumero;
+        prenomClient=reqChargerClient.value("prenomClient").toString();
+        telClient=reqChargerClient.value("telephoneClient").toString();
+        emailCLient=reqChargerClient.value("emailClient").toString();
+        adresseClient=reqChargerClient.value("adresseClient").toString();
+        cpClient=reqChargerClient.value("cpClient").toString();
+        villeClient=reqChargerClient.value("villeClient").toString();
+        //on vide les machines du client
+        ui->tableWidgetMachineClient->setRowCount(0);
+        //à revoir
+
+
+        QString txtReq="select concat(nature,concat(' ',concat(libelleMarque,concat(' ',codeModel)))),date_format(dateArrivee,'%d/%m'),libelleEtat,if(dateFinalisation is null,datediff(now(),dateArrivee),'OK'),typeMoteur,concat(nomClient,concat(' ', prenomClient)), panneReparation, idDevis,dateFinalisation, nomUtilisateur from Modele inner join Reparation on Reparation.outilRef=Modele.idModel inner join Marque on Marque.idMarque=Modele.marque inner join Client on Reparation.idClient=Client.idClient natural join Etat_Reparation left outer join Utilisateur on Reparation.idUtilisateur=Utilisateur.idUtilisateur where Client.idClient="+sonNumero+" order by Reparation.idEtat asc, dateArrivee desc";
+        qDebug()<<txtReq;
+        QSqlQuery chercherMachineDuClient;
+        chercherMachineDuClient.prepare(txtReq);
+        if(chercherMachineDuClient.exec())
+        {
+
+            int nbLigne=chercherMachineDuClient.size();
+            if(nbLigne>0)
+            {
+
+                ui->tableWidgetMachineClient->setRowCount(nbLigne);
+
+                int noLigne=0;
+                while(chercherMachineDuClient.next())
+                {
+                    QSqlRecord enregistrement=chercherMachineDuClient.record();
+                    //pour chaque champ à afficher
+                    for(int noCol=0;noCol<enregistrement.count();noCol++)
+                    {
+                        ui->tableWidgetMachineClient->setItem(noLigne,noCol,new QTableWidgetItem(chercherMachineDuClient.value(noCol).toString()));
+
+                    }
+                    noLigne++;//on passe à la ligne suivante
+                }
+                //il a des machines, on peut les sélectionner
+                ui->pushButtonVoirMachinesClient->setEnabled(true);
+            }
+            else
+            {
+                qDebug()<<"Ce client n'a pas de machine";
+                ui->pushButtonVoirMachinesClient->setEnabled(false);
+            }
+        }
+        else
+        {
+            qDebug()<<chercherMachineDuClient.lastError().databaseText();
+        }
+
+        ui->labelNomClient->setText(nomClient);
+        ui->labelPrenomClient->setText(prenomClient);
+        ui->labelTelClient->setText(telClient);
+        ui->labelEmailClient->setText(emailCLient);
+        ui->labelCPClient->setText(cpClient);
+        ui->labelAdresseClient->setText(adresseClient);
+        ui->labelVilleClient->setText(villeClient);
+
+
+        ui->lineEditNom->setText(nomClient);
+        ui->lineEditPrenom->setText(prenomClient);
+        ui->lineEditTelephone->setText(telClient);
+        ui->lineEditEmail->setText(emailCLient);
+        ui->lineEditAdresse->setText(adresseClient);
+        ui->lineEditCP->setText(cpClient);
+        ui->lineEditVille->setText(villeClient);
+
+        ui->pushButtonSupprimerClient->setEnabled(true);
+        ui->pushButtonAjouterMachine->setEnabled(true);
+        ui->pushButtonModifierClient->setEnabled(true);
+        ui->pushButtonDeselectionner->setEnabled(true);
+    }
+}
+
+void MainWindow::on_pushButtonVoirClient_clicked()
+{
+    //positionnement sur l'onglet clients
+    ui->tabWidget->setCurrentIndex(0);
+    //sélection du client
+    int row=0;
+    int nbClientsAffiches=ui->tableWidgetClient->rowCount();
+    while(!(row==nbClientsAffiches || ui->tableWidgetClient->item(row,0)->data(32)== this->numeroClientSelectionne))
+    {
+        row++;
+    }
+    if(row<nbClientsAffiches)ui->tableWidgetClient->selectRow(row);
+}
+
+void MainWindow::on_pushButtonVoirMachinesClient_clicked()
+{
+    //on passe sur l'onglet machines
+    ui->tabWidget->setCurrentIndex(1);
+    //filtrer pour n'afficher que les siennes ou positionner sur la sienne
+    ui->lineEditRechercheMachine->setText(telClient);
+    //on déclenche la recherche
+    on_pushButtonRechercherMachine_clicked();
+    //efface la sélection
+    ui->tableWidgetMachine->clearSelection();
+}
+//recherche des machines d'un client
+void MainWindow::on_pushButtonRechercherMachine_clicked()
+{
+    //s'il a des machines
+    if(ui->tableWidgetMachineClient->rowCount()>0)
+    {
+        ui->label_ListeMachines->setText(tr("Liste filtée des machines"));
+        ui->label_ListeMachines->setStyleSheet("background-color:orange;");
+        chargerLesMachines(ui->lineEditRechercheMachine->text());
+    }
+}
+//recherche de machine par noTel client ou nature ou modele
+void MainWindow::on_pushButtonAnnulerRechercheMachine_clicked()
+{
+    this->idReparationSelectionnee=-1;
+    //raz de la zone de filtrage
+    chargerLesMachines();
+    //raz du formulaire du bas machine
+    viderChampsMachine();
+    ui->label_ListeMachines->setText(tr("Liste des machines"));
+    ui->label_ListeMachines->setStyleSheet("");
+    ui->lineEditRechercheMachine->setText("");
+}
+void MainWindow::actDesactBoutonAjouterClient()
+{
+    //contrôler la validité des champs saisis
+    bool activer=true;
+    activer =activer && !ui->lineEditAdresse->text().isEmpty();
+    activer =activer && !ui->lineEditNom->text().isEmpty();
+    activer =activer && !ui->lineEditPrenom->text().isEmpty();
+    activer =activer && !ui->lineEditVille->text().isEmpty();
+    activer =activer && !ui->lineEditCP->text().isEmpty();
+    activer =activer && !ui->lineEditTelephone->text().isEmpty()&& ui->lineEditTelephone->text().length()>13;
+    ui->pushButtonAjouterClient->setEnabled(activer);
+}
+
+void MainWindow::on_resetFormClient_clicked()
+{
+    viderLesChampsClient();
+}
+
+void MainWindow::on_pushButtonDeselectionner_clicked()
+{
+    viderLesChampsClient();
+    ui->tableWidgetClient->clearSelection();
+    ui->pushButtonDeselectionner->setEnabled(false);
+    ui->pushButtonVoirMachinesClient->setEnabled(false);
+    ui->pushButtonSupprimerClient->setEnabled(false);
 }

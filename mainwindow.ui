@@ -28,7 +28,7 @@
         </sizepolicy>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="tabClients">
         <attribute name="title">
@@ -51,7 +51,7 @@
             </spacer>
            </item>
            <item>
-            <widget class="QLabel" name="label">
+            <widget class="QLabel" name="labelListeClients">
              <property name="text">
               <string>Liste des clients :</string>
              </property>
@@ -183,7 +183,7 @@
            <item>
             <widget class="QPushButton" name="pushButtonRechercher_2">
              <property name="text">
-              <string>Annuler</string>
+              <string>&amp;Tout voir</string>
              </property>
             </widget>
            </item>
@@ -335,8 +335,18 @@
                </item>
                <item>
                 <widget class="QPushButton" name="pushButtonAjouterClient">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
                  <property name="text">
                   <string>Ajouter un client</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="resetFormClient">
+                 <property name="text">
+                  <string>&amp;Reset</string>
                  </property>
                 </widget>
                </item>
@@ -397,30 +407,6 @@
               </layout>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButtonSupprimerClient">
-               <property name="enabled">
-                <bool>false</bool>
-               </property>
-               <property name="text">
-                <string>Supprimer un client</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="pushButtonVoirMachinesClient">
-               <property name="text">
-                <string>Voir les machines du client</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="pushButtonAjouterMachineClient">
-               <property name="text">
-                <string>Ajouter une machine au client</string>
-               </property>
-              </widget>
-             </item>
-             <item>
               <spacer name="verticalSpacer">
                <property name="orientation">
                 <enum>Qt::Vertical</enum>
@@ -460,7 +446,7 @@
             </spacer>
            </item>
            <item>
-            <widget class="QLabel" name="label_2">
+            <widget class="QLabel" name="label_ListeMachines">
              <property name="text">
               <string>Liste des machines :</string>
              </property>
@@ -603,7 +589,17 @@
            <item>
             <widget class="QPushButton" name="pushButtonAnnulerRechercheMachine">
              <property name="text">
-              <string>Ann&amp;uler</string>
+              <string>&amp;Tout voir</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButtonSupprMachine">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>&amp;Supprimer</string>
              </property>
             </widget>
            </item>
@@ -827,7 +823,17 @@
                   <bool>false</bool>
                  </property>
                  <property name="text">
-                  <string>&amp;Ajouter une machine</string>
+                  <string>&amp;Ajouter</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pushButtonModifierMachine">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="text">
+                  <string>&amp;Modifier</string>
                  </property>
                 </widget>
                </item>
@@ -889,27 +895,6 @@
                 </spacer>
                </item>
               </layout>
-             </item>
-             <item>
-              <widget class="QPushButton" name="pushButtonModifierMachine">
-               <property name="text">
-                <string>Modifier une machine</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="pushButtonSupprMachine">
-               <property name="text">
-                <string>Supprimer une machine</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="pushButtonAttrTechnicien">
-               <property name="text">
-                <string>Attribuer technicien</string>
-               </property>
-              </widget>
              </item>
              <item>
               <widget class="QPushButton" name="pushButtonVoirClient">
@@ -1912,7 +1897,7 @@
            <bool>true</bool>
           </property>
           <attribute name="horizontalHeaderVisible">
-           <bool>true</bool>
+           <bool>false</bool>
           </attribute>
           <attribute name="verticalHeaderVisible">
            <bool>false</bool>
@@ -1940,6 +1925,36 @@
          </widget>
         </item>
         <item>
+         <widget class="QPushButton" name="pushButtonSupprimerClient">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Supprimer un client</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButtonVoirMachinesClient">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Voir les machines du client</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButtonAjouterMachineClient">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Ajouter une machine au client</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
            <spacer name="horizontalSpacer_7">
@@ -1956,6 +1971,9 @@
           </item>
           <item>
            <widget class="QPushButton" name="pushButtonDeselectionner">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="text">
              <string>Désélectionner un client</string>
             </property>

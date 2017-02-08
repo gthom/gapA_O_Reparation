@@ -13,17 +13,22 @@ class MainWindow;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
-
+signals:
+    void clientSelectionne(QString);
 public:
     explicit MainWindow(QWidget *parent = 0);
-    QString numeroClient,nomClient,prenomClient,telClient,emailCLient,adresseClient,cpClient,villeClient;
-    QString nomMachine,marqueMachine,panneMachine,refMachine,etatMachine,typeMachine,clientMachine,devisMachine,techMachine,tempsPasse;
+    QString numeroClientSelectionne,nomClient,prenomClient,telClient,emailCLient,adresseClient,cpClient,villeClient;
+    QString nomMachineSelectionnee,marqueMachine,panneMachine,refMachine,etatMachine,typeMachine,clientMachine,devisMachine,techMachine,tempsPasse;
     QDate dateArrivee,dateSortie;
-    QString idReparation;
+    QString idReparationSelectionnee;
     ~MainWindow();  
     void chargerLesTechniciens();
-    void chargerLesEtats();
+    void chargerLesEtatsReparation();
     void chargerLesEtatsDevis();
+    void viderChampsMachine();
+
+public slots:
+    void actDesactBoutonAjouterClient();
 private slots:
     void majListeRechercheMachine(QString);
     void on_focusChanged(QWidget *, QWidget*);
@@ -33,11 +38,11 @@ private slots:
 
     void on_tableWidgetClient_cellClicked(int row, int column);
 
-    void on_pushButtonDeselectionner_clicked();
+    void on_pushButtonDeselectionnerClient_clicked();
 
     void on_pushButtonModifierClient_clicked();
 
-    void on_pushButtonRechercher_clicked();
+    void on_pushButtonRechercherClient_clicked();
 
     void on_pushButtonAjouterMachine_clicked();
 
@@ -57,15 +62,34 @@ private slots:
 
     void on_pushButtonModifierMachine_clicked();
 
+    void on_pushButtonSupprMachine_clicked();
+
+    void on_lineEditRechercheClient_textChanged(const QString &arg1);
+
+    void on_pushButtonAjouterMachineClient_clicked();
+    void afficherClientSelectionne(QString sonNumero);
+
+    void on_pushButtonVoirClient_clicked();
+
+    void on_pushButtonVoirMachinesClient_clicked();
+
+    void on_pushButtonRechercherMachine_clicked();
+
+    void on_pushButtonAnnulerRechercheMachine_clicked();
+
+    void on_resetFormClient_clicked();
+
+    void on_pushButtonDeselectionner_clicked();
+
 private:
     Ui::MainWindow *ui;
     void chargerLesClients();
 
     int chercherIdClient();
 
-    void viderLesChamps();
+    void viderLesChampsClient();
 
-    void chargerLesMachines();
+    void chargerLesMachines(QString filtre="");
     QSqlRelationalTableModel * tableModelTechnicien;
 
 };
