@@ -1,8 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "QtSql/QSqlDriver"
-#include "QtSql/QSqlQuery"
-#include "QDebug"
+#include <QSqlDriver>
+#include <QSqlQuery>
+#include <QDebug>
 #include <QSqlError>
 #include <QMessageBox>
 #include <QSqlRecord>
@@ -30,7 +30,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->lineEditMarque,SIGNAL(textEdited(QString)),this, SLOT(actDesactBoutonsAjouterMachine()));
     connect(ui->lineEditReference,SIGNAL(textEdited(QString)),this, SLOT(actDesactBoutonsAjouterMachine()));
     connect(ui->lineEditNomMachine,SIGNAL(textEdited(QString)),this, SLOT(actDesactBoutonsAjouterMachine()));
+    //j'échange le mécano avec la panne dans la table des réparations
     ui->tableWidgetMachine->horizontalHeader()->swapSections(5,10);
+    //et je dis à la panne de prendre l'espace restant
     ui->tableWidgetMachine->horizontalHeader()->stretchLastSection();
 
 }
@@ -92,7 +94,6 @@ void MainWindow::majListeRechercheMachine(QString leTexte)
     //sender() est l'émetteur du signal donc un des trois lineEdit auquel le slot est attaché
     if(sender()==ui->lineEditReference)
     {
-
         QString txtReq="select idModel,nature,codeModel,libelleMarque from Modele inner join Marque on Modele.marque=Marque.idMarque where upper(codeModel) like upper('%"+ui->lineEditReference->text()+"%')";
         qDebug()<<txtReq;
         QSqlQuery maReq(txtReq);
@@ -106,7 +107,6 @@ void MainWindow::majListeRechercheMachine(QString leTexte)
             nouvelElement->setData(34,maReq.value("libelleMarque").toString());
             nouvelElement->setData(35,maReq.value("nature").toString());
             ui->listWidgetResultatRecherche->insertItem(0,nouvelElement);
-
         }
     }
     else if(sender()==ui->lineEditMarque)
@@ -124,7 +124,6 @@ void MainWindow::majListeRechercheMachine(QString leTexte)
             nouvelElement->setData(34,maReq.value("libelleMarque").toString());
             nouvelElement->setData(35,maReq.value("nature").toString());
             ui->listWidgetResultatRecherche->insertItem(0,nouvelElement);
-
         }
     }
     else if(sender()==ui->lineEditNomMachine)
@@ -142,7 +141,6 @@ void MainWindow::majListeRechercheMachine(QString leTexte)
             nouvelElement->setData(34,maReq.value("libelleMarque").toString());
             nouvelElement->setData(35,maReq.value("nature").toString());
             ui->listWidgetResultatRecherche->insertItem(0,nouvelElement);
-
         }
     }
 }
@@ -283,7 +281,6 @@ void MainWindow::chargerLesMachines(QString filtre)
     }
 
     ui->pushButtonSupprMachine->setEnabled(false);
-
 }
 int MainWindow::chercherIdClient()
 {

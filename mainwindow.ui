@@ -21,6 +21,9 @@
        <enum>Qt::Horizontal</enum>
       </property>
       <widget class="QTabWidget" name="tabWidget">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
          <horstretch>4</horstretch>
@@ -31,6 +34,10 @@
         <number>1</number>
        </property>
        <widget class="QWidget" name="tabClients">
+        <attribute name="icon">
+         <iconset resource="icones.qrc">
+          <normaloff>:/images/client</normaloff>:/images/client</iconset>
+        </attribute>
         <attribute name="title">
          <string>Clients</string>
         </attribute>
@@ -181,12 +188,20 @@
              <property name="text">
               <string>Rechercher</string>
              </property>
+             <property name="icon">
+              <iconset resource="icones.qrc">
+               <normaloff>:/images/rechercher</normaloff>:/images/rechercher</iconset>
+             </property>
             </widget>
            </item>
            <item>
             <widget class="QPushButton" name="pushButtonToutVoirClient">
              <property name="text">
               <string>&amp;Tout voir</string>
+             </property>
+             <property name="icon">
+              <iconset resource="icones.qrc">
+               <normaloff>:/images/seeAll</normaloff>:/images/seeAll</iconset>
              </property>
             </widget>
            </item>
@@ -344,6 +359,10 @@
                  <property name="text">
                   <string>Ajouter un client</string>
                  </property>
+                 <property name="icon">
+                  <iconset resource="icones.qrc">
+                   <normaloff>:/images/add</normaloff>:/images/add</iconset>
+                 </property>
                 </widget>
                </item>
                <item>
@@ -429,6 +448,10 @@
         </layout>
        </widget>
        <widget class="QWidget" name="tabMachine">
+        <attribute name="icon">
+         <iconset resource="icones.qrc">
+          <normaloff>:/images/reparation</normaloff>:/images/reparation</iconset>
+        </attribute>
         <attribute name="title">
          <string>Machine</string>
         </attribute>
@@ -524,6 +547,10 @@
             <property name="text">
              <string>Machine</string>
             </property>
+            <property name="icon">
+             <iconset resource="icones.qrc">
+              <normaloff>:/images/reparation</normaloff>:/images/reparation</iconset>
+            </property>
            </column>
            <column>
             <property name="text">
@@ -543,6 +570,10 @@
            <column>
             <property name="text">
              <string>Client</string>
+            </property>
+            <property name="icon">
+             <iconset resource="icones.qrc">
+              <normaloff>:/images/client</normaloff>:/images/client</iconset>
             </property>
            </column>
            <column>
@@ -574,6 +605,10 @@
             <property name="text">
              <string>Technicien</string>
             </property>
+            <property name="icon">
+             <iconset resource="icones.qrc">
+              <normaloff>:/images/mecano</normaloff>:/images/mecano</iconset>
+            </property>
            </column>
           </widget>
          </item>
@@ -590,12 +625,20 @@
              <property name="text">
               <string>&amp;Rechercher</string>
              </property>
+             <property name="icon">
+              <iconset resource="icones.qrc">
+               <normaloff>:/images/rechercher</normaloff>:/images/rechercher</iconset>
+             </property>
             </widget>
            </item>
            <item>
             <widget class="QPushButton" name="pushButtonAnnulerRechercheMachine">
              <property name="text">
               <string>&amp;Tout voir</string>
+             </property>
+             <property name="icon">
+              <iconset resource="icones.qrc">
+               <normaloff>:/images/seeAll</normaloff>:/images/seeAll</iconset>
              </property>
             </widget>
            </item>
@@ -606,6 +649,10 @@
              </property>
              <property name="text">
               <string>&amp;Supprimer</string>
+             </property>
+             <property name="icon">
+              <iconset resource="icones.qrc">
+               <normaloff>:/images/supprimer</normaloff>:/images/supprimer</iconset>
              </property>
             </widget>
            </item>
@@ -739,7 +786,7 @@
                    <item row="7" column="0">
                     <widget class="QLabel" name="label_26">
                      <property name="text">
-                      <string>Mecano</string>
+                      <string>Mecanicien:</string>
                      </property>
                     </widget>
                    </item>
@@ -831,6 +878,10 @@
                  <property name="text">
                   <string>&amp;Ajouter</string>
                  </property>
+                 <property name="icon">
+                  <iconset resource="icones.qrc">
+                   <normaloff>:/images/add</normaloff>:/images/add</iconset>
+                 </property>
                 </widget>
                </item>
                <item>
@@ -906,6 +957,10 @@
               <widget class="QPushButton" name="pushButtonVoirClient">
                <property name="text">
                 <string>Voir client de la machine</string>
+               </property>
+               <property name="icon">
+                <iconset resource="icones.qrc">
+                 <normaloff>:/images/client</normaloff>:/images/client</iconset>
                </property>
               </widget>
              </item>
@@ -1577,6 +1632,10 @@
         </widget>
        </widget>
        <widget class="QWidget" name="tabTechniciens">
+        <attribute name="icon">
+         <iconset resource="icones.qrc">
+          <normaloff>:/images/mecano</normaloff>:/images/mecano</iconset>
+        </attribute>
         <attribute name="title">
          <string>Techniciens</string>
         </attribute>
@@ -1905,6 +1964,10 @@
           <property name="text">
            <string>Supprimer le client</string>
           </property>
+          <property name="icon">
+           <iconset resource="icones.qrc">
+            <normaloff>:/images/supprimer</normaloff>:/images/supprimer</iconset>
+          </property>
          </widget>
         </item>
         <item>
@@ -1956,7 +2019,7 @@
            <bool>true</bool>
           </property>
           <attribute name="horizontalHeaderVisible">
-           <bool>false</bool>
+           <bool>true</bool>
           </attribute>
           <attribute name="verticalHeaderVisible">
            <bool>false</bool>
@@ -1990,6 +2053,10 @@
           </property>
           <property name="text">
            <string>Voir les machines du client</string>
+          </property>
+          <property name="icon">
+           <iconset resource="icones.qrc">
+            <normaloff>:/images/machines</normaloff>:/images/machines</iconset>
           </property>
          </widget>
         </item>
@@ -2042,6 +2109,8 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="icones.qrc"/>
+ </resources>
  <connections/>
 </ui>
