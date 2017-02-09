@@ -29,7 +29,10 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->lineEditAdresse, SIGNAL(textEdited(QString)),this, SLOT(actDesactBoutonAjouterClient()));
     connect(ui->lineEditMarque,SIGNAL(textEdited(QString)),this, SLOT(actDesactBoutonsAjouterMachine()));
     connect(ui->lineEditReference,SIGNAL(textEdited(QString)),this, SLOT(actDesactBoutonsAjouterMachine()));
-     connect(ui->lineEditNomMachine,SIGNAL(textEdited(QString)),this, SLOT(actDesactBoutonsAjouterMachine()));
+    connect(ui->lineEditNomMachine,SIGNAL(textEdited(QString)),this, SLOT(actDesactBoutonsAjouterMachine()));
+    ui->tableWidgetMachine->horizontalHeader()->swapSections(5,10);
+    ui->tableWidgetMachine->horizontalHeader()->stretchLastSection();
+
 }
 void MainWindow::chargerLesEtatsReparation()
 {
@@ -896,6 +899,7 @@ void MainWindow::on_pushButtonVoirClient_clicked()
 
 void MainWindow::on_pushButtonVoirMachinesClient_clicked()
 {
+    qDebug()<<"void MainWindow::on_pushButtonVoirMachinesClient_clicked()";
     //on passe sur l'onglet machines
     ui->tabWidget->setCurrentIndex(1);
     //filtrer pour n'afficher que les siennes ou positionner sur la sienne
@@ -908,13 +912,11 @@ void MainWindow::on_pushButtonVoirMachinesClient_clicked()
 //recherche des machines d'un client
 void MainWindow::on_pushButtonRechercherMachine_clicked()
 {
+    qDebug()<<"void MainWindow::on_pushButtonRechercherMachine_clicked()";
     //s'il a des machines
-    if(ui->tableWidgetMachineClient->rowCount()>0)
-    {
         ui->label_ListeMachines->setText(tr("Liste filtée des machines"));
         ui->label_ListeMachines->setStyleSheet("background-color:orange;");
         chargerLesMachines(ui->lineEditRechercheMachine->text());
-    }
 }
 //recherche de machine par noTel client ou nature ou modele
 void MainWindow::on_pushButtonAnnulerRechercheMachine_clicked()
@@ -964,4 +966,11 @@ void MainWindow::on_pushButtonToutVoirClient_clicked()
 void MainWindow::on_lineEditRechercheClient_textEdited(const QString &arg1)
 {
     ui->pushButtonRechercherClient->setEnabled(!arg1.isEmpty());
+}
+
+void MainWindow::on_lineEditRechercheMachine_textEdited(const QString &arg1)
+{
+    ui->pushButtonRechercherMachine->setEnabled(!arg1.isEmpty());
+    if(arg1.length()>2)
+        on_pushButtonRechercherMachine_clicked();
 }

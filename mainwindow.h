@@ -85,6 +85,8 @@ private slots:
 
     void on_lineEditRechercheClient_textEdited(const QString &arg1);
 
+    void on_lineEditRechercheMachine_textEdited(const QString &arg1);
+
 private:
     Ui::MainWindow *ui;
     void chargerLesClients();
