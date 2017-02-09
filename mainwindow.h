@@ -28,8 +28,10 @@ public:
     void viderChampsMachine();
 
     void effacerTousLesClients();
+
 public slots:
     void actDesactBoutonAjouterClient();
+    void actDesactBoutonsAjouterMachine();
 private slots:
     void majListeRechercheMachine(QString);
     void on_focusChanged(QWidget *, QWidget*);
@@ -47,7 +49,6 @@ private slots:
 
     void on_pushButtonAjouterMachine_clicked();
 
-    void on_pushButtonRechercher_2_clicked();
 
     void on_pushButtonDeselectionner_2_clicked();
 
@@ -79,6 +80,10 @@ private slots:
     void on_resetFormClient_clicked();
 
     void on_pushButtonDeselectionner_clicked();
+
+    void on_pushButtonToutVoirClient_clicked();
+
+    void on_lineEditRechercheClient_textEdited(const QString &arg1);
 
 private:
     Ui::MainWindow *ui;

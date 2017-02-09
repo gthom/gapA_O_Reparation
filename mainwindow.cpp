@@ -27,6 +27,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->lineEditPrenom, SIGNAL(textEdited(QString)),this, SLOT(actDesactBoutonAjouterClient()));
     connect(ui->lineEditTelephone, SIGNAL(textEdited(QString)),this, SLOT(actDesactBoutonAjouterClient()));
     connect(ui->lineEditAdresse, SIGNAL(textEdited(QString)),this, SLOT(actDesactBoutonAjouterClient()));
+    connect(ui->lineEditMarque,SIGNAL(textEdited(QString)),this, SLOT(actDesactBoutonsAjouterMachine()));
+    connect(ui->lineEditReference,SIGNAL(textEdited(QString)),this, SLOT(actDesactBoutonsAjouterMachine()));
+     connect(ui->lineEditNomMachine,SIGNAL(textEdited(QString)),this, SLOT(actDesactBoutonsAjouterMachine()));
 }
 void MainWindow::chargerLesEtatsReparation()
 {
@@ -146,34 +149,35 @@ void MainWindow::on_focusChanged(QWidget* old, QWidget* nouveau)
     qDebug()<<"void MainWindow::on_focusChanged(QWidget* old, QWidget* nouveau)";
     if(nouveau==ui->lineEditReference)
     {
-        disconnect(ui->lineEditMarque,SIGNAL(textChanged(QString)),this, SLOT(majListeRechercheMachine(QString)));
-        disconnect(ui->lineEditNomMachine,SIGNAL(textChanged(QString)),this, SLOT(majListeRechercheMachine(QString)));
+        disconnect(ui->lineEditMarque,SIGNAL(textEdited(QString)),this, SLOT(majListeRechercheMachine(QString)));
+        disconnect(ui->lineEditNomMachine,SIGNAL(textEdited(QString)),this, SLOT(majListeRechercheMachine(QString)));
         //il est dans le modele on affiche les références
         //attacher l'evenement textChanged à la maj de la zone de droite
-        connect(ui->lineEditReference,SIGNAL(textChanged(QString)),this, SLOT(majListeRechercheMachine(QString)));
+        connect(ui->lineEditReference,SIGNAL(textEdited(QString)),this, SLOT(majListeRechercheMachine(QString)));
     }
     else if(nouveau==ui->lineEditNomMachine)
     {
-        disconnect(ui->lineEditReference,SIGNAL(textChanged(QString)),this, SLOT(majListeRechercheMachine(QString)));
-        disconnect(ui->lineEditMarque,SIGNAL(textChanged(QString)),this, SLOT(majListeRechercheMachine(QString)));
+        disconnect(ui->lineEditReference,SIGNAL(textEdited(QString)),this, SLOT(majListeRechercheMachine(QString)));
+        disconnect(ui->lineEditMarque,SIGNAL(textEdited(QString)),this, SLOT(majListeRechercheMachine(QString)));
         //il est dans le modele on affiche les références
         //attacher l'evenement textChanged à la maj de la zone de droite
-        connect(ui->lineEditNomMachine,SIGNAL(textChanged(QString)),this, SLOT(majListeRechercheMachine(QString)));
+        connect(ui->lineEditNomMachine,SIGNAL(textEdited(QString)),this, SLOT(majListeRechercheMachine(QString)));
 
     }
     else if(nouveau==ui->lineEditMarque)
     {
-        disconnect(ui->lineEditReference,SIGNAL(textChanged(QString)),this, SLOT(majListeRechercheMachine(QString)));
-        disconnect(ui->lineEditNomMachine,SIGNAL(textChanged(QString)),this, SLOT(majListeRechercheMachine(QString)));
+        disconnect(ui->lineEditReference,SIGNAL(textEdited(QString)),this, SLOT(majListeRechercheMachine(QString)));
+        disconnect(ui->lineEditNomMachine,SIGNAL(textEdited(QString)),this, SLOT(majListeRechercheMachine(QString)));
         //il est dans le modele on affiche les références
         //attacher l'evenement textChanged à la maj de la zone de droite
-        connect(ui->lineEditMarque,SIGNAL(textChanged(QString)),this, SLOT(majListeRechercheMachine(QString)));
+        connect(ui->lineEditMarque,SIGNAL(textEdited(QString)),this, SLOT(majListeRechercheMachine(QString)));
     }
 }
 void MainWindow::effacerTousLesClients()
 {
     ui->tableWidgetClient->clearContents();
-    for(int noLigne=0;noLigne<ui->tableWidgetClient->rowCount();noLigne++) ui->tableWidgetClient->removeRow(0);
+    int nbLigne=ui->tableWidgetClient->rowCount();
+    for(int noLigne=0;noLigne<nbLigne;noLigne++) ui->tableWidgetClient->removeRow(0);
 }
 
 void MainWindow::chargerLesClients()
@@ -188,10 +192,10 @@ void MainWindow::chargerLesClients()
    reqChargerClient.prepare("select nomClient,prenomClient,telephoneClient,emailClient,adresseClient,cpClient,villeClient,idClient from Client where not supprime order by nomClient");
    if(reqChargerClient.exec())
    {
-       ui->tableWidgetClient->setRowCount(reqChargerClient.size());
+       //ui->tableWidgetClient->setRowCount(reqChargerClient.size());
        while(reqChargerClient.next())//pour chaque client
        {
-           ui->tableWidgetClient->setRowCount(ui->tableWidgetClient->rowCount()+1);
+        ui->tableWidgetClient->setRowCount(ui->tableWidgetClient->rowCount()+1);
         //pour chaque champ à afficher
          for(int noCol=0;noCol<7;noCol++)
          {
@@ -540,7 +544,7 @@ void MainWindow::on_pushButtonAjouterMachine_clicked()
         reqObtientIdModele.first();
         QString idDuModele=reqObtientIdModele.value(0).toString();
         qDebug()<<"creation du modele"<<idDuModele;
-        QString txtRaq="insert into Modele values("+idDuModele+",'"+refMachine+"',"+idMarque+",'"+nomMachineSelectionnee+"',"+idMarque+")";
+        QString txtRaq="insert into Modele(idModel,codeModel,marque,nature,typeMoteur) values("+idDuModele+",'"+refMachine+"',"+idMarque+",'"+nomMachineSelectionnee+"',"+typeMachine+")";
         qDebug()<<txtRaq;
         QSqlQuery reqInsertModele;
         reqInsertModele.exec(txtRaq);
@@ -602,10 +606,7 @@ void MainWindow::on_pushButtonAjouterMachine_clicked()
     chargerLesMachines();
 }
 
-void MainWindow::on_pushButtonRechercher_2_clicked()
-{
-    chargerLesClients();
-}
+
 
 void MainWindow::on_pushButtonDeselectionner_2_clicked()
 {
@@ -838,6 +839,8 @@ void MainWindow::afficherClientSelectionne(QString sonNumero)
                 qDebug()<<"Ce client n'a pas de machine";
                 ui->pushButtonVoirMachinesClient->setEnabled(false);
             }
+            //activation du bouton ajouterMachineAuClient
+            ui->pushButtonAjouterMachineClient->setEnabled(true);
         }
         else
         {
@@ -862,10 +865,18 @@ void MainWindow::afficherClientSelectionne(QString sonNumero)
         ui->lineEditVille->setText(villeClient);
 
         ui->pushButtonSupprimerClient->setEnabled(true);
-        ui->pushButtonAjouterMachine->setEnabled(true);
+        //ui->pushButtonAjouterMachine->setEnabled(true);
         ui->pushButtonModifierClient->setEnabled(true);
         ui->pushButtonDeselectionner->setEnabled(true);
     }
+}
+void MainWindow::actDesactBoutonsAjouterMachine()
+{
+    bool activerAjoutMachine=true;
+    activerAjoutMachine=activerAjoutMachine&& !ui->lineEditNomMachine->text().isEmpty();
+    activerAjoutMachine=activerAjoutMachine&& !ui->lineEditMarque->text().isEmpty();
+    activerAjoutMachine=activerAjoutMachine&& !ui->lineEditReference->text().isEmpty();
+    ui->pushButtonAjouterMachine->setEnabled(activerAjoutMachine);
 }
 
 void MainWindow::on_pushButtonVoirClient_clicked()
@@ -942,4 +953,15 @@ void MainWindow::on_pushButtonDeselectionner_clicked()
     ui->pushButtonDeselectionner->setEnabled(false);
     ui->pushButtonVoirMachinesClient->setEnabled(false);
     ui->pushButtonSupprimerClient->setEnabled(false);
+}
+
+void MainWindow::on_pushButtonToutVoirClient_clicked()
+{
+    ui->lineEditRechercheClient->clear();
+    chargerLesClients();
+}
+
+void MainWindow::on_lineEditRechercheClient_textEdited(const QString &arg1)
+{
+    ui->pushButtonRechercherClient->setEnabled(!arg1.isEmpty());
 }
