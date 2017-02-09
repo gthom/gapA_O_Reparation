@@ -27,6 +27,7 @@ public:
     void chargerLesEtatsDevis();
     void viderChampsMachine();
 
+    void effacerTousLesClients();
 public slots:
     void actDesactBoutonAjouterClient();
 private slots:
@@ -38,7 +39,7 @@ private slots:
 
     void on_tableWidgetClient_cellClicked(int row, int column);
 
-    void on_pushButtonDeselectionnerClient_clicked();
+    //void on_pushButtonDeselectionnerClient_clicked();
 
     void on_pushButtonModifierClient_clicked();
 
@@ -49,8 +50,6 @@ private slots:
     void on_pushButtonRechercher_2_clicked();
 
     void on_pushButtonDeselectionner_2_clicked();
-
-    void on_lineEditMarque_returnPressed();
 
     void on_listWidgetResultatRecherche_itemActivated(QListWidgetItem *item);
 
