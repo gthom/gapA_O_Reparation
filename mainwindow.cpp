@@ -36,7 +36,6 @@ MainWindow::MainWindow(QWidget *parent) :
     //et je dis à la panne de prendre l'espace restant
     ui->tableWidgetMachine->horizontalHeader()->stretchLastSection();
     //les completers
-
     modelCp.setQuery("select distinct(codePostal) from localite" );
     completerCP.setModel(&modelCp);
     ui->lineEditCP->setCompleter(&completerCP);
@@ -984,7 +983,7 @@ void MainWindow::on_lineEditCP_editingFinished()
     qDebug()<<"void MainWindow::on_lineEditCP_editingFinished()";
     if(! ui->lineEditCP->text().isEmpty())
     {
-        modelVille.setQuery("select nom from localite where codePostal like '"+ui->lineEditCP->text()+"'");
+        modelVille.setQuery("select trim(nom) from localite where codePostal like '"+ui->lineEditCP->text()+"'");
         completerVille.setModel(&modelVille);
         completerVille.setCaseSensitivity(Qt::CaseInsensitive);
         ui->lineEditVille->setCompleter(&completerVille);
