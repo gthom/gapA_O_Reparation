@@ -31,7 +31,7 @@
         </sizepolicy>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="tabClients">
         <attribute name="icon">
@@ -270,29 +270,39 @@
                <item row="1" column="1">
                 <widget class="QLineEdit" name="lineEditPrenom"/>
                </item>
-               <item row="2" column="0">
+               <item row="3" column="0">
                 <widget class="QLabel" name="labelTelephone">
                  <property name="text">
                   <string>Téléphone :</string>
                  </property>
                 </widget>
                </item>
-               <item row="2" column="1">
+               <item row="3" column="1">
                 <widget class="QLineEdit" name="lineEditTelephone">
                  <property name="inputMask">
                   <string>99 99 99 99 99</string>
                  </property>
                 </widget>
                </item>
-               <item row="3" column="0">
-                <widget class="QLabel" name="labelVille">
+               <item row="6" column="0">
+                <widget class="QLabel" name="labelAdresse">
                  <property name="text">
-                  <string>Ville :</string>
+                  <string>Adresse :</string>
                  </property>
                 </widget>
                </item>
-               <item row="3" column="1">
-                <widget class="QLineEdit" name="lineEditVille"/>
+               <item row="6" column="1">
+                <widget class="QLineEdit" name="lineEditAdresse"/>
+               </item>
+               <item row="7" column="0">
+                <widget class="QLabel" name="labelMail">
+                 <property name="text">
+                  <string>Email :</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="7" column="1">
+                <widget class="QLineEdit" name="lineEditEmail"/>
                </item>
                <item row="4" column="0">
                 <widget class="QLabel" name="labelCP">
@@ -301,28 +311,18 @@
                  </property>
                 </widget>
                </item>
-               <item row="4" column="1">
-                <widget class="QLineEdit" name="lineEditCP"/>
-               </item>
                <item row="5" column="0">
-                <widget class="QLabel" name="labelAdresse">
+                <widget class="QLabel" name="labelVille">
                  <property name="text">
-                  <string>Adresse :</string>
+                  <string>Ville :</string>
                  </property>
                 </widget>
                </item>
                <item row="5" column="1">
-                <widget class="QLineEdit" name="lineEditAdresse"/>
+                <widget class="QLineEdit" name="lineEditVille"/>
                </item>
-               <item row="6" column="0">
-                <widget class="QLabel" name="labelMail">
-                 <property name="text">
-                  <string>Email :</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="6" column="1">
-                <widget class="QLineEdit" name="lineEditEmail"/>
+               <item row="4" column="1">
+                <widget class="QLineEdit" name="lineEditCP"/>
                </item>
               </layout>
              </item>

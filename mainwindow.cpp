@@ -11,6 +11,7 @@
 #include <QtPrintSupport/QPrintDialog>
 #include <QPrinter>
 
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -34,6 +35,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tableWidgetMachine->horizontalHeader()->swapSections(5,10);
     //et je dis à la panne de prendre l'espace restant
     ui->tableWidgetMachine->horizontalHeader()->stretchLastSection();
+    //les completers
+
+    modelCp.setQuery("select distinct(codePostal) from localite" );
+    completerCP.setModel(&modelCp);
+    ui->lineEditCP->setCompleter(&completerCP);
+
 
 }
 void MainWindow::chargerLesEtatsReparation()
@@ -971,3 +978,17 @@ void MainWindow::on_lineEditRechercheMachine_textEdited(const QString &arg1)
     if(arg1.length()>2)
         on_pushButtonRechercherMachine_clicked();
 }
+
+void MainWindow::on_lineEditCP_editingFinished()
+{
+    qDebug()<<"void MainWindow::on_lineEditCP_editingFinished()";
+    if(! ui->lineEditCP->text().isEmpty())
+    {
+        modelVille.setQuery("select nom from localite where codePostal like '"+ui->lineEditCP->text()+"'");
+        completerVille.setModel(&modelVille);
+        completerVille.setCaseSensitivity(Qt::CaseInsensitive);
+        ui->lineEditVille->setCompleter(&completerVille);
+    }
+}
+
+

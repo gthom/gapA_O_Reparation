@@ -5,6 +5,7 @@
 #include "QDateEdit"
 #include <QListWidgetItem>
 #include <QSqlRelationalTableModel>
+#include <QCompleter>
 
 namespace Ui {
 class MainWindow;
@@ -28,6 +29,10 @@ public:
     void viderChampsMachine();
 
     void effacerTousLesClients();
+    QSqlQueryModel modelCp;
+    QCompleter completerCP;
+    QSqlQueryModel modelVille;
+    QCompleter completerVille;
 
 public slots:
     void actDesactBoutonAjouterClient();
@@ -86,6 +91,9 @@ private slots:
     void on_lineEditRechercheClient_textEdited(const QString &arg1);
 
     void on_lineEditRechercheMachine_textEdited(const QString &arg1);
+
+    void on_lineEditCP_editingFinished();
+
 
 private:
     Ui::MainWindow *ui;
