@@ -33,6 +33,8 @@ public:
     QCompleter completerCP;
     QSqlQueryModel modelVille;
     QCompleter completerVille;
+    QSqlQueryModel modelPrenoms;
+    QCompleter completerPrenoms;
 
 public slots:
     void actDesactBoutonAjouterClient();

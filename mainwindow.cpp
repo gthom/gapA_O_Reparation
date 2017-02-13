@@ -39,6 +39,11 @@ MainWindow::MainWindow(QWidget *parent) :
     modelCp.setQuery("select distinct(codePostal) from localite" );
     completerCP.setModel(&modelCp);
     ui->lineEditCP->setCompleter(&completerCP);
+    //pour les prénoms
+    modelPrenoms.setQuery("select distinct(prenomClient) from Client" );
+    completerPrenoms.setModel(&modelPrenoms);
+    completerPrenoms.setCaseSensitivity(Qt::CaseInsensitive);
+    ui->lineEditPrenom->setCompleter(&completerPrenoms);
 
 
 }
@@ -360,13 +365,13 @@ void MainWindow::viderChampsMachine()
 void MainWindow::on_pushButtonAjouterClient_clicked()
 {
     qDebug()<<"void MainWindow::on_pushButtonAjouterClient_clicked()";
-   nomClient=ui->lineEditNom->text();
+   nomClient=ui->lineEditNom->text().replace("'","\\'");
    prenomClient=ui->lineEditPrenom->text();
    telClient=ui->lineEditTelephone->text();
    emailCLient=ui->lineEditEmail->text();
-   adresseClient=ui->lineEditAdresse->text();
+   adresseClient=ui->lineEditAdresse->text().replace("'","\\'");
    cpClient=ui->lineEditCP->text();
-   villeClient=ui->lineEditVille->text();
+   villeClient=ui->lineEditVille->text().replace("'","\\'");
 
    QSqlQuery reqMaxId;
    reqMaxId.prepare("select max(idClient) from Client");
@@ -429,13 +434,13 @@ void MainWindow::on_pushButtonModifierClient_clicked()
     int numClient=chercherIdClient();
     QString nbClient=QString::number(numClient);
 
-    nomClient=ui->lineEditNom->text();
+    nomClient=ui->lineEditNom->text().replace("'","\\'");
     prenomClient=ui->lineEditPrenom->text();
     telClient=ui->lineEditTelephone->text();
     emailCLient=ui->lineEditEmail->text();
-    adresseClient=ui->lineEditAdresse->text();
+    adresseClient=ui->lineEditAdresse->text().replace("'","\\'");
     cpClient=ui->lineEditCP->text();
-    villeClient=ui->lineEditVille->text();
+    villeClient=ui->lineEditVille->text().replace("'","\\'");
 
 
     QSqlQuery reqAjouterClient;
@@ -497,15 +502,16 @@ void MainWindow::on_pushButtonAjouterMachine_clicked()
     }
     dateArrivee=dateArrivee.currentDate();
     QString dateARentrer=dateArrivee.toString("yyyy/MM/dd");
-    nomMachineSelectionnee=ui->lineEditNomMachine->text();
-    marqueMachine=ui->lineEditMarque->text();
+    nomMachineSelectionnee=ui->lineEditNomMachine->text().replace("'","\\'");
+    marqueMachine=ui->lineEditMarque->text().replace("'","\\'");
     refMachine=ui->lineEditReference->text();
     //refMachine=ui->lineEditReference->property("numeroModele").toString();
     panneMachine=ui->lineEditPanne1->text();
-    panneMachine=panneMachine+"&&"+ui->lineEditPanne2->text();
-    panneMachine=panneMachine+"&&"+ui->lineEditPanne3->text();
-    panneMachine=panneMachine+"&&"+ui->lineEditPanne4->text();
-    panneMachine=panneMachine+"&&"+ui->lineEditPanne5->text();
+    panneMachine=panneMachine+"&&"+ui->lineEditPanne2->text().replace("'","\\'");
+    panneMachine=panneMachine+"&&"+ui->lineEditPanne3->text().replace("'","\\'");
+    panneMachine=panneMachine+"&&"+ui->lineEditPanne4->text().replace("'","\\'");
+    panneMachine=panneMachine+"&&"+ui->lineEditPanne5->text().replace("'","\\'");
+    QString tempsPasse=QString::number(ui->lineEditHPasse->text().toInt()*60+ui->lineEditMinPasse->text().toInt());
 
     if(ui->radioButtonElectrique->isChecked())
     {
@@ -563,12 +569,12 @@ void MainWindow::on_pushButtonAjouterMachine_clicked()
     QSqlQuery insertMachine;
 /*CREATE TABLE `Reparation`(`idReparation` int(11),`outilNom` varchar(45),`outilType` tinyint(2),`panneReparation` varchar(255),`outilRef` integer not null references Modele(idModel),`dateArrivee` DATE,`tempsPasse` int(11),`dateFinalisation` date,`idClient` int(11) NOT NULL,`idDevis` int(11) NOT NULL,`idEtat` int(11) NOT NULL,`refProduit` varchar(45) ,`idUtilisateur` int(11) NOT NULL, foreign key (`idClient`) references Client(`idClient`), foreign key (`idDevis`) references Devis_Reparation(`idDevis`), foreign key (`idEtat`) references Etat_Reparation(`idEtat`), foreign key (`refProduit`) references Produit(`refProduit`), foreign key (`idUtilisateur`) references Utilisateur(`idUtilisateur`),primary key(`idReparation`));
  */
-    QString txtReq="insert into Reparation (idReparation,panneReparation,outilRef,dateArrivee,idClient,idEtat,idDevis,idUtilisateur) "
+    QString txtReq="insert into Reparation (idReparation,panneReparation,outilRef,dateArrivee,idClient,idEtat,idDevis,idUtilisateur,tempsPasse) "
                    "values("+maxId+",'"
                    +panneMachine+"',"
                    +idModele+",'"
                    +dateARentrer+"',"
-                   +idClientAct+",1,NULL,NULL)";//plannifier,pas de devis, pas de mecano affecté
+                   +idClientAct+",1,NULL,NULL,"+tempsPasse+")";//plannifier,pas de devis, pas de mecano affecté
     insertMachine.prepare(txtReq);
     qDebug()<<txtReq;
     insertMachine.exec();
@@ -591,7 +597,7 @@ void MainWindow::on_pushButtonAjouterMachine_clicked()
     listeDesLignes<<"<table>";
     listeDesLignes<<"<tr><td>Nature:</td><td>"+nomMachineSelectionnee+"</td></tr>";
     listeDesLignes<<"<tr><td>Modèle:</td><td>"+refMachine+"</td></tr>";
-    listeDesLignes<<"<tr><td>Client:</td><td>"+nomClient+"</td></tr>";
+    listeDesLignes<<"<tr><td>Client:</td><td>"+nomClient+" "+ prenomClient+"</td></tr>";
     listeDesLignes<<"<tr><td>tel:</td><td>"+telClient+"</td></tr>";
     QStringList listPanne=panneMachine.split("&&",QString::SkipEmptyParts);
     for (int noPanne=0;noPanne<listPanne.count();noPanne++)
@@ -708,8 +714,13 @@ void MainWindow::on_tableWidgetMachine_cellClicked(int row, int column)
     ui->lineEditPanne3->setText(listPannes[2]);
     ui->lineEditPanne4->setText(listPannes[3]);
     //afficher le client de la machine
-
-
+    //obtention et affichage du temps passé
+    QSqlQuery reqTemps ("select ifnull(tempsPasse,0) from Reparation where idreparation="+idReparationSelectionnee);
+    reqTemps.first();
+    QString heures=QString::number(reqTemps.value(0).toInt()/60);
+    QString minutes=QString::number(reqTemps.value(0).toInt()%60);
+    ui->lineEditHPasse->setText(heures);
+    ui->lineEditMinPasse->setText(minutes);
 }
 
 void MainWindow::on_pushButtonModifierMachine_clicked()
@@ -729,7 +740,9 @@ void MainWindow::on_pushButtonModifierMachine_clicked()
             ui->lineEditPanne2->text()+"&&"+
             ui->lineEditPanne3->text()+"&&"+
             ui->lineEditPanne4->text();
-    QString txtUpdate="update Reparation set idDevis="+etatDevis+" ,"+" idEtat="+taf+", idUtilisateur="+mecano+", panneReparation='"+laPanne+"' where idReparation="+sIdReparation;
+    QString tempsPasse=QString::number(ui->lineEditHPasse->text().toInt()*60+ui->lineEditMinPasse->text().toInt());
+
+    QString txtUpdate="update Reparation set idDevis="+etatDevis+" ,"+" idEtat="+taf+", idUtilisateur="+mecano+", panneReparation='"+laPanne+"', tempsPasse="+tempsPasse+" where idReparation="+sIdReparation;
     QSqlQuery reqUpdateMachine;
     if(reqUpdateMachine.exec(txtUpdate))
     {
