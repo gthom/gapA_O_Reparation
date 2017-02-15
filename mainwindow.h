@@ -97,6 +97,8 @@ private slots:
     void on_lineEditCP_editingFinished();
 
 
+    void on_pushButtonAjouterPiece_clicked();
+
 private:
     Ui::MainWindow *ui;
     void chargerLesClients();

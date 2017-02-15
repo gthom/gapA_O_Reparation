@@ -10,6 +10,7 @@
 #include <QTextDocument>
 #include <QtPrintSupport/QPrintDialog>
 #include <QPrinter>
+#include "dialogajoutpieceareparation.h"
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -44,8 +45,6 @@ MainWindow::MainWindow(QWidget *parent) :
     completerPrenoms.setModel(&modelPrenoms);
     completerPrenoms.setCaseSensitivity(Qt::CaseInsensitive);
     ui->lineEditPrenom->setCompleter(&completerPrenoms);
-
-
 }
 void MainWindow::chargerLesEtatsReparation()
 {
@@ -675,6 +674,7 @@ void MainWindow::on_tableWidgetMachine_cellClicked(int row, int column)
     //activation du bouton modifier
     ui->pushButtonModifierMachine->setEnabled(true);
     ui->pushButtonSupprMachine->setEnabled(true);
+    ui->pushButtonAjouterPiece->setEnabled(true);
     //desactivation du bouton ajouter
     ui->pushButtonAjouterMachine->setEnabled(false);
 
@@ -1004,3 +1004,53 @@ void MainWindow::on_lineEditCP_editingFinished()
 }
 
 
+
+void MainWindow::on_pushButtonAjouterPiece_clicked()
+{
+    //ajouter une pièce nécessaire à la  réparation
+    DialogAjoutPieceAReparation monDialog;
+    if(monDialog.exec()==QDialog::Accepted)
+    {
+
+        //je choppe les infos et j'enregistre tout ça
+        QString reference=monDialog.getReference().replace("'","\\'");
+         QString libelle=monDialog.getLibelle().replace("'","\\'");
+         QString quantiteNecessaire=monDialog.getQuantite();
+         bool estStocke=monDialog.getStocke();
+         QString stocke="false";
+         if(estStocke) stocke="true";
+         QString seuilAlerte="0";
+         if(estStocke)
+         {
+             seuilAlerte=monDialog.getSeuilAlerte();
+         }
+         if(!reference.isEmpty()&&!libelle.isEmpty() && !quantiteNecessaire.isEmpty())
+         {
+             //c'est une nouvelle pièce à enregistrer
+             //chopper le modèle de la machine en cours de reparation
+             QString reqModele="select outilRef from Reparation where idReparation="+idReparationSelectionnee;
+             qDebug()<<reqModele;
+             QSqlQuery sQ(reqModele);
+             sQ.first();
+             QString idModele=sQ.value(0).toString();
+             //je cree la pièce
+             QSqlQuery reqMax("select ifnull(max(idProduit),0)+1 from Produit");
+             reqMax.first();
+             QString idProduit=reqMax.value(0).toString();
+
+             QString txtInsPiece ="insert into Produit(idProduit,libelleProduit,stocke,reference,seuilalerte) values("+idProduit+",'"+libelle+"',"+stocke+",'"+reference+"',"+seuilAlerte+")";
+             qDebug()<<txtInsPiece;
+             QSqlQuery reqInsPiece(txtInsPiece);
+             //rentrer les lignes dans convenir
+             QString textReq="insert into convenir(idModel,idProduit) values ("+idModele+","+idProduit+")";
+             qDebug()<<textReq;
+             QSqlQuery reqInsConvenir(textReq);
+
+             //rentrer la ligne dans necessiter
+             QString textReqNec="insert into necessiter(idReparation,idProduit,qteNecessaire) values ("+idReparationSelectionnee+","+idProduit+","+quantiteNecessaire+")";
+             qDebug()<<textReqNec;
+             QSqlQuery reqInsNecessiter(textReqNec);
+
+         }
+    }
+}

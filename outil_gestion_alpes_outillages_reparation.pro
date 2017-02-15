@@ -24,11 +24,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    dialogajoutpieceareparation.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    dialogajoutpieceareparation.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    dialogajoutpieceareparation.ui
 
 RESOURCES += \
     icones.qrc

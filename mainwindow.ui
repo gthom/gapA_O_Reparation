@@ -35,7 +35,7 @@
        </property>
        <widget class="QWidget" name="tabClients">
         <attribute name="icon">
-         <iconset resource="icones.qrc">
+         <iconset>
           <normaloff>:/images/client</normaloff>:/images/client</iconset>
         </attribute>
         <attribute name="title">
@@ -189,7 +189,7 @@
               <string>Rechercher</string>
              </property>
              <property name="icon">
-              <iconset resource="icones.qrc">
+              <iconset>
                <normaloff>:/images/rechercher</normaloff>:/images/rechercher</iconset>
              </property>
             </widget>
@@ -200,7 +200,7 @@
               <string>&amp;Tout voir</string>
              </property>
              <property name="icon">
-              <iconset resource="icones.qrc">
+              <iconset>
                <normaloff>:/images/seeAll</normaloff>:/images/seeAll</iconset>
              </property>
             </widget>
@@ -360,7 +360,7 @@
                   <string>Ajouter un client</string>
                  </property>
                  <property name="icon">
-                  <iconset resource="icones.qrc">
+                  <iconset>
                    <normaloff>:/images/add</normaloff>:/images/add</iconset>
                  </property>
                 </widget>
@@ -449,7 +449,7 @@
        </widget>
        <widget class="QWidget" name="tabMachine">
         <attribute name="icon">
-         <iconset resource="icones.qrc">
+         <iconset>
           <normaloff>:/images/reparation</normaloff>:/images/reparation</iconset>
         </attribute>
         <attribute name="title">
@@ -548,7 +548,7 @@
              <string>Machine</string>
             </property>
             <property name="icon">
-             <iconset resource="icones.qrc">
+             <iconset>
               <normaloff>:/images/reparation</normaloff>:/images/reparation</iconset>
             </property>
            </column>
@@ -572,7 +572,7 @@
              <string>Client</string>
             </property>
             <property name="icon">
-             <iconset resource="icones.qrc">
+             <iconset>
               <normaloff>:/images/client</normaloff>:/images/client</iconset>
             </property>
            </column>
@@ -606,7 +606,7 @@
              <string>Technicien</string>
             </property>
             <property name="icon">
-             <iconset resource="icones.qrc">
+             <iconset>
               <normaloff>:/images/mecano</normaloff>:/images/mecano</iconset>
             </property>
            </column>
@@ -626,7 +626,7 @@
               <string>&amp;Rechercher</string>
              </property>
              <property name="icon">
-              <iconset resource="icones.qrc">
+              <iconset>
                <normaloff>:/images/rechercher</normaloff>:/images/rechercher</iconset>
              </property>
             </widget>
@@ -637,7 +637,7 @@
               <string>&amp;Tout voir</string>
              </property>
              <property name="icon">
-              <iconset resource="icones.qrc">
+              <iconset>
                <normaloff>:/images/seeAll</normaloff>:/images/seeAll</iconset>
              </property>
             </widget>
@@ -651,7 +651,7 @@
               <string>&amp;Supprimer</string>
              </property>
              <property name="icon">
-              <iconset resource="icones.qrc">
+              <iconset>
                <normaloff>:/images/supprimer</normaloff>:/images/supprimer</iconset>
              </property>
             </widget>
@@ -936,18 +936,18 @@
                 <string>Voir client de la machine</string>
                </property>
                <property name="icon">
-                <iconset resource="icones.qrc">
+                <iconset>
                  <normaloff>:/images/client</normaloff>:/images/client</iconset>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButtonVoirCommandePieces">
+              <widget class="QPushButton" name="pushButtonAjouterPiece">
                <property name="enabled">
                 <bool>false</bool>
                </property>
                <property name="text">
-                <string>Voir commande de pièces</string>
+                <string>&amp;ajout Pièce</string>
                </property>
               </widget>
              </item>
@@ -979,7 +979,7 @@
               <string>&amp;Ajouter</string>
              </property>
              <property name="icon">
-              <iconset resource="icones.qrc">
+              <iconset>
                <normaloff>:/images/add</normaloff>:/images/add</iconset>
              </property>
             </widget>
@@ -1664,7 +1664,7 @@
        </widget>
        <widget class="QWidget" name="tabTechniciens">
         <attribute name="icon">
-         <iconset resource="icones.qrc">
+         <iconset>
           <normaloff>:/images/mecano</normaloff>:/images/mecano</iconset>
         </attribute>
         <attribute name="title">
@@ -1996,7 +1996,7 @@
            <string>Supprimer le client</string>
           </property>
           <property name="icon">
-           <iconset resource="icones.qrc">
+           <iconset>
             <normaloff>:/images/supprimer</normaloff>:/images/supprimer</iconset>
           </property>
          </widget>
@@ -2086,7 +2086,7 @@
            <string>Voir les machines du client</string>
           </property>
           <property name="icon">
-           <iconset resource="icones.qrc">
+           <iconset>
             <normaloff>:/images/machines</normaloff>:/images/machines</iconset>
           </property>
          </widget>
@@ -2178,7 +2178,7 @@
   <tabstop>pushButtonModifierMachine</tabstop>
   <tabstop>listWidgetResultatRecherche</tabstop>
   <tabstop>pushButtonVoirClient</tabstop>
-  <tabstop>pushButtonVoirCommandePieces</tabstop>
+  <tabstop>pushButtonAjouterPiece</tabstop>
   <tabstop>tableWidget_3</tabstop>
   <tabstop>pushButton_7</tabstop>
   <tabstop>pushButton_6</tabstop>
@@ -2207,8 +2207,6 @@
   <tabstop>pushButtonVoirMachinesClient</tabstop>
   <tabstop>pushButtonAjouterMachineClient</tabstop>
  </tabstops>
- <resources>
-  <include location="icones.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
