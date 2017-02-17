@@ -34,8 +34,11 @@ public:
     QSqlQueryModel modelVille;
     QCompleter completerVille;
     QSqlQueryModel modelPrenoms;
-    QCompleter completerPrenoms;
+    QCompleter completerPrenoms;  
+    QCompleter* completerPanne;
 
+    void imprimeMachine();
+    void selectionneMachineDansLaTableDesMachines(QString sonId);
 public slots:
     void actDesactBoutonAjouterClient();
     void actDesactBoutonsAjouterMachine();
@@ -95,9 +98,11 @@ private slots:
     void on_lineEditRechercheMachine_textEdited(const QString &arg1);
 
     void on_lineEditCP_editingFinished();
-
-
     void on_pushButtonAjouterPiece_clicked();
+    void on_pushButtonImprimerMachine_clicked();
+    void on_tableWidgetMachineClient_cellClicked(int row, int column);
+
+    void closeEvent(QCloseEvent* event);
 
 private:
     Ui::MainWindow *ui;

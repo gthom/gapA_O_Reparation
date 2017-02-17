@@ -11,6 +11,7 @@
 #include <QtPrintSupport/QPrintDialog>
 #include <QPrinter>
 #include "dialogajoutpieceareparation.h"
+#include <QCloseEvent>
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -45,6 +46,27 @@ MainWindow::MainWindow(QWidget *parent) :
     completerPrenoms.setModel(&modelPrenoms);
     completerPrenoms.setCaseSensitivity(Qt::CaseInsensitive);
     ui->lineEditPrenom->setCompleter(&completerPrenoms);
+    //pour les pannes
+    QStringList listeDesPannes;
+    QSqlQuery queryTtePannes("select panneReparation from Reparation");
+    while(queryTtePannes.next())
+    {
+        QStringList listPanneASplitter=queryTtePannes.value(0).toString().split("&&");
+        foreach (QString laPanne, listPanneASplitter) {
+            if(!(listeDesPannes.contains(laPanne)))
+            {
+                listeDesPannes.append(laPanne);
+            }
+        }
+    }
+    listeDesPannes.sort(Qt::CaseInsensitive);
+    completerPanne=new QCompleter(listeDesPannes);
+
+    completerPanne->setCaseSensitivity(Qt::CaseInsensitive);
+    ui->lineEditPanne1->setCompleter(completerPanne);
+    ui->lineEditPanne2->setCompleter(completerPanne);
+    ui->lineEditPanne3->setCompleter(completerPanne);
+    ui->lineEditPanne4->setCompleter(completerPanne);
 }
 void MainWindow::chargerLesEtatsReparation()
 {
@@ -95,6 +117,7 @@ void MainWindow::chargerLesTechniciens()
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete completerPanne;
 }
 
 void MainWindow::majListeRechercheMachine(QString leTexte)
@@ -186,6 +209,7 @@ void MainWindow::on_focusChanged(QWidget* old, QWidget* nouveau)
 }
 void MainWindow::effacerTousLesClients()
 {
+    qDebug()<<"void MainWindow::effacerTousLesClients()";
     ui->tableWidgetClient->clearContents();
     int nbLigne=ui->tableWidgetClient->rowCount();
     for(int noLigne=0;noLigne<nbLigne;noLigne++) ui->tableWidgetClient->removeRow(0);
@@ -203,10 +227,12 @@ void MainWindow::chargerLesClients()
    reqChargerClient.prepare("select nomClient,prenomClient,telephoneClient,emailClient,adresseClient,cpClient,villeClient,idClient from Client where not supprime order by nomClient");
    if(reqChargerClient.exec())
    {
+       ui->tableWidgetClient->setRowCount(reqChargerClient.size());
+       ui->tableWidgetClient->horizontalHeader()->show();
        //ui->tableWidgetClient->setRowCount(reqChargerClient.size());
        while(reqChargerClient.next())//pour chaque client
        {
-        ui->tableWidgetClient->setRowCount(ui->tableWidgetClient->rowCount()+1);
+
         //pour chaque champ à afficher
          for(int noCol=0;noCol<7;noCol++)
          {
@@ -248,7 +274,7 @@ void MainWindow::chargerLesMachines(QString filtre)
             while(reqChargerMachine.next())
             {
                 QString laPanne=reqChargerMachine.value(5).toString();
-                laPanne.replace("&&","\n");
+                QString laPanneEnForme=laPanne.replace("&&","\n");
                 for(int noCol=0;noCol<11;noCol++)
                 {
                     ui->tableWidgetMachine->setItem(ligneActu,noCol,new QTableWidgetItem(reqChargerMachine.value(noCol).toString()));
@@ -261,7 +287,8 @@ void MainWindow::chargerLesMachines(QString filtre)
                 QString idClient=reqChargerMachine.value("idClient").toString();
                 qDebug()<<"client:"<<idClient;
                 ui->tableWidgetMachine->item(ligneActu,4)->setData(32,idClient);
-
+                //la panne entière en data 32 de l'item colonne 5
+                ui->tableWidgetMachine->item(ligneActu,5)->setData(32,laPanne);
                 //affichage du type de moteur
                 int idType=reqChargerMachine.value(3).toInt();
                 if(idType==1)
@@ -274,7 +301,7 @@ void MainWindow::chargerLesMachines(QString filtre)
                 }
                 ui->tableWidgetMachine->setItem(ligneActu,3,new QTableWidgetItem(typeMachine));
                 //affichage correct des pannes
-                ui->tableWidgetMachine->setItem(ligneActu,5,new QTableWidgetItem(laPanne));
+                ui->tableWidgetMachine->setItem(ligneActu,5,new QTableWidgetItem(laPanneEnForme));
                 ui->tableWidgetMachine->verticalHeader()->resizeSections(QHeaderView::ResizeToContents);
                 ligneActu++;
             }
@@ -457,6 +484,8 @@ void MainWindow::on_pushButtonRechercherClient_clicked()
     qDebug()<<"void MainWindow::on_pushButtonRechercherClient_clicked()";
     int ligneActu=0;
     QString nomRecherche=ui->lineEditRechercheClient->text();
+    if(!nomRecherche.isEmpty())
+    {
     QSqlQuery reqRecherche;
     reqRecherche.prepare("select * from Client where upper(nomClient) like upper('%"+nomRecherche+"%') OR upper(prenomClient) like upper('%"+nomRecherche+"%') or telephoneClient like '%"+nomRecherche+"%'");
     if(reqRecherche.exec())
@@ -479,6 +508,11 @@ void MainWindow::on_pushButtonRechercherClient_clicked()
     else
     {
         qDebug()<<"pb req";
+    }
+    }
+    else
+    {
+        ui->pushButtonRechercherClient->setEnabled(false);
     }
 
 }
@@ -509,7 +543,7 @@ void MainWindow::on_pushButtonAjouterMachine_clicked()
     panneMachine=panneMachine+"&&"+ui->lineEditPanne2->text().replace("'","\\'");
     panneMachine=panneMachine+"&&"+ui->lineEditPanne3->text().replace("'","\\'");
     panneMachine=panneMachine+"&&"+ui->lineEditPanne4->text().replace("'","\\'");
-    panneMachine=panneMachine+"&&"+ui->lineEditPanne5->text().replace("'","\\'");
+    //panneMachine=panneMachine+"&&"+ui->lineEditPanne5->text().replace("'","\\'");
     QString tempsPasse=QString::number(ui->lineEditHPasse->text().toInt()*60+ui->lineEditMinPasse->text().toInt());
 
     if(ui->radioButtonElectrique->isChecked())
@@ -578,7 +612,7 @@ void MainWindow::on_pushButtonAjouterMachine_clicked()
     qDebug()<<txtReq;
     insertMachine.exec();
     qDebug()<<insertMachine.lastError();
-    chargerLesMachines();
+
 //raz des zones de saisie
     ui->lineEditNomMachine->setText("");
     ui->lineEditReference->setText("");
@@ -587,33 +621,9 @@ void MainWindow::on_pushButtonAjouterMachine_clicked()
     ui->lineEditPanne2->setText("");
     ui->lineEditPanne3->setText("");
     ui->lineEditPanne4->setText("");
-    ui->lineEditPanne5->setText("");
+    //ui->lineEditPanne5->setText("");
     //impression de l'étiquette
-    QTextDocument etiquette;
-    QStringList listeDesLignes;
-    listeDesLignes<<"<body><center><h1>Alpes-Outillage-Reparation</h1></center>";
-    listeDesLignes<<"<div>";
-    listeDesLignes<<"<table>";
-    listeDesLignes<<"<tr><td>Nature:</td><td>"+nomMachineSelectionnee+"</td></tr>";
-    listeDesLignes<<"<tr><td>Modèle:</td><td>"+refMachine+"</td></tr>";
-    listeDesLignes<<"<tr><td>Client:</td><td>"+nomClient+" "+ prenomClient+"</td></tr>";
-    listeDesLignes<<"<tr><td>tel:</td><td>"+telClient+"</td></tr>";
-    QStringList listPanne=panneMachine.split("&&",QString::SkipEmptyParts);
-    for (int noPanne=0;noPanne<listPanne.count();noPanne++)
-    {
-        listeDesLignes<<"<tr><td>Panne:</td><td>"+listPanne[noPanne]+"</td></tr>";
-    }
-    listeDesLignes<<"<tr><td>Arrivée:</td><td>"+dateARentrer+"</td></tr>";
-    listeDesLignes<<"</table></div></body>";
-
-    etiquette.setHtml(listeDesLignes.join("\r\n"));
-    QPrinter printer;
-    printer.setPageSize(QPagedPaintDevice::A6);
-    QPrintDialog printDialog(&printer);
-    if(printDialog.exec()==QDialog::Accepted)
-     {
-        etiquette.print(&printer);
-    }
+    imprimeMachine();
     chargerLesMachines();
 }
 
@@ -634,11 +644,46 @@ void MainWindow::on_listWidgetResultatRecherche_itemActivated(QListWidgetItem *i
     ui->lineEditReference->setText(item->data(33).toString());   
     ui->lineEditMarque->setText(item->data(34).toString());
     ui->lineEditNomMachine->setText(item->data(35).toString());
+    //activation du bouton ajouter machine
+    ui->pushButtonAjouterMachine->setEnabled(true);
 }
 
 void MainWindow::on_action_Fermer_triggered()
 {
     close();
+}
+void MainWindow::imprimeMachine()
+{
+    qDebug()<<"void MainWindow::imprimeMachine()";
+    //impression de l'étiquette
+    QTextDocument etiquette;
+    QStringList listeDesLignes;
+    listeDesLignes<<"<body><center><h1>A.O.R</h1></center>";
+    listeDesLignes<<"<div>";
+    listeDesLignes<<"<table border=\"1\">";
+    listeDesLignes<<"<tr><td>Nature:</td><td>"+nomMachineSelectionnee+"</td></tr>";
+    listeDesLignes<<"<tr><td>Modèle:</td><td>"+refMachine+"</td></tr>";
+    listeDesLignes<<"<tr><td>Client:</td><td>"+nomClient+" "+ prenomClient+"</td></tr>";
+    listeDesLignes<<"<tr><td>tel:</td><td>"+telClient+"</td></tr>";
+    listeDesLignes<<"<tr><th colspan=\"2\">Panne(s):</th></tr><tr><td colspan=\"2\"><ul>";
+    QStringList listPanne=panneMachine.replace("&&","\n").split("\n",QString::SkipEmptyParts);
+    for (int noPanne=0;noPanne<listPanne.count();noPanne++)
+    {
+        listeDesLignes<<"<li>"+listPanne[noPanne]+"</li>";
+    }
+    listeDesLignes<<"</ul></td></tr>";
+    QString dateARentrer=dateArrivee.toString("dd/MM/yyyy");
+    listeDesLignes<<"<tr><td>Arrivée:</td><td>"+dateARentrer+"</td></tr>";
+    listeDesLignes<<"</table></div></body>";
+
+    etiquette.setHtml(listeDesLignes.join("\r\n"));
+    QPrinter printer;
+    printer.setPageSize(QPagedPaintDevice::A6);
+    QPrintDialog printDialog(&printer);
+    if(printDialog.exec()==QDialog::Accepted)
+     {
+        etiquette.print(&printer);
+    }
 }
 
 void MainWindow::on_pushButtonAddTechnicien_clicked()
@@ -683,22 +728,30 @@ void MainWindow::on_tableWidgetMachine_cellClicked(int row, int column)
     //mémoriser l'identifiant du client en variable globale de la mainwindow
     numeroClientSelectionne=idClient;
     emit(clientSelectionne(idClient));
-    QString rNomMachine=ui->tableWidgetMachine->item(row,0)->text();
-    QString rMarque=ui->tableWidgetMachine->item(row,1)->text();
-    QString rModele=ui->tableWidgetMachine->item(row,2)->text();
-    QString rType=ui->tableWidgetMachine->item(row,3)->text();
+    qDebug()<<"retour dans void MainWindow::on_tableWidgetMachine_cellClicked(int row, int column)";
+    nomMachineSelectionnee=ui->tableWidgetMachine->item(row,0)->text();
+    marqueMachine=ui->tableWidgetMachine->item(row,1)->text();
+    refMachine=ui->tableWidgetMachine->item(row,2)->text();
+    typeMachine=ui->tableWidgetMachine->item(row,3)->text();
+    qDebug()<<ui->tableWidgetMachine->item(row,8)->text();
+    dateArrivee=QDate::fromString(ui->tableWidgetMachine->item(row,8)->text(),"yyyy-MM-dd");
+    qDebug()<<"date arrivee:"<<dateArrivee;
+    dateSortie=QDate::fromString(ui->tableWidgetMachine->item(row,9)->text(),"yyyy-MM-dd");
+    techMachine=ui->tableWidgetMachine->item(row,10)->text();
     //il y a le client en colonne 4 et on ne s'en sert pas
-    QString rPanne=ui->tableWidgetMachine->item(row,5)->text();
+    panneMachine=ui->tableWidgetMachine->item(row,5)->text();
+    qDebug()<<"Panne:"<<panneMachine;
+
     QString rEtat=ui->tableWidgetMachine->item(row,6)->text();
     QString rDevis=ui->tableWidgetMachine->item(row,7)->text();
     //en 8 il y a la date d'arrivée et on ne la modifie pas
     QString rDateSortie=ui->tableWidgetMachine->item(row,9)->text();
     QString rTechnicien=ui->tableWidgetMachine->item(row,10)->text();
     //on rempli les zones de saisie avec
-    ui->lineEditNomMachine->setText(rNomMachine);
-    ui->lineEditMarque->setText(rMarque);
-    ui->lineEditReference->setText(rModele);
-    if(rType=="Electrique")ui->radioButtonElectrique->setChecked(true);
+    ui->lineEditNomMachine->setText(nomMachineSelectionnee);
+    ui->lineEditMarque->setText(marqueMachine);
+    ui->lineEditReference->setText(refMachine);
+    if(typeMachine=="Electrique")ui->radioButtonElectrique->setChecked(true);
     else ui->radioButtonThermique->setChecked(true);
     //etat devis
     ui->comboBoxDevis->setCurrentText(rDevis);
@@ -707,6 +760,7 @@ void MainWindow::on_tableWidgetMachine_cellClicked(int row, int column)
     //Mecano
     ui->comboBoxMecano->setCurrentText(rTechnicien);
     //pannes
+    QString rPanne=ui->tableWidgetMachine->item(row, 5)->text();
     QStringList listPannes=rPanne.split("\n");
     //vider les pannes et les afficher
     ui->lineEditPanne1->setText(listPannes[0]);
@@ -721,6 +775,9 @@ void MainWindow::on_tableWidgetMachine_cellClicked(int row, int column)
     QString minutes=QString::number(reqTemps.value(0).toInt()%60);
     ui->lineEditHPasse->setText(heures);
     ui->lineEditMinPasse->setText(minutes);
+    //activation des boutons voir client de la machine et imprimer
+    ui->pushButtonImprimerMachine->setEnabled(true);
+    ui->pushButtonVoirClient->setEnabled(true);
 }
 
 void MainWindow::on_pushButtonModifierMachine_clicked()
@@ -825,7 +882,7 @@ void MainWindow::afficherClientSelectionne(QString sonNumero)
         //à revoir
 
 
-        QString txtReq="select concat(nature,concat(' ',concat(libelleMarque,concat(' ',codeModel)))),date_format(dateArrivee,'%d/%m'),libelleEtat,if(dateFinalisation is null,datediff(now(),dateArrivee),'OK'),typeMoteur,concat(nomClient,concat(' ', prenomClient)), panneReparation, idDevis,dateFinalisation, nomUtilisateur from Modele inner join Reparation on Reparation.outilRef=Modele.idModel inner join Marque on Marque.idMarque=Modele.marque inner join Client on Reparation.idClient=Client.idClient natural join Etat_Reparation left outer join Utilisateur on Reparation.idUtilisateur=Utilisateur.idUtilisateur where Client.idClient="+sonNumero+" order by Reparation.idEtat asc, dateArrivee desc";
+        QString txtReq="select concat(nature,concat(' ',concat(libelleMarque,concat(' ',codeModel)))),date_format(dateArrivee,'%d/%m'),libelleEtat,if(dateFinalisation is null,datediff(now(),dateArrivee),'OK'),typeMoteur,concat(nomClient,concat(' ', prenomClient)), panneReparation, idDevis,dateFinalisation, nomUtilisateur,idReparation from Modele inner join Reparation on Reparation.outilRef=Modele.idModel inner join Marque on Marque.idMarque=Modele.marque inner join Client on Reparation.idClient=Client.idClient natural join Etat_Reparation left outer join Utilisateur on Reparation.idUtilisateur=Utilisateur.idUtilisateur where Client.idClient="+sonNumero+" order by Reparation.idEtat asc, dateArrivee desc";
         qDebug()<<txtReq;
         QSqlQuery chercherMachineDuClient;
         chercherMachineDuClient.prepare(txtReq);
@@ -848,6 +905,7 @@ void MainWindow::afficherClientSelectionne(QString sonNumero)
                         ui->tableWidgetMachineClient->setItem(noLigne,noCol,new QTableWidgetItem(chercherMachineDuClient.value(noCol).toString()));
 
                     }
+                    ui->tableWidgetMachineClient->item(noLigne,0)->setData(32,enregistrement.value("idReparation").toString());
                     noLigne++;//on passe à la ligne suivante
                 }
                 //il a des machines, on peut les sélectionner
@@ -887,10 +945,13 @@ void MainWindow::afficherClientSelectionne(QString sonNumero)
         //ui->pushButtonAjouterMachine->setEnabled(true);
         ui->pushButtonModifierClient->setEnabled(true);
         ui->pushButtonDeselectionner->setEnabled(true);
+
     }
+
 }
 void MainWindow::actDesactBoutonsAjouterMachine()
 {
+    qDebug()<<"void MainWindow::actDesactBoutonsAjouterMachine()";
     bool activerAjoutMachine=true;
     activerAjoutMachine=activerAjoutMachine&& !ui->lineEditNomMachine->text().isEmpty();
     activerAjoutMachine=activerAjoutMachine&& !ui->lineEditMarque->text().isEmpty();
@@ -937,6 +998,7 @@ void MainWindow::on_pushButtonRechercherMachine_clicked()
 //recherche de machine par noTel client ou nature ou modele
 void MainWindow::on_pushButtonAnnulerRechercheMachine_clicked()
 {
+    qDebug()<<"void MainWindow::on_pushButtonAnnulerRechercheMachine_clicked()";
     this->idReparationSelectionnee=-1;
     //raz de la zone de filtrage
     chargerLesMachines();
@@ -948,6 +1010,7 @@ void MainWindow::on_pushButtonAnnulerRechercheMachine_clicked()
 }
 void MainWindow::actDesactBoutonAjouterClient()
 {
+    qDebug()<<"void MainWindow::actDesactBoutonAjouterClient()";
     //contrôler la validité des champs saisis
     bool activer=true;
     activer =activer && !ui->lineEditAdresse->text().isEmpty();
@@ -961,11 +1024,13 @@ void MainWindow::actDesactBoutonAjouterClient()
 
 void MainWindow::on_resetFormClient_clicked()
 {
+    qDebug()<<"void MainWindow::on_resetFormClient_clicked()";
     viderLesChampsClient();
 }
 
 void MainWindow::on_pushButtonDeselectionner_clicked()
 {
+    qDebug()<<"void MainWindow::on_pushButtonDeselectionner_clicked()";
     viderLesChampsClient();
     ui->tableWidgetClient->clearSelection();
     ui->pushButtonDeselectionner->setEnabled(false);
@@ -975,17 +1040,20 @@ void MainWindow::on_pushButtonDeselectionner_clicked()
 
 void MainWindow::on_pushButtonToutVoirClient_clicked()
 {
+    qDebug()<<"void MainWindow::on_pushButtonToutVoirClient_clicked()";
     ui->lineEditRechercheClient->clear();
     chargerLesClients();
 }
 
 void MainWindow::on_lineEditRechercheClient_textEdited(const QString &arg1)
 {
+    qDebug()<<"void MainWindow::on_lineEditRechercheClient_textEdited(const QString &arg1)";
     ui->pushButtonRechercherClient->setEnabled(!arg1.isEmpty());
 }
 
 void MainWindow::on_lineEditRechercheMachine_textEdited(const QString &arg1)
 {
+    qDebug()<<"void MainWindow::on_lineEditRechercheMachine_textEdited(const QString &arg1)";
     ui->pushButtonRechercherMachine->setEnabled(!arg1.isEmpty());
     if(arg1.length()>2)
         on_pushButtonRechercherMachine_clicked();
@@ -1007,6 +1075,7 @@ void MainWindow::on_lineEditCP_editingFinished()
 
 void MainWindow::on_pushButtonAjouterPiece_clicked()
 {
+    qDebug()<<"void MainWindow::on_pushButtonAjouterPiece_clicked()";
     //ajouter une pièce nécessaire à la  réparation
     DialogAjoutPieceAReparation monDialog;
     if(monDialog.exec()==QDialog::Accepted)
@@ -1053,4 +1122,42 @@ void MainWindow::on_pushButtonAjouterPiece_clicked()
 
          }
     }
+}
+
+void MainWindow::on_pushButtonImprimerMachine_clicked()
+{
+    qDebug()<<"void MainWindow::on_pushButtonImprimerMachine_clicked()";
+  imprimeMachine();
+}
+void MainWindow::selectionneMachineDansLaTableDesMachines(QString sonId)
+{
+    qDebug()<<"void MainWindow::selectionneMachineDansLaTableDesMachines(QString sonId)";
+    int ligne=0;
+    while(!(ui->tableWidgetMachine->item(ligne,0)->data(32).toString()==sonId))
+    {
+        ligne++;
+    }
+    //sélection de la ligne
+     ui->tableWidgetMachine->selectRow(ligne);
+    //ui->tableWidgetMachine->itemClicked(ui->tableWidgetMachine->item(ligne,0));
+}
+
+void MainWindow::on_tableWidgetMachineClient_cellClicked(int row, int column)
+{
+    qDebug()<<"void MainWindow::on_tableWidgetMachineClient_cellClicked(int row, int column)";
+    //sélection d'une machine dans la table de droite
+    //ui->tabWidget->setCurrentIndex(1);
+    on_pushButtonVoirMachinesClient_clicked();
+    //et selection de la bonne machine
+    selectionneMachineDansLaTableDesMachines(ui->tableWidgetMachineClient->item(row,0)->data(32).toString());
+}
+
+void MainWindow::closeEvent(QCloseEvent* event)
+{
+    if(QMessageBox::warning(this,"GapReparation","êtes vous sûr de vouloir quitter l'application",QMessageBox::Yes|QMessageBox::No,QMessageBox::No)==QMessageBox::Yes)
+    {
+        event->accept();
+    }
+    else
+        event->ignore();
 }

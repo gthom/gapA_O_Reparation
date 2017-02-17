@@ -3,9 +3,13 @@
 #include <QSqlDatabase>
 #include <QtSql>
 #include <QFileDialog>
+#include <QTextCodec>
 
 int main(int argc, char *argv[])
 {
+    QApplication a(argc, argv);
+    QTextCodec::setCodecForLocale(QTextCodec::codecForName("utf8"));
+
      QSqlDatabase maBase = QSqlDatabase::addDatabase("QMYSQL");
      maBase.setDatabaseName("alpes_outillage_reparation");
      maBase.setHostName("localhost");
@@ -14,7 +18,7 @@ int main(int argc, char *argv[])
      bool baseOuverte = maBase.open();
      if(baseOuverte)
      {
-         QApplication a(argc, argv);
+
          MainWindow w;
          w.showMaximized();
          return a.exec();

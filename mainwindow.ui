@@ -35,7 +35,7 @@
        </property>
        <widget class="QWidget" name="tabClients">
         <attribute name="icon">
-         <iconset>
+         <iconset resource="icones.qrc">
           <normaloff>:/images/client</normaloff>:/images/client</iconset>
         </attribute>
         <attribute name="title">
@@ -189,7 +189,7 @@
               <string>Rechercher</string>
              </property>
              <property name="icon">
-              <iconset>
+              <iconset resource="icones.qrc">
                <normaloff>:/images/rechercher</normaloff>:/images/rechercher</iconset>
              </property>
             </widget>
@@ -200,7 +200,7 @@
               <string>&amp;Tout voir</string>
              </property>
              <property name="icon">
-              <iconset>
+              <iconset resource="icones.qrc">
                <normaloff>:/images/seeAll</normaloff>:/images/seeAll</iconset>
              </property>
             </widget>
@@ -253,7 +253,7 @@
                <item row="0" column="0">
                 <widget class="QLabel" name="labelNom">
                  <property name="text">
-                  <string>Nom :</string>
+                  <string>Nom* :</string>
                  </property>
                 </widget>
                </item>
@@ -263,7 +263,7 @@
                <item row="1" column="0">
                 <widget class="QLabel" name="labelPrenom">
                  <property name="text">
-                  <string>Prénom :</string>
+                  <string>Prénom* :</string>
                  </property>
                 </widget>
                </item>
@@ -273,7 +273,7 @@
                <item row="3" column="0">
                 <widget class="QLabel" name="labelTelephone">
                  <property name="text">
-                  <string>Téléphone :</string>
+                  <string>Téléphone* :</string>
                  </property>
                 </widget>
                </item>
@@ -287,7 +287,7 @@
                <item row="6" column="0">
                 <widget class="QLabel" name="labelAdresse">
                  <property name="text">
-                  <string>Adresse :</string>
+                  <string>Adresse* :</string>
                  </property>
                 </widget>
                </item>
@@ -307,14 +307,14 @@
                <item row="4" column="0">
                 <widget class="QLabel" name="labelCP">
                  <property name="text">
-                  <string>CP :</string>
+                  <string>CP* :</string>
                  </property>
                 </widget>
                </item>
                <item row="5" column="0">
                 <widget class="QLabel" name="labelVille">
                  <property name="text">
-                  <string>Ville :</string>
+                  <string>Ville* :</string>
                  </property>
                 </widget>
                </item>
@@ -360,7 +360,7 @@
                   <string>Ajouter un client</string>
                  </property>
                  <property name="icon">
-                  <iconset>
+                  <iconset resource="icones.qrc">
                    <normaloff>:/images/add</normaloff>:/images/add</iconset>
                  </property>
                 </widget>
@@ -449,7 +449,7 @@
        </widget>
        <widget class="QWidget" name="tabMachine">
         <attribute name="icon">
-         <iconset>
+         <iconset resource="icones.qrc">
           <normaloff>:/images/reparation</normaloff>:/images/reparation</iconset>
         </attribute>
         <attribute name="title">
@@ -548,7 +548,7 @@
              <string>Machine</string>
             </property>
             <property name="icon">
-             <iconset>
+             <iconset resource="icones.qrc">
               <normaloff>:/images/reparation</normaloff>:/images/reparation</iconset>
             </property>
            </column>
@@ -572,7 +572,7 @@
              <string>Client</string>
             </property>
             <property name="icon">
-             <iconset>
+             <iconset resource="icones.qrc">
               <normaloff>:/images/client</normaloff>:/images/client</iconset>
             </property>
            </column>
@@ -606,7 +606,7 @@
              <string>Technicien</string>
             </property>
             <property name="icon">
-             <iconset>
+             <iconset resource="icones.qrc">
               <normaloff>:/images/mecano</normaloff>:/images/mecano</iconset>
             </property>
            </column>
@@ -626,7 +626,7 @@
               <string>&amp;Rechercher</string>
              </property>
              <property name="icon">
-              <iconset>
+              <iconset resource="icones.qrc">
                <normaloff>:/images/rechercher</normaloff>:/images/rechercher</iconset>
              </property>
             </widget>
@@ -637,7 +637,7 @@
               <string>&amp;Tout voir</string>
              </property>
              <property name="icon">
-              <iconset>
+              <iconset resource="icones.qrc">
                <normaloff>:/images/seeAll</normaloff>:/images/seeAll</iconset>
              </property>
             </widget>
@@ -651,7 +651,7 @@
               <string>&amp;Supprimer</string>
              </property>
              <property name="icon">
-              <iconset>
+              <iconset resource="icones.qrc">
                <normaloff>:/images/supprimer</normaloff>:/images/supprimer</iconset>
              </property>
             </widget>
@@ -704,7 +704,7 @@
                <item row="0" column="0">
                 <widget class="QLabel" name="label_4">
                  <property name="text">
-                  <string>Machine :</string>
+                  <string>Machine* :</string>
                  </property>
                 </widget>
                </item>
@@ -714,7 +714,7 @@
                <item row="1" column="0">
                 <widget class="QLabel" name="label_7">
                  <property name="text">
-                  <string>Marque :</string>
+                  <string>Marque* :</string>
                  </property>
                 </widget>
                </item>
@@ -724,7 +724,7 @@
                <item row="2" column="0">
                 <widget class="QLabel" name="label_5">
                  <property name="text">
-                  <string>Modèle :</string>
+                  <string>Modèle* :</string>
                  </property>
                 </widget>
                </item>
@@ -734,7 +734,7 @@
                <item row="3" column="0">
                 <widget class="QLabel" name="label_6">
                  <property name="text">
-                  <string>Type :</string>
+                  <string>Type* :</string>
                  </property>
                 </widget>
                </item>
@@ -762,7 +762,7 @@
                <item row="4" column="0">
                 <widget class="QLabel" name="label_24">
                  <property name="text">
-                  <string>Devis</string>
+                  <string>Devis*</string>
                  </property>
                 </widget>
                </item>
@@ -772,7 +772,7 @@
                <item row="6" column="0">
                 <widget class="QLabel" name="label_25">
                  <property name="text">
-                  <string>TAF</string>
+                  <string>TAF*</string>
                  </property>
                 </widget>
                </item>
@@ -843,9 +843,6 @@
              </item>
              <item>
               <widget class="QLineEdit" name="lineEditPanne4"/>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="lineEditPanne5"/>
              </item>
              <item>
               <layout class="QHBoxLayout" name="horizontalLayout_21">
@@ -932,12 +929,29 @@
              </item>
              <item>
               <widget class="QPushButton" name="pushButtonVoirClient">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
                <property name="text">
                 <string>Voir client de la machine</string>
                </property>
                <property name="icon">
-                <iconset>
+                <iconset resource="icones.qrc">
                  <normaloff>:/images/client</normaloff>:/images/client</iconset>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButtonImprimerMachine">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="text">
+                <string>&amp;Imprimer</string>
+               </property>
+               <property name="icon">
+                <iconset resource="icones.qrc">
+                 <normaloff>:/images/images/printer.png</normaloff>:/images/images/printer.png</iconset>
                </property>
               </widget>
              </item>
@@ -979,7 +993,7 @@
               <string>&amp;Ajouter</string>
              </property>
              <property name="icon">
-              <iconset>
+              <iconset resource="icones.qrc">
                <normaloff>:/images/add</normaloff>:/images/add</iconset>
              </property>
             </widget>
@@ -1664,7 +1678,7 @@
        </widget>
        <widget class="QWidget" name="tabTechniciens">
         <attribute name="icon">
-         <iconset>
+         <iconset resource="icones.qrc">
           <normaloff>:/images/mecano</normaloff>:/images/mecano</iconset>
         </attribute>
         <attribute name="title">
@@ -1996,7 +2010,7 @@
            <string>Supprimer le client</string>
           </property>
           <property name="icon">
-           <iconset>
+           <iconset resource="icones.qrc">
             <normaloff>:/images/supprimer</normaloff>:/images/supprimer</iconset>
           </property>
          </widget>
@@ -2046,11 +2060,17 @@
           <property name="alternatingRowColors">
            <bool>true</bool>
           </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
           <property name="sortingEnabled">
            <bool>true</bool>
           </property>
           <attribute name="horizontalHeaderVisible">
-           <bool>false</bool>
+           <bool>true</bool>
           </attribute>
           <attribute name="verticalHeaderVisible">
            <bool>false</bool>
@@ -2086,7 +2106,7 @@
            <string>Voir les machines du client</string>
           </property>
           <property name="icon">
-           <iconset>
+           <iconset resource="icones.qrc">
             <normaloff>:/images/machines</normaloff>:/images/machines</iconset>
           </property>
          </widget>
@@ -2173,7 +2193,6 @@
   <tabstop>lineEditPanne2</tabstop>
   <tabstop>lineEditPanne3</tabstop>
   <tabstop>lineEditPanne4</tabstop>
-  <tabstop>lineEditPanne5</tabstop>
   <tabstop>pushButtonAjouterMachine</tabstop>
   <tabstop>pushButtonModifierMachine</tabstop>
   <tabstop>listWidgetResultatRecherche</tabstop>
@@ -2207,6 +2226,8 @@
   <tabstop>pushButtonVoirMachinesClient</tabstop>
   <tabstop>pushButtonAjouterMachineClient</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="icones.qrc"/>
+ </resources>
  <connections/>
 </ui>

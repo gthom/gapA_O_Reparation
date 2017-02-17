@@ -9,5 +9,6 @@
         <file alias="rechercher">images/search.jpg</file>
         <file alias="add">images/add.jpg</file>
         <file alias="seeAll">images/toutVoir.jpg</file>
+        <file>images/printer.png</file>
     </qresource>
 </RCC>
